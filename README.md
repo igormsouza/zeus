@@ -14,5 +14,6 @@ You can also contribuite as tester, developer and with some suggestions to impro
 Some videos explaining the way to use and build the structue are comming... 
 
 ### Do you like?
-Following my last posts you can find my last updates about Zeus and others things. 
-[igormsouza](https://igormsouza.wordpress.com/)
+Following my last posts you can find my last updates about Zeus and others things.
+
+[https://igormsouza.wordpress.com](https://igormsouza.wordpress.com/)
