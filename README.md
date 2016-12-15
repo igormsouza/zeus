@@ -15,4 +15,4 @@ Some videos explaining the way to use and build the structue are comming...
 
 ### Do you like?
 Following my last posts you can find my last updates about Zeus and others things. 
-[igormsouza](http://bhs.com.br/)
+[igormsouza](https://igormsouza.wordpress.com/)
