@@ -1,0 +1,10 @@
+C:\ProjetosPessoais\Zeus\zeus\Cronos\Cronos\bin\Debug\Cronos.exe.config
+C:\ProjetosPessoais\Zeus\zeus\Cronos\Cronos\obj\Debug\Cronos.csproj.ResolveComReference.cache
+C:\ProjetosPessoais\Zeus\zeus\Cronos\Cronos\bin\Debug\Cronos.exe
+C:\ProjetosPessoais\Zeus\zeus\Cronos\Cronos\bin\Debug\Cronos.pdb
+C:\ProjetosPessoais\Zeus\zeus\Cronos\Cronos\obj\Debug\Cronos.csprojResolveAssemblyReference.cache
+C:\ProjetosPessoais\Zeus\zeus\Cronos\Cronos\obj\Debug\Cronos.FormPrincipal.resources
+C:\ProjetosPessoais\Zeus\zeus\Cronos\Cronos\obj\Debug\Cronos.Properties.Resources.resources
+C:\ProjetosPessoais\Zeus\zeus\Cronos\Cronos\obj\Debug\Cronos.csproj.GenerateResource.Cache
+C:\ProjetosPessoais\Zeus\zeus\Cronos\Cronos\obj\Debug\Cronos.exe
+C:\ProjetosPessoais\Zeus\zeus\Cronos\Cronos\obj\Debug\Cronos.pdb

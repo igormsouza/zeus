@@ -11,18 +11,18 @@ namespace Cronos
 {
     public static class Util
     {
-        public static Tuple<string, string> DescobreNamespace(string caminho)
+        public static Tuple<string, string> DiscoverNamespace(string path)
         {
-            Tuple<string, string> retorno = null;
-            var pasta = new DirectoryInfo(caminho);
-            var diretorios = pasta.GetDirectories();
-            var dominio = diretorios.Where(o => o.Name.Contains(".Dominio")).Select(o => o.Name).FirstOrDefault();
-            if (dominio != null)
+            Tuple<string, string> result = null;
+            var folder = new DirectoryInfo(path);
+            var directories = folder.GetDirectories();
+            var domain = directories.Where(o => o.Name.Contains(".Dominio")).Select(o => o.Name).FirstOrDefault();
+            if (domain != null)
             {
-                string[] namespacePartido = dominio.Split('.');
-                if (namespacePartido.Length > 2)
+                string[] slicedNamespace = domain.Split('.');
+                if (slicedNamespace.Length > 2)
                 {
-                    retorno = new Tuple<string, string>(namespacePartido[0], namespacePartido[1]);
+                    result = new Tuple<string, string>(slicedNamespace[0], slicedNamespace[1]);
                 }
                 else
                 {
@@ -34,28 +34,28 @@ namespace Cronos
                 throw new Exception("Pasta Selecionada não é referente a base ZEUS!");
             }
 
-            return retorno;
+            return result;
         }
 
-        public static IList<DirectoryInfo> CarregaPastasOrigem(string caminho)
+        public static IList<DirectoryInfo> LoadOriginFolder(string path)
         {
-            var pasta = new DirectoryInfo(caminho);
-            var diretorios = pasta.GetDirectories();
-            return diretorios.ToList();
+            var folder = new DirectoryInfo(path);
+            var directories = folder.GetDirectories();
+            return directories.ToList();
         }
 
-        public static void AlteraPermissaoDeEscritaPasta(string caminho, bool testePermissao = false)
+        public static void EditWriteFolder(string path, bool testPermission = false)
         {
-            DirectoryInfo diretorio = new DirectoryInfo(caminho);
-            DirectorySecurity dSecurity = diretorio.GetAccessControl();
+            DirectoryInfo directorory = new DirectoryInfo(path);
+            DirectorySecurity dSecurity = directorory.GetAccessControl();
             dSecurity.AddAccessRule(new FileSystemAccessRule(new SecurityIdentifier(WellKnownSidType.WorldSid, null), FileSystemRights.FullControl, InheritanceFlags.ObjectInherit | InheritanceFlags.ContainerInherit, PropagationFlags.InheritOnly, AccessControlType.Allow));
-            diretorio.SetAccessControl(dSecurity);
+            directorory.SetAccessControl(dSecurity);
 
-            ClearAttributes(caminho);
+            ClearAttributes(path);
 
-            if (testePermissao)
+            if (testPermission)
             {
-                var arquivo = diretorio.GetFiles().FirstOrDefault();
+                var arquivo = directorory.GetFiles().FirstOrDefault();
                 if (arquivo != null)
                 {
                     string text = File.ReadAllText(arquivo.FullName);
@@ -65,10 +65,10 @@ namespace Cronos
             }           
         }
 
-        public static void CopiaArquivosPastaOrigemParaDestino(string caminhoOrigem, string caminhoDestino)
+        public static void CopyFolders(string originPath, string destinyPath)
         {
-            DirectoryCopy(caminhoOrigem, caminhoDestino, true);
-            AlteraPermissaoDeEscritaPasta(caminhoDestino);
+            DirectoryCopy(originPath, destinyPath, true);
+            EditWriteFolder(destinyPath);
         }
 
         private static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
@@ -109,36 +109,36 @@ namespace Cronos
             }
         }
 
-        public static void LimpaDestino(string caminho)
+        public static void CleanDestiny(string path)
         {
-            DirectoryInfo dir = new DirectoryInfo(caminho);
-            var diretorios = dir.GetDirectories();
-            foreach (var item in diretorios)
+            DirectoryInfo dir = new DirectoryInfo(path);
+            var directories = dir.GetDirectories();
+            foreach (var item in directories)
             {
                 item.Delete(true);
             }
 
-            var arquivos = dir.GetFiles();
-            foreach (var item in arquivos)
+            var files = dir.GetFiles();
+            foreach (var item in files)
             {
                 item.Delete();
             }
         }
 
-        public static void ClearAttributes(string caminho)
+        public static void ClearAttributes(string path)
         {
-            if (Directory.Exists(caminho))
+            if (Directory.Exists(path))
             {
-                string[] subDirs = Directory.GetDirectories(caminho);
+                string[] subDirs = Directory.GetDirectories(path);
                 foreach (string dir in subDirs)
                     ClearAttributes(dir);
-                string[] files = files = Directory.GetFiles(caminho);
+                string[] files = files = Directory.GetFiles(path);
                 foreach (string file in files)
                     File.SetAttributes(file, FileAttributes.Normal);
             }
         }
 
-        public static string[] pastasZeus = {
+        public static string[] ZEUS_FOLDER = {
                 "{namespaceAtual}.App",
                 "{namespaceAtual}.Contrato",
                 "{namespaceAtual}.Dados",
@@ -149,7 +149,7 @@ namespace Cronos
                 "{namespaceAtual}.Util"
             };
 
-        public static string[] pastasInternasIgnorar = {
+        public static string[] IGNORE_FOLDER = {
                 "App_Data",
                 "Content",
                 "Scripts",
@@ -157,67 +157,67 @@ namespace Cronos
                 "obj"
             };
 
-        public static void RenomeiaDestino(string caminho, string namespaceAtual, string namespaceFuturo, string pastaProcessada)
+        public static void RenameDestiny(string path, string currentNamespace, string newNamespace, string processFolder)
         {
-            if (Directory.Exists(caminho))
+            if (Directory.Exists(path))
             {
-                var pasta = new DirectoryInfo(caminho);
+                var pasta = new DirectoryInfo(path);
 
-                var diretorios = !string.IsNullOrWhiteSpace(pastaProcessada)
-                                ? pasta.GetDirectories().Where(o => o.Name == pastaProcessada).ToList()
-                                : pasta.GetDirectories().Where(o => !pastasInternasIgnorar.Contains(o.Name)).ToList();
+                var diretorios = !string.IsNullOrWhiteSpace(processFolder)
+                                ? pasta.GetDirectories().Where(o => o.Name == processFolder).ToList()
+                                : pasta.GetDirectories().Where(o => !IGNORE_FOLDER.Contains(o.Name)).ToList();
 
                 foreach (var item in diretorios)
                 {
-                    var diretoriosFilhos = item.GetDirectories().Where(o => !pastasInternasIgnorar.Contains(o.Name)).ToList();
+                    var diretoriosFilhos = item.GetDirectories().Where(o => !IGNORE_FOLDER.Contains(o.Name)).ToList();
                     if (diretoriosFilhos.Count > 0)
                     {
-                        RenomeiaDestino(item.FullName, namespaceAtual, namespaceFuturo, string.Empty);
+                        RenameDestiny(item.FullName, currentNamespace, newNamespace, string.Empty);
                     }
 
-                    if (item.Name.Contains(namespaceAtual))
+                    if (item.Name.Contains(currentNamespace))
                     {
-                        var novoNome = item.Name.Replace(namespaceAtual, namespaceFuturo);
+                        var novoNome = item.Name.Replace(currentNamespace, newNamespace);
                         var novoCaminho = item.FullName.Replace(item.Name, novoNome);
                         item.MoveTo(novoCaminho);
                     }
 
-                    RenomeiaArquivosPasta(item, namespaceAtual, namespaceFuturo);
+                    RenameFilesAndFolders(item, currentNamespace, newNamespace);
                 }
 
-                if (!string.IsNullOrWhiteSpace(pastaProcessada))
+                if (!string.IsNullOrWhiteSpace(processFolder))
                 {
-                    RenomeiaArquivosPasta(pasta, namespaceAtual, namespaceFuturo);
+                    RenameFilesAndFolders(pasta, currentNamespace, newNamespace);
                 }
             }
         }
 
-        public static void RenomeiaArquivosPasta(DirectoryInfo diretorio, string namespaceAtual, string namespaceFuturo)
+        public static void RenameFilesAndFolders(DirectoryInfo directory, string currentNamespace, string newNamespace)
         {
-            var arquivos = diretorio.GetFiles();
-            foreach (var item in arquivos)
+            var files = directory.GetFiles();
+            foreach (var item in files)
             {
-                if (item.Name.Contains(namespaceAtual))
+                if (item.Name.Contains(currentNamespace))
                 {
-                    var novoNome = item.Name.Replace(namespaceAtual, namespaceFuturo);
-                    var novoCaminho = item.FullName.Replace(item.Name, novoNome);
-                    item.MoveTo(novoCaminho);
+                    var newName = item.Name.Replace(currentNamespace, newNamespace);
+                    var newPath = item.FullName.Replace(item.Name, newName);
+                    item.MoveTo(newPath);
                 }
 
                 if (item.Extension == ".sln" || item.Extension == ".gpState" || item.Extension == ".v11" || item.Extension == ".v12" || item.Extension == ".vssscc")
                 {
-                    var novoNome = namespaceFuturo;
-                    var novoCaminho = item.FullName.Replace(item.Name, "") + novoNome + item.Extension;
+                    var newName = newNamespace;
+                    var newPath = item.FullName.Replace(item.Name, "") + newName + item.Extension;
 
-                    if (!File.Exists(novoCaminho))
+                    if (!File.Exists(newPath))
                     {
-                        item.MoveTo(novoCaminho);
+                        item.MoveTo(newPath);
                     }
                 }
 
                 File.SetAttributes(item.FullName, FileAttributes.Normal);
                 string text = File.ReadAllText(item.FullName);
-                text = text.Replace(namespaceAtual, namespaceFuturo);
+                text = text.Replace(currentNamespace, newNamespace);
                 File.WriteAllText(item.FullName, text);
             }
         }
