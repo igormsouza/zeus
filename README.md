@@ -13,6 +13,10 @@ You can also contribuite as tester, developer and with some suggestions to impro
 
 Some videos explaining the way to use and build the structue are comming... 
 
+### What is Cronos?
+
+A quick way to generate a new structure of one Zeus project.
+
 ### Do you like?
 Following my last posts you can find my last updates about Zeus and others things.
 
