@@ -87,7 +87,7 @@
             this.groupBox1.Size = new System.Drawing.Size(667, 444);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Diretórios";
+            this.groupBox1.Text = "Directories";
             // 
             // linkHelp
             // 
