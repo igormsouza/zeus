@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/BHS.ProjetoBaseMvc.Dominio" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/BHS.ProjetoBaseMvc.Contrato.Entidade" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:element name="ListarCidade">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarCidadeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/BHS.ProjetoBaseMvc.Dominio" minOccurs="0" name="ListarCidadeResult" nillable="true" type="q1:ArrayOfTB_CIDADE" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarPaginadoCidade">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="paginaAtual" type="xs:int" />
+        <xs:element minOccurs="0" name="ordenacao" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="direcaoOrdenacao" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="quantidadePorPagina" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarPaginadoCidadeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/BHS.ProjetoBaseMvc.Contrato.Entidade" minOccurs="0" name="ListarPaginadoCidadeResult" nillable="true" type="q2:RetornoListaTotalOfTB_CIDADE_Suar5u8q" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BuscarPorIdCidade">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BuscarPorIdCidadeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/BHS.ProjetoBaseMvc.Dominio" minOccurs="0" name="BuscarPorIdCidadeResult" nillable="true" type="q3:TB_CIDADE" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CriarCidade">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BHS.ProjetoBaseMvc.Dominio" minOccurs="0" name="objetoNovo" nillable="true" type="q4:TB_CIDADE" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CriarCidadeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/BHS.ProjetoBaseMvc.Contrato.Entidade" minOccurs="0" name="CriarCidadeResult" nillable="true" type="q5:RetornoComMensagem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditarCidade">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/BHS.ProjetoBaseMvc.Dominio" minOccurs="0" name="objetoEditado" nillable="true" type="q6:TB_CIDADE" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditarCidadeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/BHS.ProjetoBaseMvc.Contrato.Entidade" minOccurs="0" name="EditarCidadeResult" nillable="true" type="q7:RetornoComMensagem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExcluirCidade">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExcluirCidadeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/BHS.ProjetoBaseMvc.Contrato.Entidade" minOccurs="0" name="ExcluirCidadeResult" nillable="true" type="q8:RetornoComMensagem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExcluirVariosCidade">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="id" nillable="true" type="q9:ArrayOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExcluirVariosCidadeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/BHS.ProjetoBaseMvc.Contrato.Entidade" minOccurs="0" name="ExcluirVariosCidadeResult" nillable="true" type="q10:RetornoComMensagem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarUF">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarUFResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/BHS.ProjetoBaseMvc.Dominio" minOccurs="0" name="ListarUFResult" nillable="true" type="q11:ArrayOfTB_UF" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarPaginadoUF">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="paginaAtual" type="xs:int" />
+        <xs:element minOccurs="0" name="ordenacao" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="direcaoOrdenacao" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="quantidadePorPagina" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListarPaginadoUFResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/BHS.ProjetoBaseMvc.Contrato.Entidade" minOccurs="0" name="ListarPaginadoUFResult" nillable="true" type="q12:RetornoListaTotalOfTB_UF_Suar5u8q" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BuscarPorIdUF">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BuscarPorIdUFResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/BHS.ProjetoBaseMvc.Dominio" minOccurs="0" name="BuscarPorIdUFResult" nillable="true" type="q13:TB_UF" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CriarUF">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/BHS.ProjetoBaseMvc.Dominio" minOccurs="0" name="objetoNovo" nillable="true" type="q14:TB_UF" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CriarUFResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/BHS.ProjetoBaseMvc.Contrato.Entidade" minOccurs="0" name="CriarUFResult" nillable="true" type="q15:RetornoComMensagem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditarUF">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/BHS.ProjetoBaseMvc.Dominio" minOccurs="0" name="objetoEditado" nillable="true" type="q16:TB_UF" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EditarUFResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/BHS.ProjetoBaseMvc.Contrato.Entidade" minOccurs="0" name="EditarUFResult" nillable="true" type="q17:RetornoComMensagem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExcluirUF">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExcluirUFResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/BHS.ProjetoBaseMvc.Contrato.Entidade" minOccurs="0" name="ExcluirUFResult" nillable="true" type="q18:RetornoComMensagem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExcluirVariosUF">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="id" nillable="true" type="q19:ArrayOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExcluirVariosUFResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/BHS.ProjetoBaseMvc.Contrato.Entidade" minOccurs="0" name="ExcluirVariosUFResult" nillable="true" type="q20:RetornoComMensagem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TestarServico">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="id" nillable="true" type="q21:ArrayOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TestarServicoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/BHS.ProjetoBaseMvc.Contrato.Entidade" minOccurs="0" name="TestarServicoResult" nillable="true" type="q22:RetornoComMensagem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

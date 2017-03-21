@@ -1,0 +1,23 @@
+﻿@{
+    bool? positionRight = (bool?)TempData["ErrorPositionRight"];
+}
+
+@if (!string.IsNullOrWhiteSpace(TempData["ErrorMessage"] as string))
+{
+    <div class="alert alert-danger @(positionRight == false ? "" : "PositionMensagem")">@TempData["ErrorMessage"]</div>    
+}
+
+else if (!string.IsNullOrWhiteSpace(TempData["WarningMessage"] as string))
+{
+    <div class="alert alert-warning @(positionRight == false ? "" : "PositionMensagem")">@TempData["WarningMessage"]</div>
+}
+
+else if (!string.IsNullOrWhiteSpace(TempData["SuccessMessage"] as string))
+{
+    <div class="alert alert-success @(positionRight == false ? "" : "PositionMensagem")">@TempData["SuccessMessage"]</div>
+}
+
+else if (!string.IsNullOrWhiteSpace(TempData["InfoMessage"] as string))
+{
+    <div class="alert alert-info @(positionRight == false ? "" : "PositionMensagem")">@TempData["InfoMessage"]</div>
+}

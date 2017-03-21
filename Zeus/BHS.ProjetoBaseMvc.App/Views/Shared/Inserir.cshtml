@@ -1,0 +1,294 @@
+﻿@using BHS.ProjetoBaseMvc.Dominio.Base;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ModelAutomaticoTela modelo = new ModelAutomaticoTela(true);
+    if (ViewBag.Modelo is ModelAutomaticoTela)
+    {
+        modelo = ViewBag.Modelo as ModelAutomaticoTela;
+    }
+
+    var idDiv = 0;
+}
+
+@if (modelo.NaoCarregado)
+{
+    <div class="row"> View não carregada! </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                @(modelo.Titulo ?? @ViewContext.RouteData.Values["controller"] as string) - Inserir
+            </h1>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Campos Principais
+                </div>
+
+                <div class="panel-body">
+                    @using (Html.BeginForm("Inserir", @ViewContext.RouteData.Values["controller"] as string, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.Hidden("ID", Request["ID"])
+
+                        foreach (var campo in modelo.CamposOcultos)
+                        {
+                            if (!string.IsNullOrWhiteSpace(campo.ValorFixo))
+                            {
+                                @Html.Hidden(campo.Nome, campo.ValorFixo)
+                            }
+                            else
+                            {
+                                var valor = ViewData[campo.Nome];
+                                valor = valor ?? "";
+                                @Html.Hidden(campo.Nome, valor)
+                            }
+                        }
+
+                        <div class="clearfix">
+                            <div class="form-section">
+                                <div class="row" id="conteudoForm">
+                                    @if (modelo.ConteudoDinamicoInserir.Count > 0)
+                                    {
+                                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-12 margintop10" id="divConteudoDinamicoInicio">
+
+                                        </div>
+                                    }
+
+                                    @foreach (var campo in modelo.Campos)
+                                    {
+                                        var Metadata = ModelMetadata.FromStringExpression(campo.Nome as string, ViewData);
+                                        if (Metadata.PropertyName == null) { continue; }
+                                        var NomeCampo = (Metadata.DisplayName ?? Metadata.PropertyName);
+                                        var Valor = Metadata.Model;
+
+                                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-@campo.Largura margintop10" id="div_id_@campo.Nome">
+                                            <div class="">
+                                                @Html.Label(Metadata.PropertyName, NomeCampo + (NomeCampo.EndsWith("?") ? "" : ":"), new { @class = "labelCustom" })
+
+                                                @if (Metadata.ModelType == typeof(bool) || Metadata.ModelType == typeof(bool?))
+                                                {
+                                                    if (campo.Tipo == enumTipoCampo.Padrao)
+                                                    {
+                                                        @Html.DropDownList(Metadata.PropertyName, new List<System.Web.Mvc.SelectListItem> {
+                                                    new System.Web.Mvc.SelectListItem { Text = "Sim", Value = "True", Selected = Valor == "True" },
+                                                    new System.Web.Mvc.SelectListItem { Text = "Não", Value = "False", Selected = Valor == "False" }
+                                                }, new { @class = "form-control" })
+                                                    }
+                                                    else if (campo.Tipo == enumTipoCampo.CustomizadoParcial)
+                                                    {
+                                                        @Html.Partial(campo.CarregarControle)
+                                                    }
+                                                    else if (campo.Tipo == enumTipoCampo.CustomizadoHtml)
+                                                    {
+                                                        @Html.Raw(campo.CarregarControle)
+                                                    }
+                                                }
+                                                else if (Metadata.PropertyName.ToUpper().StartsWith("ID") && Metadata.PropertyName.ToUpper() != "ID")
+                                                {
+                                                    var lista = (SelectList)ViewData[Metadata.PropertyName.Replace("ID_", "").ToUpper()];
+                                                    if (lista != null)
+                                                    {
+                                                        if (campo.Tipo == enumTipoCampo.Padrao)
+                                                        {
+                                                            @Html.DropDownList(Metadata.PropertyName, lista, Valor as string, new { @class = "form-control" })
+                                                        }
+                                                        else if (campo.Tipo == enumTipoCampo.CustomizadoParcial)
+                                                        {
+                                                            @Html.Partial(campo.CarregarControle)
+                                                        }
+                                                        else if (campo.Tipo == enumTipoCampo.CustomizadoHtml)
+                                                        {
+                                                            @Html.Raw(campo.CarregarControle)
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        if (campo.Tipo == enumTipoCampo.TextArea)
+                                                        {
+                                                            Valor = Valor ?? "";
+                                                            @Html.TextArea(Metadata.PropertyName, Valor.ToString(), htmlAttributes: new { @class = "form-control", maxlength = "50", @readonly = "readonly" })
+                                                        }
+                                                        else if (campo.Tipo == enumTipoCampo.CustomizadoParcial)
+                                                        {
+                                                            @Html.Partial(campo.CarregarControle)
+                                                        }
+                                                        else if (campo.Tipo == enumTipoCampo.CustomizadoHtml)
+                                                        {
+                                                            @Html.Raw(campo.CarregarControle)
+                                                        }
+                                                        else if (campo.Tipo == enumTipoCampo.Padrao)
+                                                        {
+                                                            @Html.TextBox(Metadata.PropertyName, Valor ?? Request[Metadata.PropertyName.Replace("_", "")], new { @class = "form-control", maxlength = "50", @readonly = "readonly" })
+                                                        }
+                                                    }
+                                                }
+                                                else if (Metadata.PropertyName.ToUpper() == "SENHA" || Metadata.PropertyName.ToUpper() == "PASSWORD")
+                                                {
+                                                    if (campo.Tipo == enumTipoCampo.Padrao)
+                                                    {
+                                                        @Html.Password(Metadata.PropertyName, "", new { @class = "form-control", maxlength = "50" })
+                                                    }
+                                                    else if (campo.Tipo == enumTipoCampo.CustomizadoParcial)
+                                                    {
+                                                        @Html.Partial(campo.CarregarControle)
+                                                    }
+                                                    else if (campo.Tipo == enumTipoCampo.CustomizadoHtml)
+                                                    {
+                                                        @Html.Raw(campo.CarregarControle)
+                                                    }
+                                                }
+                                                else if (Metadata.ModelType == typeof(DateTime) || Metadata.ModelType == typeof(DateTime?))
+                                                {
+                                                    if (campo.Tipo == enumTipoCampo.Padrao)
+                                                    {
+                                                        if (campo.Ativo)
+                                                        {
+                                                            if (Valor == null || (DateTime)Valor == DateTime.MinValue)
+                                                            {
+                                                                @Html.TextBox(Metadata.PropertyName, "", "{0:dd/MM/yyyy}", new { @class = "form-control data datepicker", maxlength = "10" })
+                                                            }
+                                                            else
+                                                            {
+                                                                @Html.TextBox(Metadata.PropertyName, Valor, "{0:dd/MM/yyyy}", new { @class = "form-control data datepicker", maxlength = "10" })
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBox(Metadata.PropertyName + "_visivel", Valor, "{0:dd/MM/yyyy}", new { @class = "form-control data datepicker", maxlength = "10", disabled = "disabled" })
+                                                            @Html.Hidden(Metadata.PropertyName, Valor)
+                                                        }
+                                                    }
+                                                    else if (campo.Tipo == enumTipoCampo.CustomizadoParcial)
+                                                    {
+                                                        @Html.Partial(campo.CarregarControle)
+                                                    }
+                                                    else if (campo.Tipo == enumTipoCampo.CustomizadoHtml)
+                                                    {
+                                                        @Html.Raw(campo.CarregarControle)
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    var classes = new List<string> { "form-control" };
+                                                    if (Metadata.PropertyName.ToLower().Contains("cpf")) { classes.Add("cpf"); }
+                                                    if (Metadata.PropertyName.ToLower().Contains("cnpj")) { classes.Add("cnpj"); }
+                                                    if (Metadata.PropertyName.ToLower().Contains("cep")) { classes.Add("cep"); }
+                                                    if (Metadata.PropertyName.ToLower().Contains("telefone")) { classes.Add("telefone"); }
+                                                    if (Metadata.PropertyName.ToLower().Contains("celular")) { classes.Add("telefone"); }
+                                                    if (Metadata.ModelType == typeof(int) || Metadata.ModelType == typeof(int?)) { classes.Add("numero"); }
+                                                    if (Metadata.ModelType == typeof(decimal) || Metadata.ModelType == typeof(decimal?)) { classes.Add("numero"); }
+                                                    if (Metadata.ModelType == typeof(long) || Metadata.ModelType == typeof(long?)) { classes.Add("numero"); }
+
+                                                    if (campo.Tipo == enumTipoCampo.TextArea)
+                                                    {
+                                                        Valor = Valor ?? "";
+                                                        if (campo.Ativo)
+                                                        {
+                                                            @Html.TextArea(Metadata.PropertyName, Valor.ToString(), new { @class = string.Join(" ", classes), maxlength = "1000" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextArea(Metadata.PropertyName + "_visivel", Valor.ToString(), new { @class = string.Join(" ", classes), disabled = "disabled", maxlength = "1000" })
+                                                            @Html.Hidden(Metadata.PropertyName, Valor)
+                                                        }
+                                                    }
+                                                    else if (campo.Tipo == enumTipoCampo.CustomizadoParcial)
+                                                    {
+                                                        @Html.Partial(campo.CarregarControle)
+                                                    }
+                                                    else if (campo.Tipo == enumTipoCampo.CustomizadoHtml)
+                                                    {
+                                                        @Html.Raw(campo.CarregarControle)
+                                                    }
+                                                    else if (campo.Tipo == enumTipoCampo.Padrao)
+                                                    {
+                                                        if (campo.Ativo)
+                                                        {
+                                                            @Html.TextBox(Metadata.PropertyName, Valor, new { @class = string.Join(" ", classes), maxlength = "50" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBox(Metadata.PropertyName + "_visivel", Valor, new { @class = string.Join(" ", classes), maxlength = "50", disabled = "disabled" })
+                                                            @Html.Hidden(Metadata.PropertyName, Valor)
+                                                        }
+                                                    }
+                                                }
+                                                @Html.ValidationMessage(Metadata.PropertyName, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    }
+
+                                    @if (modelo.ConteudoDinamicoInserir.Count > 0)
+                                    {
+                                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-12 margintop10" id="divConteudoDinamicoFinal">
+
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container-buttons clearfix">
+                            <div class="row">
+                                <div class="pull-right">
+                                    @if(modelo.Redirecionar == null)
+                                    { 
+                                        <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-arrow-circle-o-left fa-fw"></i> Cancelar</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action(modelo.Redirecionar.ActionOrigem, modelo.Redirecionar.ControllerOrigem)" class="btn btn-default"><i class="fa fa-arrow-circle-o-left fa-fw"></i> Cancelar</a>
+                                    }
+                                    
+                                    @if (modelo.Campos.Count > 0)
+                                    {
+                                        <button type="submit" value="Create" class="btn btn-default btn-principal"><i class="fa fa-plus-circle fa-fw"></i> Cadastrar</button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@foreach (var campo in modelo.ConteudoDinamicoInserir)
+{
+    var nomeDiv = string.Format("divDinamica_{0}", idDiv);
+
+    <div id="@nomeDiv" data-pai="@campo.IdReferencia" data-modo-conteudo="@Convert.ToInt32(campo.InclusaoReferencia).ToString()" class="@campo.CssDiv">
+
+        @if (campo.TipoConteudo == enumTipoConteudoDinamico.CustomizadoParcial)
+        {
+            if (!string.IsNullOrWhiteSpace(campo.Propriedade))
+            {
+                var metadata = ModelMetadata.FromStringExpression(campo.Propriedade as string, ViewData);
+                var valor = metadata.Model;
+                if (valor != null)
+                {
+                    @Html.Partial(campo.Conteudo, valor)
+                }
+                else
+                {
+                    @Html.Partial(campo.Conteudo)
+                }
+            }
+            else
+            {
+                @Html.Partial(campo.Conteudo)
+            }
+        }
+        else if (campo.TipoConteudo == enumTipoConteudoDinamico.CustomizadoHtml)
+        {
+            @Html.Raw(campo.Conteudo)
+        }
+
+    </div>
+}

@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Permissao";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Permissao</h2>
+
+
+
+<div id="tree"></div>
+
+
+
+@section Scripts {
+
+
+    <script type="text/javascript">
+
+        var dataMenu = @Html.Raw(Json.Encode(ViewBag.Menus));
+        var dataFuncionalidades = @Html.Raw(Json.Encode(ViewBag.Funcionalidades));
+        var arvoreMenu = [];
+
+        $(document).ready(function () {
+            $('#tree').treeview({ data: ArvoreMenu() });
+
+        });
+
+        function ArvoreMenu() {
+
+            $(dataMenu).each(function(index,element){
+                if(element.IDPai == null)
+                    arvoreMenu.push( { text:element.Titulo, nodes:null, ID: element.ID });
+            });
+
+            $(arvoreMenu).each(function(index,element){
+                MontaFilhosArvoreMenu(element)
+            });
+
+            return arvoreMenu;
+        }
+
+        function MontaFilhosArvoreMenu(item)
+        {
+
+            $(dataMenu).each(function(index,element){
+                if(element.IDPai == item.ID)
+                {
+                    if(item.nodes==null)
+                        item.nodes=[];
+                    item.nodes.push( { text:element.Titulo, nodes:null, id: element.ID });
+                    
+                    //MontaFilhosArvoreMenu(element);
+                }
+            });
+
+        }
+
+    </script>
+}

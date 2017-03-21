@@ -1,0 +1,417 @@
+﻿@using BHS.ProjetoBaseMvc.Dominio.Base;
+@using BHS.ProjetoBaseMvc.Util;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ModelAutomaticoTela modelo = new ModelAutomaticoTela(true);
+    if (ViewBag.Modelo is ModelAutomaticoTela)
+    {
+        modelo = ViewBag.Modelo as ModelAutomaticoTela;
+    }
+
+    var idDiv = 0;
+    var scriptDesabilitaCampos = "";
+}
+
+@if (modelo.NaoCarregado)
+{
+    <div class="row"> View não carregada! </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                @(modelo.Titulo ?? @ViewContext.RouteData.Values["controller"] as string)
+            </h1>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Opções de pesquisa
+
+                    @if (modelo.ExibirNovo == true)
+                    {
+                        var qs = Request.QueryString ?? Request.Form;
+                        var dic = new RouteValueDictionary(qs.Keys.Cast<string>
+                        ().Where(a => a != "Query.ID").ToDictionary(a => a.Replace("Query.", ""), a => (object)qs[a]));
+
+                        <div class="pull-right">
+                            <div class="btn-group">
+                                <a href="@Url.Action("Inserir", dic)" class="btn btn-default btn-xs"><i class="fa fa-plus-circle"></i>&nbsp;Novo</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <!-- .panel-heading -->
+
+                <div class="panel-body">
+
+                    @if (modelo.CamposPesquisa.Count > 0)
+                    {
+                        using (Html.BeginForm("Index", @ViewContext.RouteData.Values["controller"] as string, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.Hidden("sort", Request["sort"])
+                            @Html.Hidden("sortdir", Request["sortdir"])
+
+                            foreach (var campo in modelo.CamposOcultos)
+                            {
+                                if (!string.IsNullOrWhiteSpace(campo.ValorFixo))
+                                {
+                                    @Html.Hidden(campo.Nome, campo.ValorFixo)
+                                }
+                                else
+                                {
+                                    var valor = ViewData[campo.Nome];
+                                    valor = valor ?? "";
+                                    @Html.Hidden(campo.Nome, valor)
+                                }
+                            }
+
+                            <div class="clearfix">
+                                <div class="form-section">
+                                    <div class="row" id="conteudoForm">
+                                        @foreach (var campo in modelo.CamposPesquisa)
+                                        {
+                                            var Metadata = ModelMetadata.FromStringExpression("Query." + campo.Nome, ViewData);
+                                            if (Metadata == null) { continue; }
+                                            var NomeCampo = "Query." + campo.Nome;// Metadata.PropertyName;
+                                            var TituloCampo = (Metadata.DisplayName ?? campo.Nome);
+
+                                            if (Metadata.ModelType == typeof(bool) || Metadata.ModelType == typeof(bool?))
+                                            {
+                                                continue;
+                                            }
+
+                                            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-@campo.Largura margintop10">
+
+
+                                                @Html.Label(NomeCampo, TituloCampo, new { @class = "labelCustom" })
+
+                                                @if (Metadata.ModelType == typeof(DateTime) || Metadata.ModelType == typeof(DateTime?))
+                                                {
+                                                    var data = (Request[NomeCampo] == null || Request[NomeCampo] == "" || Convert.ToDateTime(Request[NomeCampo]) == DateTime.MinValue) ? "" : Request[NomeCampo];
+
+                                                    if (campo.Tipo == enumTipoCampo.Padrao)
+                                                    {
+                                                        @Html.TextBox(NomeCampo, data, "{0:dd/MM/yyyy}", new { @class = "form-control data date", maxlength = "10" })
+                                                    }
+                                                    else if (campo.Tipo == enumTipoCampo.CustomizadoParcial)
+                                                    {
+                                                        @Html.Partial(campo.CarregarControle)
+                                                    }
+                                                    else if (campo.Tipo == enumTipoCampo.CustomizadoHtml)
+                                                    {
+                                                        @Html.Raw(campo.CarregarControle)
+                                                    }
+                                                }
+                                                else if (NomeCampo.ToUpper().StartsWith("QUERY.ID_") && NomeCampo.ToUpper() != "QUERY.ID")
+                                                {
+                                                    var lista = (SelectList)ViewData[Metadata.PropertyName.Replace("ID_", "")];
+                                                    if (lista != null)
+                                                    {
+                                                        if (campo.Tipo == enumTipoCampo.Padrao)
+                                                        {
+                                                            if (lista.SelectedValue == null)
+                                                            {
+                                                                @Html.DropDownList(NomeCampo, lista, string.Empty, new { @class = "form-control" })
+                                                            }
+                                                            else
+                                                            {
+                                                                if (campo.Ativo)
+                                                                {
+                                                                    @Html.DropDownList(NomeCampo, lista, htmlAttributes: new { @class = "form-control" })
+                                                                }
+                                                                else
+                                                                {
+                                                                    @Html.DropDownList(NomeCampo + "_visivel", lista, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                                                                    @Html.Hidden(NomeCampo, lista.SelectedValue.ToString())
+                                                                }
+                                                            }
+                                                        }
+                                                        else if (campo.Tipo == enumTipoCampo.CustomizadoParcial)
+                                                        {
+                                                            @Html.Partial(campo.CarregarControle)
+                                                        }
+                                                        else if (campo.Tipo == enumTipoCampo.CustomizadoHtml)
+                                                        {
+                                                            @Html.Raw(campo.CarregarControle)
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        if (campo.Tipo == enumTipoCampo.Padrao)
+                                                        {
+                                                            @Html.TextBox(NomeCampo, null, new { @class = "form-control", maxlength = "50", @readonly = "readonly" })
+                                                        }
+                                                        else if (campo.Tipo == enumTipoCampo.CustomizadoParcial)
+                                                        {
+                                                            @Html.Partial(campo.CarregarControle)
+                                                        }
+                                                        else if (campo.Tipo == enumTipoCampo.CustomizadoHtml)
+                                                        {
+                                                            @Html.Raw(campo.CarregarControle)
+                                                        }
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    if (campo.Tipo == enumTipoCampo.Padrao)
+                                                    {
+                                                        var classes = new List<string> { "form-control" };
+                                                        if (NomeCampo.ToLower().Contains("cpf")) { classes.Add("cpf"); }
+                                                        if (NomeCampo.ToLower().Contains("cnpj")) { classes.Add("cnpj"); }
+                                                        if (NomeCampo.ToLower().Contains("cep")) { classes.Add("cep"); }
+                                                        if (NomeCampo.ToLower().Contains("telefone")) { classes.Add("telefone"); }
+                                                        if (NomeCampo.ToLower().Contains("celular")) { classes.Add("telefone"); }
+                                                        if (Metadata.ModelType == typeof(int) || Metadata.ModelType == typeof(int?)) { classes.Add("numero"); }
+                                                        if (Metadata.ModelType == typeof(decimal) || Metadata.ModelType == typeof(decimal?)) { classes.Add("numero"); }
+                                                        if (Metadata.ModelType == typeof(long) || Metadata.ModelType == typeof(long?)) { classes.Add("numero"); }
+
+                                                        if (campo.Ativo)
+                                                        {
+                                                            @Html.TextBox(NomeCampo, campo.ValorFixo, new { @class = string.Join(" ", classes), maxlength = "50" })
+                                                        }
+                                                        else
+                                                        {
+                                                            @Html.TextBox(NomeCampo, campo.ValorFixo, new { @class = string.Join(" ", classes), maxlength = "50", @readonly = "readonly" })
+                                                        }
+                                                    }
+                                                    else if (campo.Tipo == enumTipoCampo.CustomizadoParcial)
+                                                    {
+                                                        @Html.Partial(campo.CarregarControle)
+                                                    }
+                                                    else if (campo.Tipo == enumTipoCampo.CustomizadoHtml)
+                                                    {
+                                                        @Html.Raw(campo.CarregarControle)
+                                                    }
+                                                }
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="row">
+                                        @foreach (var campo in modelo.CamposPesquisa)
+                                        {
+                                            var Metadata = ModelMetadata.FromStringExpression("Query." + campo.Nome, ViewData);
+                                            if (Metadata == null) { continue; }
+                                            var NomeCampo = "Query." + campo.Nome;// Metadata.PropertyName;
+                                            var TituloCampo = (Metadata.DisplayName ?? NomeCampo);
+
+                                            if (Metadata.ModelType == typeof(bool) || Metadata.ModelType == typeof(bool?))
+                                            {
+                                                if (campo.Tipo == enumTipoCampo.Padrao)
+                                                {
+                                                    <div class="col-xs-12">
+                                                        <label>
+                                                            @Html.CheckBox(NomeCampo)
+                                                            @TituloCampo
+                                                        </label>
+                                                    </div>
+                                                }
+                                                else if (campo.Tipo == enumTipoCampo.CustomizadoParcial)
+                                                {
+                                                    @Html.Partial(campo.CarregarControle)
+                                                }
+                                                else if (campo.Tipo == enumTipoCampo.CustomizadoHtml)
+                                                {
+                                                    @Html.Raw(campo.CarregarControle)
+                                                }
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                                <div class="container-buttons clearfix">
+                                    <div class="row">
+                                        <div class="pull-right">
+                                            @if (modelo.ExibirLimpar)
+                                            {
+                                                <a href="@Url.Action("LimparPesquisa")" class="btn btn-default"><i class="fa fa-eraser fa-fw"></i> Limpar</a>
+                                            }
+
+                                            @if (modelo.ExibirNovo)
+                                            {
+                                                <a href="@Url.Action("Inserir")" class="btn btn-default"><i class="fa fa-plus-circle fa-fw"></i> Novo</a>
+                                            }
+                                            <button type="submit" class="btn btn-default btn-principal"><i class="fa fa-search fa-fw"></i> Pesquisar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    @{
+                    if (modelo.CamposGrid == null) { return; }
+
+                    var grid = new WebGrid(
+                        canPage: true,
+                        rowsPerPage: Model.QuantidadePorPagina,
+                        selectionFieldName: "selectedRow",
+                        ajaxUpdateContainerId: "gridContent"
+                    );
+                    grid.Pager(WebGridPagerModes.NextPrevious);
+                    grid.Bind(rowCount: Model.TotalItens, source: Model.Itens, autoSortAndPage: false);
+
+                    var columns = new List<WebGridColumn>();
+                    int j = 0;
+                    foreach (string CampoGrid in modelo.CamposGrid)
+                    {
+                        // Obter o DisplayName do campo usando Reflection
+                        var TipoModelo = Model.Itens.GetType() as Type;
+                        var CamposModelo = TipoModelo == null ? null : TipoModelo.GetGenericArguments()[0].GetProperties();
+                        var CampoReflection = CamposModelo == null ? null : CamposModelo.FirstOrDefault(a => a.Name.ToUpper() == CampoGrid.ToUpper().Split('.')[0]);
+                        var AtributoCampo = CampoReflection == null ? null : CampoReflection.GetCustomAttributes(typeof(System.ComponentModel.DisplayNameAttribute), false).FirstOrDefault() as System.ComponentModel.DisplayNameAttribute;
+                        var TituloCampo = AtributoCampo == null ? CampoGrid : AtributoCampo.DisplayName;
+                        if (modelo.CamposGridNome.Count > 0)
+                        {
+                            TituloCampo = modelo.CamposGridNome[j];
+                        }
+
+                        var Booleano = CampoReflection == null ? false : (CampoReflection.PropertyType == typeof(bool) || CampoReflection.PropertyType == typeof(bool?));
+                        var Data = CampoReflection == null ? false : (CampoReflection.PropertyType == typeof(DateTime) || CampoReflection.PropertyType == typeof(DateTime?));
+
+                        if (Booleano)
+                        {
+                            columns.Add(grid.Column(CampoGrid, TituloCampo, format: (item) => item[CampoGrid] == true ? "Sim" : "Não"));
+                        }
+                        else if (Data)
+                        {
+                            columns.Add(grid.Column(CampoGrid, TituloCampo, format: (item) => item[CampoGrid] == null ? "" : (item[CampoGrid] as DateTime?).Value.ToString("dd/MM/yyyy")));
+                        }
+                        else
+                        {
+                            var Link = "";
+                            var Key = "";
+                            if (modelo.LinksGrid.Count > 0
+                                && modelo.LinksGrid is string[]
+                                && (modelo.LinksGrid as string[]).Length > j
+                                && !string.IsNullOrEmpty((modelo.LinksGrid as string[])[j]))
+                            {
+                                Link = (modelo.LinksGrid[j] as string).Split('|').First();
+                                Key = (modelo.LinksGrid[j] as string).Split('|').Last();
+                            }
+                            columns.Add(grid.Column(CampoGrid, TituloCampo, format: (item) =>
+                                {
+                                    try
+                                    {
+
+                                        // É necessário utilizar esta exceção, já que o item[Key] pode ser inválido, e a única
+                                        // maneira de saber é recebendo uma exceção do tipo RuntimeBinderException.
+                                        try
+                                        {
+                                            if (!string.IsNullOrEmpty(Link))
+                                            {
+                                                var dic = new RouteValueDictionary(new Dictionary<string, object> { { "Query.ID", item[Key] } });
+                                                return Html.Raw("<a href='" + Url.Action("Index", Link, dic) + "'>" + Html.Encode(item[CampoGrid]) + "</a>");
+                                            }
+                                            return item[CampoGrid];
+                                        }
+                                        catch (Exception)
+                                        {
+                                            return item[CampoGrid];
+                                        }
+
+                                    }
+                                    catch (Exception)
+                                    {
+                                        return "-";
+                                    }
+                                }, style: "description"));
+                        }
+                        j++;
+                    }
+
+                    if (modelo.CamposGrid.Count > 0)
+                    {
+                        if (modelo.ExibirEditar != false)
+                        {
+                            columns.Add(grid.Column("Editar", format: (item) => @Html.Raw("<a href=\"" + @Url.Action("Editar", new { id = item.ID }) + "\">Editar</a>"), style: "btnEditarRemover"));
+                        }
+                        if (modelo.ExibirExcluir == true)
+                        {
+                            columns.Add(grid.Column("Remover", format: (item) => @Html.Raw("<a href=\"" + @Url.Action("Deletar", new { id = item.ID }) + "\" onclick = \"return confirm('Deseja relamente excluir o item selecionado?')\">Excluir</a>"), style: "btnEditarRemover"));
+                        }
+                    }
+
+                    try
+                    {
+                        if (modelo.Acoes.Count > 0)
+                        {
+                            int contador = 0;
+                            foreach (var acao in modelo.Acoes)
+                            {
+                                if (!string.IsNullOrWhiteSpace(acao.CampoReferencia))
+                                {
+                                    columns.Add(grid.Column("", format: (item) => @Html.ActionLink(acao.Nome, acao.LinkActionGrid, acao.LinkControllerGrid,
+                                        new RouteValueDictionary() { { acao.ParametroUrl, item[acao.CampoReferencia] } },
+                                        new Dictionary<string, object>() { })));
+                                }
+                                contador++;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+
+                    <div class="serach-result set-scroll">
+                        <div class="grid">
+                            @grid.GetHtml(
+                                tableStyle: "table table-bordered table-hover table-striped",
+                                headerStyle: "head",
+                                footerStyle: "hide",
+                                alternatingRowStyle: "altRow",
+                                selectedRowStyle: "selectRow",
+                                columns: grid.Columns(columns.ToArray())
+                            )
+                        </div>
+                        @if (grid.TotalRowCount == 0)
+                        {
+                            <div style="text-align: center">Nenhum registro foi encontrado.</div>
+                        }
+                    </div>
+
+                        @grid.PagerList(paginationStyle: "pagination ", previousText: "«", nextText: "»")
+                    }
+                </div>
+
+                <!-- .panel-body -->
+            </div>
+        </div>
+    </div>
+}
+
+@foreach (var campo in modelo.ConteudoDinamico)
+{
+    var nomeDiv = string.Format("divDinamica_{0}", idDiv);
+
+    <div id="@nomeDiv" data-pai="@campo.IdReferencia" data-modo-conteudo="@Convert.ToInt32(campo.InclusaoReferencia).ToString()">
+
+        @if (campo.TipoConteudo == enumTipoConteudoDinamico.CustomizadoParcial)
+        {
+            @Html.Partial(campo.Conteudo)
+        }
+        else if (campo.TipoConteudo == enumTipoConteudoDinamico.CustomizadoHtml)
+        {
+            @Html.Raw(campo.Conteudo)
+        }
+
+    </div>
+}
+
+@foreach (var campo in modelo.CamposPesquisa)
+{
+    scriptDesabilitaCampos += "$('#Query_" + campo.Nome.Replace(".", "_") + "').rules('remove', 'required');";
+}
+
+
+@section Scripts {
+    @if (!string.IsNullOrWhiteSpace(scriptDesabilitaCampos))
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                @Html.Raw(scriptDesabilitaCampos)
+            });
+        </script>
+    }
+}

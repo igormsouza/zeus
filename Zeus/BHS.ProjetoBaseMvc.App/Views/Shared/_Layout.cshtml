@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BHS - Zeus Exemplo</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Início", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @*@Html.ActionLink("Backlog", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Criticas e sugestões", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Como requisitar acesso", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    @BHS.ProjetoBaseMvc.Util.Menu.MenuExtensions.BhsMenu(ViewBag.Menus)
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    @{
+                        if (BHS.ProjetoBaseMvc.App.Custom.LoginManager.IsUsuarioLogado)
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Olá @BHS.ProjetoBaseMvc.App.Custom.LoginManager.UsuarioLogado.NOME <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a href="../Account/LogOff">Sair</a></li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li><a href="../Account/Login">Login</a></li>
+                        }
+                    }
+                </ul>
+
+
+            </div><!-- /.navbar-collapse -->
+        </div>
+    </div>
+    <div class="container body-content">
+
+
+        @Html.Partial("_Mensagens")
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; BHS</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

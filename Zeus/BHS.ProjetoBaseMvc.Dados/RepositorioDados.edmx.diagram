@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5f0756ea7057461895d36a8471760e78" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="BHS.ProjetoBaseMvc.Dominio.TB_UF" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BHS.ProjetoBaseMvc.Dominio.TB_MENU" Width="1.5" PointX="15" PointY="4.75" />
+        <AssociationConnector Association="BHS.ProjetoBaseMvc.Dominio.FK_TB_MENU_MENU_ID" />
+        <EntityTypeShape EntityType="BHS.ProjetoBaseMvc.Dominio.TB_FUNCIONALIDADE" Width="1.5" PointX="15" PointY="8.625" />
+        <AssociationConnector Association="BHS.ProjetoBaseMvc.Dominio.FK_TB_FUNCIONALIDADE_TB_MENU" />
+        <EntityTypeShape EntityType="BHS.ProjetoBaseMvc.Dominio.TB_SUGESTOES" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="BHS.ProjetoBaseMvc.Dominio.TB_CIDADE" Width="1.5" PointX="2.75" PointY="4.125" />
+        <EntityTypeShape EntityType="BHS.ProjetoBaseMvc.Dominio.TB_USUARIO" Width="1.5" PointX="11.25" PointY="5.75" />
+        <AssociationConnector Association="BHS.ProjetoBaseMvc.Dominio.FK_TB_CIDADE_TB_UF" />
+        <AssociationConnector Association="BHS.ProjetoBaseMvc.Dominio.FK_TB_USUARIO_TB_CIDADE" />
+        <EntityTypeShape EntityType="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL" Width="1.5" PointX="9" PointY="5.5" />
+        <AssociationConnector Association="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL_FUNCIONALIDADE" />
+        <AssociationConnector Association="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL_MENU" />
+        <AssociationConnector Association="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL_USUARIO" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

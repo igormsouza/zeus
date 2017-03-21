@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1D31FBE5-E15A-4BC6-93D9-9BD102154ECB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BHS.ProjetoBaseMvc.Dados</RootNamespace>
+    <AssemblyName>BHS.ProjetoBaseMvc.Dados</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Adaptador.cs" />
+    <Compile Include="Adaptador1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Adaptador.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\RepositorioGenerico.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositorio\CidadeRepositorio.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorio\FuncionalidadeRepositorio.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorio\MenuRepositorio.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorio\PerfilRepositorio.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorio\Repositorio.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorio\SugestoesRepositorio.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorio\UFRepositorio.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repositorio\UsuarioRepositorio.cs">
+      <DependentUpon>Repositorio.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioDados.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepositorioDados.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioDados.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepositorioDados.edmx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BHS.ProjetoBaseMvc.Dominio\BHS.ProjetoBaseMvc.Dominio.csproj">
+      <Project>{cfc9aa86-fa55-429a-a2c1-ef8608a20ac6}</Project>
+      <Name>BHS.ProjetoBaseMvc.Dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BHS.ProjetoBaseMvc.Util\BHS.ProjetoBaseMvc.Util.csproj">
+      <Project>{aaef4c65-1961-47b1-996f-8addfec01da0}</Project>
+      <Name>BHS.ProjetoBaseMvc.Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Adaptador.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Adaptador1.cs</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <EntityDeploy Include="RepositorioDados.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>RepositorioDados.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Repositorio\Repositorio.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Repositorio.cs</LastGenOutput>
+    </None>
+    <None Include="RepositorioDados.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RepositorioDados.edmx</DependentUpon>
+      <LastGenOutput>RepositorioDados.Context.cs</LastGenOutput>
+    </None>
+    <None Include="RepositorioDados.edmx.diagram">
+      <DependentUpon>RepositorioDados.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="RepositorioCustomizado\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\scrpitAcesso.sql" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,83 @@
+﻿@model BHS.ProjetoBaseMvc.Dominio.PesquisaDTO.PesquisaUF
+@{
+
+
+<h2>UF</h2>
+<div class="row">
+    <div class="col-md-8">
+   
+    @using (Html.BeginForm("Index", "UF", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Nome, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", maxlength = "50" })
+                @Html.ValidationMessageFor(m => m.Nome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Sigla, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Sigla, new { @class = "form-control", maxlength = "2" })
+                @Html.ValidationMessageFor(m => m.Sigla, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-4">
+                <button type="submit" name="Acao" value="Pesquisar" class="btn btn-default">
+                    <span class="glyphicon glyphicon-search"></span>&nbsp;Pesquisar
+                </button>
+                <button type="reset" class="btn btn-default">
+                    <span class=""></span>&nbsp;Limpar
+                </button>
+            </div>
+        </div>
+    }
+
+    </div>
+</div>
+   
+    <p>
+        @Html.ActionLink("Novo", "Inserir")
+    </p>
+    ViewBag.Title = "Exemplo Grid";
+    var grid = new WebGrid(canPage: true, rowsPerPage: Model.QuantidadePorPagina, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+    grid.Pager(WebGridPagerModes.NextPrevious);
+    grid.Bind(rowCount: Model.TotalItens, source: Model.Itens, autoSortAndPage: false);
+}
+
+<div id="gridContent">
+@if (Model.TotalItens > 0)
+{
+    @grid.GetHtml(tableStyle: "table",
+            headerStyle: "head",
+            alternatingRowStyle: "altRow",
+            selectedRowStyle: "selectRow",
+            columns: grid.Columns(
+            grid.Column("ID", format: (item) => item.GetSelectLink(item.ID.ToString())),
+            grid.Column("NOME", "Nome", style: "description"),
+            grid.Column("SIGLA", "Sigla", style: "description"),
+            grid.Column("", format: (item) => @Html.ActionLink("Editar", "Editar", new { id = item.ID })),
+            grid.Column("", format: (item) => @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { onclick = "return confirm('Deseja relamente excluir o item selecionado?');" }))
+        ))
+
+    if (grid.HasSelection)
+    {
+        var ItemGrid = (BHS.ProjetoBaseMvc.Dominio.TB_UF)grid.Rows[grid.SelectedIndex].Value;
+        <b>Id</b> @ItemGrid.ID<br />
+        <b>Nome</b>  @ItemGrid.NOME<br />
+        <b>Sigla</b>  @ItemGrid.SIGLA<br />
+    }
+}
+else if (Model.AbrirGrid)
+{
+    <p>Nenhum item foi encontrado.</p>
+}
+
+</div>
+
+
+
