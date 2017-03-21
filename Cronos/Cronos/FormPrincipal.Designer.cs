@@ -59,7 +59,7 @@
             this.btnSearchOriginPath.TabIndex = 0;
             this.btnSearchOriginPath.Text = "Search";
             this.btnSearchOriginPath.UseVisualStyleBackColor = true;
-            this.btnSearchOriginPath.Click += new System.EventHandler(this.btnBuscarCaminhoOrigem_Click);
+            this.btnSearchOriginPath.Click += new System.EventHandler(this.btnSearchOriginPath_Click);
             // 
             // groupBox1
             // 
@@ -98,7 +98,7 @@
             this.linkHelp.TabIndex = 18;
             this.linkHelp.TabStop = true;
             this.linkHelp.Text = "Help ?";
-            this.linkHelp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkAjuda_LinkClicked);
+            this.linkHelp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkHelp_LinkClicked);
             // 
             // txtProduct
             // 
@@ -223,7 +223,7 @@
             this.btnSearchDestinyPath.TabIndex = 3;
             this.btnSearchDestinyPath.Text = "Search";
             this.btnSearchDestinyPath.UseVisualStyleBackColor = true;
-            this.btnSearchDestinyPath.Click += new System.EventHandler(this.btnBuscarCaminhoDestino_Click);
+            this.btnSearchDestinyPath.Click += new System.EventHandler(this.btnSearchDestinyPath_Click);
             // 
             // txtOriginPath
             // 

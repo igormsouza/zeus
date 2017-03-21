@@ -16,7 +16,7 @@ namespace Cronos
             Tuple<string, string> result = null;
             var folder = new DirectoryInfo(path);
             var directories = folder.GetDirectories();
-            var domain = directories.Where(o => o.Name.Contains(".Dominio")).Select(o => o.Name).FirstOrDefault();
+            var domain = directories.Where(o => o.Name.Contains(".Domain")).Select(o => o.Name).FirstOrDefault();
             if (domain != null)
             {
                 string[] slicedNamespace = domain.Split('.');
@@ -26,12 +26,12 @@ namespace Cronos
                 }
                 else
                 {
-                    throw new Exception("Pasta Selecionada não é referente a base ZEUS!");
+                    throw new Exception("The selected folder is not referente to a ZEUS structure!");
                 }
             }
             else
             {
-                throw new Exception("Pasta Selecionada não é referente a base ZEUS!");
+                throw new Exception("The selected folder is not referente to a ZEUS structure!");
             }
 
             return result;
@@ -140,12 +140,12 @@ namespace Cronos
 
         public static string[] ZEUS_FOLDER = {
                 "{namespaceAtual}.App",
-                "{namespaceAtual}.Contrato",
-                "{namespaceAtual}.Dados",
-                "{namespaceAtual}.Dominio",
-                "{namespaceAtual}.Negocio",
-                "{namespaceAtual}.Servico",
-                "{namespaceAtual}.TesteUnitario",
+                "{namespaceAtual}.Contract",
+                "{namespaceAtual}.Data",
+                "{namespaceAtual}.Domain",
+                "{namespaceAtual}.Business",
+                "{namespaceAtual}.Service",
+                "{namespaceAtual}.UnitTest",
                 "{namespaceAtual}.Util"
             };
 

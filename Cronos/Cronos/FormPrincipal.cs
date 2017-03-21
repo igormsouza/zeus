@@ -24,52 +24,6 @@ namespace Cronos
             linkHelp.Links.Add(link);
         }
 
-        private void btnBuscarCaminhoOrigem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var fbd = new FolderBrowserDialog();
-                fbd.RootFolder = System.Environment.SpecialFolder.MyComputer;
-
-                var result = fbd.ShowDialog();
-
-                if (result == DialogResult.OK)
-                {
-                    txtOriginPath.Text = fbd.SelectedPath;
-                    var namespaceAtual = Util.DiscoverNamespace(txtOriginPath.Text);
-                    txtNamespaceOrigin.Text = string.Format("{0}.{1}", namespaceAtual.Item1, namespaceAtual.Item2);
-                }
-
-                UpdateStatus();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnBuscarCaminhoDestino_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var fbd = new FolderBrowserDialog();
-                fbd.RootFolder = System.Environment.SpecialFolder.MyComputer;
-
-                var result = fbd.ShowDialog();
-
-                if (result == DialogResult.OK)
-                {
-                    txtDestinyPath.Text = fbd.SelectedPath;
-                }
-
-                UpdateStatus();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private bool UpdateStatus()
         {
             bool generate = false;
@@ -107,7 +61,7 @@ namespace Cronos
             }
             else
             {
-                MessageBox.Show("Existe(m) informação(ões) incompleta(s) para geração.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("You have to complete all fields to generate a new structure.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -119,32 +73,32 @@ namespace Cronos
                 NewLine(string.Format("Path Origin = {0}", txtOriginPath.Text));
                 NewLine(string.Format("Path Destiny = {0}", txtDestinyPath.Text));
 
-                NewLine(string.Format(" Preparação dos dados {0}", Environment.NewLine));
+                NewLine(string.Format(" Preparing data {0}", Environment.NewLine));
 
-                NewLine("1 - Alterar e verificar permissão de leitura e escrita na pasta origem.");
+                NewLine("1 - Updating and verifing permission of read and write in a origin path.");
                 Util.EditWriteFolder(txtOriginPath.Text, true);
 
-                NewLine("2 - Alterar e verificar permissão de leitura e escrita na pasta destino.");
+                NewLine("2 - Updating and verifing permission of read and write in a destiny path.");
                 Util.EditWriteFolder(txtOriginPath.Text, true);
 
-                NewLine("3 - Limpa pasta destino.");
+                NewLine("3 - Cleaning destiny folder.");
                 Util.CleanDestiny(txtDestinyPath.Text);
 
-                NewLine("4 - Copia pasta destino para origem.");
+                NewLine("4 - Copy itens from destiny to origin.");
                 Util.CopyFolders(txtOriginPath.Text, txtDestinyPath.Text);
 
-                NewLine("5 - Modificando nome de pastas e arquivos na pasta");
+                NewLine("5 - Modifying names of folders and files.");
                 Util.ZEUS_FOLDER = Util.ZEUS_FOLDER.Select(o => o.Replace("{namespaceAtual}", txtNamespaceOrigin.Text)).ToArray();
                 int cont = 1;
                 foreach (var item in Util.ZEUS_FOLDER)
                 {
                     Util.RenameDestiny(txtDestinyPath.Text, txtNamespaceOrigin.Text, string.Format("{0}.{1}", txtClient.Text, txtProduct.Text), item);
-                    NewLine(string.Format("5.{0} - Pasta {1} processada com sucesso", cont, item.Split('.')[2]));
+                    NewLine(string.Format("5.{0} - Folder {1} processed with success.", cont, item.Split('.')[2]));
                     cont++;
                 }
 
-                NewLine("6 - Geração realizada com sucesso!");
-                MessageBox.Show("Geração realizada com sucesso!", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                NewLine("6 - Success!");
+                MessageBox.Show("New struct was generated with success!", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             catch (Exception ex)
             {
@@ -166,7 +120,7 @@ namespace Cronos
             txtLog.AppendText(string.Format("[{0}] {1}  {2}", DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"), line, Environment.NewLine));
         }
 
-        public void NewLineAsync(string line, bool first = false)
+        private void NewLineAsync(string line, bool first = false)
         {
             if (InvokeRequired)
             {
@@ -180,7 +134,53 @@ namespace Cronos
                 txtLog.Text += line + Environment.NewLine + Environment.NewLine;
         }
 
-        private void linkAjuda_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void btnSearchOriginPath_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var fbd = new FolderBrowserDialog();
+                fbd.RootFolder = System.Environment.SpecialFolder.MyComputer;
+
+                var result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    txtOriginPath.Text = fbd.SelectedPath;
+                    var namespaceAtual = Util.DiscoverNamespace(txtOriginPath.Text);
+                    txtNamespaceOrigin.Text = string.Format("{0}.{1}", namespaceAtual.Item1, namespaceAtual.Item2);
+                }
+
+                UpdateStatus();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnSearchDestinyPath_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var fbd = new FolderBrowserDialog();
+                fbd.RootFolder = System.Environment.SpecialFolder.MyComputer;
+
+                var result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    txtDestinyPath.Text = fbd.SelectedPath;
+                }
+
+                UpdateStatus();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void linkHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start(e.Link.LinkData as string);
         }
