@@ -34,7 +34,7 @@ namespace BHS.ProjetoBaseMvc.Util
                     else
                     {
                         ModelStateDictionary model = controller.ModelState;
-                        model.ExibeErros(erros);
+                        model.ShowErros(erros);
                     }
                 }
             }

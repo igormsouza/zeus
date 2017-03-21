@@ -5,14 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="BHS.ProjetoBaseMvc.Dominio.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="TB_CIDADE">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ID_UF" Type="int" Nullable="false" />
-          <Property Name="NOME" Type="varchar" MaxLength="100" Nullable="false" />
-        </EntityType>
         <EntityType Name="TB_FUNCIONALIDADE">
           <Key>
             <PropertyRef Name="ID" />
@@ -68,23 +60,6 @@
           <Property Name="ID_USUARIO" Type="int" Nullable="false" />
           <Property Name="ID_PERFIL" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="TB_SUGESTOES">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NOTA" Type="int" Nullable="false" />
-          <Property Name="OBSERVACAO" Type="varchar" MaxLength="1000" />
-          <Property Name="USUARIO" Type="varchar" MaxLength="100" Nullable="false" />
-        </EntityType>
-        <EntityType Name="TB_UF">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NOME" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="SIGLA" Type="varchar" MaxLength="2" Nullable="false" />
-        </EntityType>
         <EntityType Name="TB_USUARIO">
           <Key>
             <PropertyRef Name="ID" />
@@ -97,18 +72,6 @@
           <Property Name="EMAIL" Type="varchar" MaxLength="128" Nullable="false" />
           <Property Name="LOGIN" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
-        <Association Name="FK_TB_CIDADE_TB_UF">
-          <End Role="TB_UF" Type="Self.TB_UF" Multiplicity="1" />
-          <End Role="TB_CIDADE" Type="Self.TB_CIDADE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_UF">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TB_CIDADE">
-              <PropertyRef Name="ID_UF" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TB_FUNCIONALIDADE_TB_MENU">
           <End Role="TB_MENU" Type="Self.TB_MENU" Multiplicity="0..1" />
           <End Role="TB_FUNCIONALIDADE" Type="Self.TB_FUNCIONALIDADE" Multiplicity="*" />
@@ -205,33 +168,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TB_USUARIO_TB_CIDADE">
-          <End Role="TB_CIDADE" Type="Self.TB_CIDADE" Multiplicity="0..1" />
-          <End Role="TB_USUARIO" Type="Self.TB_USUARIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_CIDADE">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TB_USUARIO">
-              <PropertyRef Name="ID_CIDADE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="BHSProjetoBaseMvcDominioStoreContainer">
-          <EntitySet Name="TB_CIDADE" EntityType="Self.TB_CIDADE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_FUNCIONALIDADE" EntityType="Self.TB_FUNCIONALIDADE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_MENU" EntityType="Self.TB_MENU" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_PERFIL" EntityType="Self.TB_PERFIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_PERFIL_FUNCIONALIDADE" EntityType="Self.TB_PERFIL_FUNCIONALIDADE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_PERFIL_MENU" EntityType="Self.TB_PERFIL_MENU" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_PERFIL_USUARIO" EntityType="Self.TB_PERFIL_USUARIO" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TB_SUGESTOES" EntityType="Self.TB_SUGESTOES" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TB_UF" EntityType="Self.TB_UF" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_USUARIO" EntityType="Self.TB_USUARIO" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_TB_CIDADE_TB_UF" Association="Self.FK_TB_CIDADE_TB_UF">
-            <End Role="TB_UF" EntitySet="TB_UF" />
-            <End Role="TB_CIDADE" EntitySet="TB_CIDADE" />
-          </AssociationSet>
           <AssociationSet Name="FK_TB_FUNCIONALIDADE_TB_MENU" Association="Self.FK_TB_FUNCIONALIDADE_TB_MENU">
             <End Role="TB_MENU" EntitySet="TB_MENU" />
             <End Role="TB_FUNCIONALIDADE" EntitySet="TB_FUNCIONALIDADE" />
@@ -264,17 +208,12 @@
             <End Role="TB_USUARIO" EntitySet="TB_USUARIO" />
             <End Role="TB_PERFIL_USUARIO" EntitySet="TB_PERFIL_USUARIO" />
           </AssociationSet>
-          <AssociationSet Name="FK_TB_USUARIO_TB_CIDADE" Association="Self.FK_TB_USUARIO_TB_CIDADE">
-            <End Role="TB_CIDADE" EntitySet="TB_CIDADE" />
-            <End Role="TB_USUARIO" EntitySet="TB_USUARIO" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BHS.ProjetoBaseMvc.Dominio" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="Contexto" p1:LazyLoadingEnabled="true">
-          <EntitySet Name="TB_UF" EntityType="BHS.ProjetoBaseMvc.Dominio.TB_UF" />
           <EntitySet Name="TB_MENU" EntityType="BHS.ProjetoBaseMvc.Dominio.TB_MENU" />
           <AssociationSet Name="FK_TB_MENU_MENU_ID" Association="BHS.ProjetoBaseMvc.Dominio.FK_TB_MENU_MENU_ID">
             <End Role="TB_MENU" EntitySet="TB_MENU" />
@@ -285,17 +224,7 @@
             <End Role="TB_MENU" EntitySet="TB_MENU" />
             <End Role="TB_FUNCIONALIDADE" EntitySet="TB_FUNCIONALIDADE" />
           </AssociationSet>
-          <EntitySet Name="TB_SUGESTOES" EntityType="BHS.ProjetoBaseMvc.Dominio.TB_SUGESTOES" />
-          <EntitySet Name="TB_CIDADE" EntityType="BHS.ProjetoBaseMvc.Dominio.TB_CIDADE" />
           <EntitySet Name="TB_USUARIO" EntityType="BHS.ProjetoBaseMvc.Dominio.TB_USUARIO" />
-          <AssociationSet Name="FK_TB_CIDADE_TB_UF" Association="BHS.ProjetoBaseMvc.Dominio.FK_TB_CIDADE_TB_UF">
-            <End Role="TB_UF" EntitySet="TB_UF" />
-            <End Role="TB_CIDADE" EntitySet="TB_CIDADE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TB_USUARIO_TB_CIDADE" Association="BHS.ProjetoBaseMvc.Dominio.FK_TB_USUARIO_TB_CIDADE">
-            <End Role="TB_CIDADE" EntitySet="TB_CIDADE" />
-            <End Role="TB_USUARIO" EntitySet="TB_USUARIO" />
-          </AssociationSet>
           <EntitySet Name="TB_PERFIL" EntityType="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL" />
           <AssociationSet Name="TB_PERFIL_FUNCIONALIDADE" Association="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL_FUNCIONALIDADE">
             <End Role="TB_FUNCIONALIDADE" EntitySet="TB_FUNCIONALIDADE" />
@@ -310,15 +239,6 @@
             <End Role="TB_USUARIO" EntitySet="TB_USUARIO" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="TB_UF">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="NOME" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="SIGLA" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="TB_CIDADE" Relationship="BHS.ProjetoBaseMvc.Dominio.FK_TB_CIDADE_TB_UF" FromRole="TB_UF" ToRole="TB_CIDADE" />
-        </EntityType>
         <EntityType Name="TB_MENU">
           <Key>
             <PropertyRef Name="ID" />
@@ -372,25 +292,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="TB_SUGESTOES">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NOTA" Type="Int32" Nullable="false" />
-          <Property Name="OBSERVACAO" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="USUARIO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="TB_CIDADE">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ID_UF" Type="Int32" Nullable="false" />
-          <Property Name="NOME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TB_UF" Relationship="BHS.ProjetoBaseMvc.Dominio.FK_TB_CIDADE_TB_UF" FromRole="TB_CIDADE" ToRole="TB_UF" />
-          <NavigationProperty Name="TB_USUARIO" Relationship="BHS.ProjetoBaseMvc.Dominio.FK_TB_USUARIO_TB_CIDADE" FromRole="TB_CIDADE" ToRole="TB_USUARIO" />
-        </EntityType>
         <EntityType Name="TB_USUARIO">
           <Key>
             <PropertyRef Name="ID" />
@@ -402,33 +303,8 @@
           <Property Name="SENHA" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="LOGIN" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TB_CIDADE" Relationship="BHS.ProjetoBaseMvc.Dominio.FK_TB_USUARIO_TB_CIDADE" FromRole="TB_USUARIO" ToRole="TB_CIDADE" />
           <NavigationProperty Name="TB_PERFIL" Relationship="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL_USUARIO" FromRole="TB_USUARIO" ToRole="TB_PERFIL" />
         </EntityType>
-        <Association Name="FK_TB_CIDADE_TB_UF">
-          <End Type="BHS.ProjetoBaseMvc.Dominio.TB_UF" Role="TB_UF" Multiplicity="1" />
-          <End Type="BHS.ProjetoBaseMvc.Dominio.TB_CIDADE" Role="TB_CIDADE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_UF">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TB_CIDADE">
-              <PropertyRef Name="ID_UF" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TB_USUARIO_TB_CIDADE">
-          <End Type="BHS.ProjetoBaseMvc.Dominio.TB_CIDADE" Role="TB_CIDADE" Multiplicity="0..1" />
-          <End Type="BHS.ProjetoBaseMvc.Dominio.TB_USUARIO" Role="TB_USUARIO" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TB_CIDADE">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="TB_USUARIO">
-              <PropertyRef Name="ID_CIDADE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="TB_PERFIL">
           <Key>
             <PropertyRef Name="ID" />
@@ -458,15 +334,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="BHSProjetoBaseMvcDominioStoreContainer" CdmEntityContainer="Contexto">
-          <EntitySetMapping Name="TB_UF">
-            <EntityTypeMapping TypeName="BHS.ProjetoBaseMvc.Dominio.TB_UF">
-              <MappingFragment StoreEntitySet="TB_UF">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="NOME" ColumnName="NOME" />
-                <ScalarProperty Name="SIGLA" ColumnName="SIGLA" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TB_MENU">
             <EntityTypeMapping TypeName="BHS.ProjetoBaseMvc.Dominio.TB_MENU">
               <MappingFragment StoreEntitySet="TB_MENU">
@@ -488,25 +355,6 @@
                 <ScalarProperty Name="ACTION" ColumnName="ACTION" />
                 <ScalarProperty Name="CONTROLLER" ColumnName="CONTROLLER" />
                 <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_SUGESTOES">
-            <EntityTypeMapping TypeName="BHS.ProjetoBaseMvc.Dominio.TB_SUGESTOES">
-              <MappingFragment StoreEntitySet="TB_SUGESTOES">
-                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
-                <ScalarProperty Name="OBSERVACAO" ColumnName="OBSERVACAO" />
-                <ScalarProperty Name="NOTA" ColumnName="NOTA" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TB_CIDADE">
-            <EntityTypeMapping TypeName="BHS.ProjetoBaseMvc.Dominio.TB_CIDADE">
-              <MappingFragment StoreEntitySet="TB_CIDADE">
-                <ScalarProperty Name="NOME" ColumnName="NOME" />
-                <ScalarProperty Name="ID_UF" ColumnName="ID_UF" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

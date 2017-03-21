@@ -32,7 +32,7 @@ namespace BHS.ProjetoBaseMvc.Util.Attributes
 
             value = Regex.Replace(value.ToString(), @"\D", "");
 
-            bool valido = value.ToString().Length > 11 ? Util.ValidaCNPJ(value.ToString()) : Util.ValidaCPF(value.ToString());
+            bool valido = value.ToString().Length > 11 ? Util.ValidateCnpj(value.ToString()) : Util.ValidateCpf(value.ToString());
             return valido;
         }
 

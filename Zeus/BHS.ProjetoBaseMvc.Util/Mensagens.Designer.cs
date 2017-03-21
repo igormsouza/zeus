@@ -259,7 +259,7 @@ namespace BHS.ProjetoBaseMvc.Util {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Os valores inseridos nos campos Senha e Confirmação de Senha não são iguais..
+        ///   Looks up a localized string similar to Os valuees inseridos nos campos Senha e Confirmação de Senha não são iguais..
         /// </summary>
         public static string SenhaDiferenteConfirmacaoDeSenha {
             get {

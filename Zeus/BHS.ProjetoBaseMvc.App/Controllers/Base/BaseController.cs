@@ -105,7 +105,7 @@ namespace BHS.ProjetoBaseMvc.App.Controllers
 
         public virtual void ErroCatchPadrao(Dictionary<string, string> errosValidacao, Exception ex)
         {
-            ModelState.ExibeErros(errosValidacao, ex);
+            ModelState.ShowErros(errosValidacao, ex);
             ExibeMensagem.Show((Controller)this, errosValidacao);
         }
 

@@ -12,7 +12,7 @@ namespace BHS.ProjetoBaseMvc.Util.Menu
         public int ID { get; set; }
 
         [Map("TITULO")]
-        public string Titulo { get; set; }
+        public string Title { get; set; }
 
         [Map("CONTROLLER")]
         public string Controller { get; set; }
@@ -21,17 +21,17 @@ namespace BHS.ProjetoBaseMvc.Util.Menu
         public string Action { get; set; }
 
         [Map("IMAGEM")]
-        public string Imagem { get; set; }
+        public string Image { get; set; }
 
         [Map("ID_PAI")]
-        public Nullable<int> IDPai { get; set; }
+        public Nullable<int> IdFather { get; set; }
 
         [Map("URL")]
         public string Url { get; set; }
 
         [Map("IND_ABRIR_NOVA_PAGINA")]
-        public Nullable<bool> IndAbrirNovaPagina { get; set; }
+        public Nullable<bool> NewPage { get; set; }
 
-        public List<MenuModel> Filhos { get; set; }
+        public List<MenuModel> Childreen { get; set; }
     }
 }

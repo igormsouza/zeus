@@ -184,7 +184,7 @@
     <value>Senhas digitadas não conferem.</value>
   </data>
   <data name="SenhaDiferenteConfirmacaoDeSenha" xml:space="preserve">
-    <value>Os valores inseridos nos campos Senha e Confirmação de Senha não são iguais.</value>
+    <value>Os valuees inseridos nos campos Senha e Confirmação de Senha não são iguais.</value>
   </data>
   <data name="SenhaIncorreta" xml:space="preserve">
     <value>Senha atual incorreta.</value>

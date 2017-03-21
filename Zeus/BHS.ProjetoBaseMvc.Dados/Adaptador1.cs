@@ -27,19 +27,6 @@ namespace BHS.ProjetoBaseMvc.Dados
 		// Implementa Repositorios
 		#region [ Repositorios ]
 
-		private CidadeRepositorio cidaderepositorio;
-        public CidadeRepositorio CidadeRepositorio
-        {
-            get
-            {
-                if (this.cidaderepositorio == null)
-                {
-                    this.cidaderepositorio = new CidadeRepositorio(contexto);
-                }
-                return this.cidaderepositorio;
-            }
-        }
-
 		private FuncionalidadeRepositorio funcionalidaderepositorio;
         public FuncionalidadeRepositorio FuncionalidadeRepositorio
         {
@@ -76,32 +63,6 @@ namespace BHS.ProjetoBaseMvc.Dados
                     this.perfilrepositorio = new PerfilRepositorio(contexto);
                 }
                 return this.perfilrepositorio;
-            }
-        }
-
-		private SugestoesRepositorio sugestoesrepositorio;
-        public SugestoesRepositorio SugestoesRepositorio
-        {
-            get
-            {
-                if (this.sugestoesrepositorio == null)
-                {
-                    this.sugestoesrepositorio = new SugestoesRepositorio(contexto);
-                }
-                return this.sugestoesrepositorio;
-            }
-        }
-
-		private UFRepositorio ufrepositorio;
-        public UFRepositorio UFRepositorio
-        {
-            get
-            {
-                if (this.ufrepositorio == null)
-                {
-                    this.ufrepositorio = new UFRepositorio(contexto);
-                }
-                return this.ufrepositorio;
             }
         }
 

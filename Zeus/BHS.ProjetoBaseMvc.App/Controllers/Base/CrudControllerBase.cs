@@ -264,7 +264,7 @@ namespace BHS.ProjetoBaseMvc.App.Controllers
 
         public virtual void ExibeMensagemAposInserir(Dictionary<string, string> errosValidacao)
         {
-            ModelState.ExibeErros(errosValidacao);
+            ModelState.ShowErros(errosValidacao);
             ExibeMensagem.Show((Controller)this, errosValidacao);
         }
 
@@ -367,7 +367,7 @@ namespace BHS.ProjetoBaseMvc.App.Controllers
 
         public virtual void ExibeMensagemAposEditar(Dictionary<string, string> errosValidacao)
         {
-            ModelState.ExibeErros(errosValidacao);
+            ModelState.ShowErros(errosValidacao);
             ExibeMensagem.Show((Controller)this, errosValidacao);
         }
 
@@ -431,7 +431,7 @@ namespace BHS.ProjetoBaseMvc.App.Controllers
 
         public virtual void ExibeMensagemAposDeletar(Dictionary<string, string> errosValidacao)
         {
-            ModelState.ExibeErros(errosValidacao);
+            ModelState.ShowErros(errosValidacao);
             ExibeMensagem.Show((Controller)this, errosValidacao);
         }
 

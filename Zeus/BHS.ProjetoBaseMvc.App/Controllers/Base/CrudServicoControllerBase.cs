@@ -238,7 +238,7 @@ namespace BHS.ProjetoBaseMvc.App.Controllers
             errosValidacao = new Dictionary<string, string>();
 
             Type type = typeof(CrudContratoClient);
-            MethodInfo info = type.GetMethod("Criar" + Util.Util.GeraNomeClasse(typeof(T).Name));
+            MethodInfo info = type.GetMethod("Criar" + Util.Util.GenerateClassName(typeof(T).Name));
 
             object[] parametro = { dominio };
             object retornoMetodo = info.Invoke(ServicoCrudContrato, parametro);
@@ -255,7 +255,7 @@ namespace BHS.ProjetoBaseMvc.App.Controllers
 
         public virtual void ExibeMensagemAposInserir(Dictionary<string, string> errosValidacao)
         {
-            ModelState.ExibeErros(errosValidacao);
+            ModelState.ShowErros(errosValidacao);
             ExibeMensagem.Show((Controller)this, errosValidacao);
         }
 
@@ -354,7 +354,7 @@ namespace BHS.ProjetoBaseMvc.App.Controllers
             errosValidacao = new Dictionary<string, string>();
 
             Type type = typeof(CrudContratoClient);
-            MethodInfo info = type.GetMethod("Editar" + Util.Util.GeraNomeClasse(typeof(T).Name));
+            MethodInfo info = type.GetMethod("Editar" + Util.Util.GenerateClassName(typeof(T).Name));
 
             object[] parametro = { dominio };
             object retornoMetodo = info.Invoke(ServicoCrudContrato, parametro);
@@ -371,7 +371,7 @@ namespace BHS.ProjetoBaseMvc.App.Controllers
 
         public virtual void ExibeMensagemAposEditar(Dictionary<string, string> errosValidacao)
         {
-            ModelState.ExibeErros(errosValidacao);
+            ModelState.ShowErros(errosValidacao);
             ExibeMensagem.Show((Controller)this, errosValidacao);
         }
 
@@ -434,7 +434,7 @@ namespace BHS.ProjetoBaseMvc.App.Controllers
             errosValidacao = new Dictionary<string, string>();
 
             Type type = typeof(CrudContratoClient);
-            MethodInfo info = type.GetMethod("Excluir" + Util.Util.GeraNomeClasse(typeof(T).Name));
+            MethodInfo info = type.GetMethod("Excluir" + Util.Util.GenerateClassName(typeof(T).Name));
 
             object[] parametro = { id };
             object retornoMetodo = info.Invoke(ServicoCrudContrato, parametro);
@@ -451,7 +451,7 @@ namespace BHS.ProjetoBaseMvc.App.Controllers
 
         public virtual void ExibeMensagemAposDeletar(Dictionary<string, string> errosValidacao)
         {
-            ModelState.ExibeErros(errosValidacao);
+            ModelState.ShowErros(errosValidacao);
             ExibeMensagem.Show((Controller)this, errosValidacao);
         }
 

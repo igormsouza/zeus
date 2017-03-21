@@ -68,10 +68,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\CaptchaAttribute.cs" />
     <Compile Include="Attributes\CpfCnpjAttribute.cs" />
-    <Compile Include="ConsultaCache.cs" />
-    <Compile Include="ErrosValidacao.cs" />
+    <Compile Include="CacheSearch.cs" />
+    <Compile Include="ValidationErros.cs" />
     <Compile Include="ExibeMensagem.cs" />
     <Compile Include="Mail.cs" />
     <Compile Include="Map\MapAttribute.cs" />
