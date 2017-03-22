@@ -95,9 +95,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BHS.ProjetoBaseMvc.Util\BHS.ProjetoBaseMvc.Util.csproj">
+    <ProjectReference Include="..\BHS.ProjetoBaseMvc.Util\Client.Zeus.Util.csproj">
       <Project>{aaef4c65-1961-47b1-996f-8addfec01da0}</Project>
-      <Name>BHS.ProjetoBaseMvc.Util</Name>
+      <Name>Client.Zeus.Util</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

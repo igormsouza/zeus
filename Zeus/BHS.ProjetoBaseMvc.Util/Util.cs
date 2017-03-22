@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BHS.ProjetoBaseMvc.Util
+namespace Client.Zeus.Util
 {
     public static class Util
     {

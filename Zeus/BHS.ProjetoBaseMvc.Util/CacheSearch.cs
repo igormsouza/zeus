@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Caching;
 
-namespace BHS.ProjetoBaseMvc.Util
+namespace Client.Zeus.Util
 {
     public class CacheSearch
     {

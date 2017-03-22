@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace BHS.ProjetoBaseMvc.Util
+namespace Client.Zeus.Util
 {
-    public static class ValidationErros
+    public static class ValidationError
     {
         public static void ShowErros(this ModelStateDictionary model, Dictionary<string, string> validataion)
         {

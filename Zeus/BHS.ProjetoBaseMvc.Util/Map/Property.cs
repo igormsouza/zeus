@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BHS.ProjetoBaseMvc.Util.Map
+namespace Client.Zeus.Util.Map
 {
     public class Property
     {

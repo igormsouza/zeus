@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHS.ProjetoBaseMvc.Negocio"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHS.ProjetoBaseMvc.Dados", "BHS.ProjetoBaseMvc.Dados\BHS.ProjetoBaseMvc.Dados.csproj", "{1D31FBE5-E15A-4BC6-93D9-9BD102154ECB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHS.ProjetoBaseMvc.Util", "BHS.ProjetoBaseMvc.Util\BHS.ProjetoBaseMvc.Util.csproj", "{AAEF4C65-1961-47B1-996F-8ADDFEC01DA0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Zeus.Util", "BHS.ProjetoBaseMvc.Util\Client.Zeus.Util.csproj", "{AAEF4C65-1961-47B1-996F-8ADDFEC01DA0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHS.ProjetoBaseMvc.TesteUnitario", "BHS.ProjetoBaseMvc.TesteUnitario\BHS.ProjetoBaseMvc.TesteUnitario.csproj", "{1962D6F8-1D4B-4573-B363-AE3145FF1814}"
 EndProject

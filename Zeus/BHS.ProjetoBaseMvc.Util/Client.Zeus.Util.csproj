@@ -7,8 +7,8 @@
     <ProjectGuid>{AAEF4C65-1961-47B1-996F-8ADDFEC01DA0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BHS.ProjetoBaseMvc.Util</RootNamespace>
-    <AssemblyName>BHS.ProjetoBaseMvc.Util</AssemblyName>
+    <RootNamespace>Client.Zeus.Util</RootNamespace>
+    <AssemblyName>Client.Zeus.Util</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>

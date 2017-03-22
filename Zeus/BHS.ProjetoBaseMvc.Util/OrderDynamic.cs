@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BHS.ProjetoBaseMvc.Util
+namespace Client.Zeus.Util
 {
     public static class OrderDynamic
     {

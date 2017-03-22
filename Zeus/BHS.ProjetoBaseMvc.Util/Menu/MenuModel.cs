@@ -1,11 +1,11 @@
-﻿using BHS.ProjetoBaseMvc.Util.Map;
+﻿using Client.Zeus.Util.Map;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BHS.ProjetoBaseMvc.Util.Menu
+namespace Client.Zeus.Util.Menu
 {
     public class MenuModel
     {

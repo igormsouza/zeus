@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BHS.ProjetoBaseMvc.Util.Map
+namespace Client.Zeus.Util.Map
 {
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Class)]
     public sealed class NoMapAttribute : Attribute

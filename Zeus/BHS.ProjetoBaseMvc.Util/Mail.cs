@@ -8,7 +8,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Configuration;
 
-namespace BHS.ProjetoBaseMvc.Util
+namespace Client.Zeus.Util
 {
     public class Mail
     {
@@ -20,31 +20,31 @@ namespace BHS.ProjetoBaseMvc.Util
         private bool bCopia;
         private string EmailControladoria = string.Empty;
 
-        public Mail(string de, string para, string assunto, bool copia)
+        public Mail(string from, string to, string subject, bool copy)
         {
-            this.from = de;
-            this.to = para;
+            this.from = from;
+            this.to = to;
             this.mask = ConfigurationManager.AppSettings["MascaraCarteiro"];
-            this.subject = assunto;
-            this.bCopia = copia;
+            this.subject = subject;
+            this.bCopia = copy;
         }
 
-        public void TextMail(string mensagem)
+        public void TextMail(string mensage)
         {
-            this.doby = mensagem;
+            this.doby = mensage;
             SendMail(false);
         }
 
         
-        public void HtmlMail(string nome, string chamada, string titulo, string mensagem, int ID)
+        public void HtmlMail(string name, string call, string title, string mensage, int ID)
         {
             this.doby = System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath("~/content/Email/template.html"));
             this.doby = this.doby.Replace("[URL]", ConfigurationManager.AppSettings["siteURL"]);
-            this.doby = this.doby.Replace("[URLTOPO]", ConfigurationManager.AppSettings["siteURL"] + "/Images/logo_60.png");
-            this.doby = this.doby.Replace("[ASSUNTO]", this.subject);
-            this.doby = this.doby.Replace("[NOME]", nome);
-            this.doby = this.doby.Replace("[TITULO]", titulo);
-            this.doby = this.doby.Replace("[MENSAGEM]", mensagem);
+            this.doby = this.doby.Replace("[URLTOP]", ConfigurationManager.AppSettings["siteURL"] + "/Images/logo_60.png");
+            this.doby = this.doby.Replace("[SUBJECT]", this.subject);
+            this.doby = this.doby.Replace("[NAME]", name);
+            this.doby = this.doby.Replace("[TITLE]", title);
+            this.doby = this.doby.Replace("[MENSAGE]", mensage);
             
             SendMail(true);
         }

@@ -84,9 +84,9 @@
       <Project>{9e433fc0-b8ae-4a0d-a6ff-366bdb216ab1}</Project>
       <Name>BHS.ProjetoBaseMvc.Negocio</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BHS.ProjetoBaseMvc.Util\BHS.ProjetoBaseMvc.Util.csproj">
+    <ProjectReference Include="..\BHS.ProjetoBaseMvc.Util\Client.Zeus.Util.csproj">
       <Project>{aaef4c65-1961-47b1-996f-8addfec01da0}</Project>
-      <Name>BHS.ProjetoBaseMvc.Util</Name>
+      <Name>Client.Zeus.Util</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace BHS.ProjetoBaseMvc.Util.Attributes
+namespace Client.Zeus.Util.Attributes
 {
     /// <summary>
     /// Validação customizada para CPF

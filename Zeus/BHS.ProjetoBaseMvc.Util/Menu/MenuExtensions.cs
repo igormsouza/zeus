@@ -1,4 +1,4 @@
-﻿using BHS.ProjetoBaseMvc.Util;
+﻿using Client.Zeus.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace BHS.ProjetoBaseMvc.Util.Menu
+namespace Client.Zeus.Util.Menu
 {
     public static class MenuExtensions
     {
