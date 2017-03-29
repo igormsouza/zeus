@@ -27,21 +27,21 @@ namespace BHS.ProjetoBaseMvc.App.Controllers
         public TesteCidadeAutomaticaController()
         {
             var campos = new[] { 
-                new Campo("NOME") 
-            }.ToList<Campo>();
+                new Field("NOME") 
+            }.ToList<Field>();
 
             var camposPesquisa = new[] { 
                 "NOME"
-            }.Select(o => new Campo(o)).ToList();
+            }.Select(o => new Field(o)).ToList();
 
             var camposGrid = new[] { 
                 "NOME"
             };
 
-            ModelAutomaticoTela.Titulo = "Cidade";
-            ModelAutomaticoTela.CamposPesquisa = camposPesquisa;
-            ModelAutomaticoTela.CamposGrid = camposGrid;
-            ModelAutomaticoTela.Campos = campos;
+            ModelAutomaticoTela.Title = "Cidade";
+            ModelAutomaticoTela.SearchFields = camposPesquisa;
+            ModelAutomaticoTela.GridField = camposGrid;
+            ModelAutomaticoTela.Fields = campos;
         }
     }
 }

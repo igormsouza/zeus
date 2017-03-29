@@ -29,24 +29,24 @@ namespace BHS.ProjetoBaseMvc.App.Controllers
         public UsuarioController()
         {
             var campos = new[] {
-                new Campo("NOME"),
-                new Campo("LOGIN"),
-                new Campo("EMAIL"),
-                new Campo("CPF")
-            }.ToList<Campo>();
+                new Field("NOME"),
+                new Field("LOGIN"),
+                new Field("EMAIL"),
+                new Field("CPF")
+            }.ToList<Field>();
 
             var camposPesquisa = new[] {
                 "NOME", "LOGIN", "EMAIL"
-            }.Select(o => new Campo(o)).ToList();
+            }.Select(o => new Field(o)).ToList();
 
             var camposGrid = new[] {
                 "ID", "NOME", "LOGIN", "EMAIL"
             };
 
-            ModelAutomaticoTela.Titulo = "Usuário";
-            ModelAutomaticoTela.CamposPesquisa = camposPesquisa;
-            ModelAutomaticoTela.CamposGrid = camposGrid;
-            ModelAutomaticoTela.Campos = campos;
+            ModelAutomaticoTela.Title = "Usuário";
+            ModelAutomaticoTela.SearchFields = camposPesquisa;
+            ModelAutomaticoTela.GridField = camposGrid;
+            ModelAutomaticoTela.Fields = campos;
         }
 
         public ActionResult Permissao()

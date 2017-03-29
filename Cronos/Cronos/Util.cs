@@ -55,12 +55,12 @@ namespace Cronos
 
             if (testPermission)
             {
-                var arquivo = directorory.GetFiles().FirstOrDefault();
-                if (arquivo != null)
+                var file = directorory.GetFiles().FirstOrDefault();
+                if (file != null)
                 {
-                    string text = File.ReadAllText(arquivo.FullName);
+                    string text = File.ReadAllText(file.FullName);
                     text = text + " ";
-                    File.WriteAllText(arquivo.FullName, text);
+                    File.WriteAllText(file.FullName, text);
                 }
             }           
         }
@@ -161,13 +161,13 @@ namespace Cronos
         {
             if (Directory.Exists(path))
             {
-                var pasta = new DirectoryInfo(path);
+                var folder = new DirectoryInfo(path);
 
-                var diretorios = !string.IsNullOrWhiteSpace(processFolder)
-                                ? pasta.GetDirectories().Where(o => o.Name == processFolder).ToList()
-                                : pasta.GetDirectories().Where(o => !IGNORE_FOLDER.Contains(o.Name)).ToList();
+                var directories = !string.IsNullOrWhiteSpace(processFolder)
+                                ? folder.GetDirectories().Where(o => o.Name == processFolder).ToList()
+                                : folder.GetDirectories().Where(o => !IGNORE_FOLDER.Contains(o.Name)).ToList();
 
-                foreach (var item in diretorios)
+                foreach (var item in directories)
                 {
                     var diretoriosFilhos = item.GetDirectories().Where(o => !IGNORE_FOLDER.Contains(o.Name)).ToList();
                     if (diretoriosFilhos.Count > 0)
@@ -187,7 +187,7 @@ namespace Cronos
 
                 if (!string.IsNullOrWhiteSpace(processFolder))
                 {
-                    RenameFilesAndFolders(pasta, currentNamespace, newNamespace);
+                    RenameFilesAndFolders(folder, currentNamespace, newNamespace);
                 }
             }
         }

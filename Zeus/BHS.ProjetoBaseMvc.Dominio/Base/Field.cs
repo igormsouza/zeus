@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace BHS.ProjetoBaseMvc.Dominio.Base
 {
-    public class Campo
+    public class Field
     {
-        public Campo(string nome)
-            : this(nome, "", enumTipoCampo.Padrao)
+        public Field(string nome)
+            : this(nome, "", enumTipoCampo.Default)
         {
 
         }
 
-        public Campo(string nome, string linkControllerGrid, string linkActionGrid)
-            : this(nome, "", enumTipoCampo.Padrao, linkControllerGrid: linkControllerGrid, linkActionGrid: linkActionGrid)
+        public Field(string nome, string linkControllerGrid, string linkActionGrid)
+            : this(nome, "", enumTipoCampo.Default, linkControllerGrid: linkControllerGrid, linkActionGrid: linkActionGrid)
         {
 
         }
 
-        public Campo(string nome = "", string cssClass = "", enumTipoCampo tipo = enumTipoCampo.Padrao, 
+        public Field(string nome = "", string cssClass = "", enumTipoCampo tipo = enumTipoCampo.Default, 
             string valorFixo = "", string linkActionGrid = "", string linkControllerGrid = "", string largura = "6", bool ativo = true)
         {
             Nome = nome;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BHS.ProjetoBaseMvc.Dominio.Base
 {
-    public class CampoLink
+    public class LinkField
     {
         /// <summary>
         /// Criação dos controles e ações do grid
@@ -16,7 +16,7 @@ namespace BHS.ProjetoBaseMvc.Dominio.Base
         /// <param name="linkActionGrid">ACtion</param>
         /// <param name="campoReferencia">Campo que vai buscar o valor</param>
         /// <param name="parametroUrl">Campo que vai exibir na tela ex: ?ID_PRODUTO=</param>
-        public CampoLink(string nome, string linkControllerGrid, string linkActionGrid, string campoReferencia = "", string parametroUrl = "id")
+        public LinkField(string nome, string linkControllerGrid, string linkActionGrid, string campoReferencia = "", string parametroUrl = "id")
         {
             Nome = nome;
             LinkControllerGrid = linkControllerGrid;

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BHS.ProjetoBaseMvc.Dominio.Base
 {
-    public class PesquisaBase
+    public class BaseSearch
     {
-        public PesquisaBase()
+        public BaseSearch()
         {
             QuantidadePorPagina = 5;
             Page = 1;
@@ -16,7 +16,7 @@ namespace BHS.ProjetoBaseMvc.Dominio.Base
             SortDir = "ASC";
         }
 
-        public PesquisaBase(int quantidadePorPagina, int page, string sort, string sortDir)
+        public BaseSearch(int quantidadePorPagina, int page, string sort, string sortDir)
             : this()
         {
             if (quantidadePorPagina > 0)

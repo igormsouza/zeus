@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace BHS.ProjetoBaseMvc.Dominio.Base
 {
     [DataContract]
-    public class DominioBase
+    public class BaseDomain
     {
         [DataMember]
         [DisplayName("Código")]

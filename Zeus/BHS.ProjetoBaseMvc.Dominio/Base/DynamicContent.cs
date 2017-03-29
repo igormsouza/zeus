@@ -5,16 +5,16 @@ using System.Text;
 
 namespace BHS.ProjetoBaseMvc.Dominio.Base
 {
-    public class ConteudoDinamico
+    public class DynamicContent
     {
-        public ConteudoDinamico(string idReferencia = "", string conteudo = "")
-            : this(idReferencia, conteudo, enumTipoConteudoDinamico.CustomizadoParcial)
+        public DynamicContent(string idReferencia = "", string conteudo = "")
+            : this(idReferencia, conteudo, enumTipoConteudoDinamico.CustomizedParcial)
         {
 
         }
 
-        public ConteudoDinamico(string idReferencia = "", string conteudo = "", enumTipoConteudoDinamico tipoConteudo = enumTipoConteudoDinamico.CustomizadoParcial, 
-            enumInclusaoReferencia inclusaoReferencia = enumInclusaoReferencia.Depois, string propriedade = null, string cssDiv = "")
+        public DynamicContent(string idReferencia = "", string conteudo = "", enumTipoConteudoDinamico tipoConteudo = enumTipoConteudoDinamico.CustomizedParcial, 
+            enumInclusaoReferencia inclusaoReferencia = enumInclusaoReferencia.After, string propriedade = null, string cssDiv = "")
         {
             IdReferencia = idReferencia;
             Conteudo = conteudo;

@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace BHS.ProjetoBaseMvc.Dominio.Base
 {
-    public class CampoGrid
+    public class GridField
     {
-        public CampoGrid(string nome)
+        public GridField(string nome)
             : this(nome, nome)
         {
 
         }
 
-        public CampoGrid(string nome, string tituloColuna, bool ativo = true)
+        public GridField(string nome, string tituloColuna, bool ativo = true)
         {
             Nome = nome;
             TituloColuna = tituloColuna;
