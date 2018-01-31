@@ -134,16 +134,16 @@ namespace BHS.ProjetoBaseMvc.App.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        private IList<Redirecionar> redirecionar;
-        public IList<Redirecionar> Redirecionar
+        private IList<Redirect> redirecionar;
+        public IList<Redirect> Redirecionar
         {
             get
             {
-                redirecionar = redirecionar ?? new List<Redirecionar>();
+                redirecionar = redirecionar ?? new List<Redirect>();
 
-                if (Session["Redirecionar"] != null && Session["Redirecionar"] is IList<Redirecionar>)
+                if (Session["Redirecionar"] != null && Session["Redirecionar"] is IList<Redirect>)
                 {
-                    redirecionar = Session["Redirecionar"] as IList<Redirecionar>;
+                    redirecionar = Session["Redirecionar"] as IList<Redirect>;
                 }
 
                 return redirecionar;
@@ -154,14 +154,14 @@ namespace BHS.ProjetoBaseMvc.App.Controllers
             }
         }
 
-        public void AdicionaRedirecionar(Redirecionar redirecionarItem, bool removeItensMesmoController, string limparController = "")
+        public void AdicionaRedirecionar(Redirect redirecionarItem, bool removeItensMesmoController, string limparController = "")
         {
-            var lista = new List<Redirecionar>();
+            var lista = new List<Redirect>();
 
             if (redirecionarItem != null)
             {
                 if (removeItensMesmoController)
-                    lista.AddRange(Redirecionar.Where(o => o.ControllerOrigem != redirecionarItem.ControllerOrigem).ToList());
+                    lista.AddRange(Redirecionar.Where(o => o.OrginController != redirecionarItem.OrginController).ToList());
                 else
                     lista.AddRange(Redirecionar);
 
@@ -171,7 +171,7 @@ namespace BHS.ProjetoBaseMvc.App.Controllers
             {
                 limparController = limparController.Replace('/', ' ').Trim();
                 if (removeItensMesmoController)
-                    lista.AddRange(Redirecionar.Where(o => o.ControllerOrigem != limparController).ToList());
+                    lista.AddRange(Redirecionar.Where(o => o.OrginController != limparController).ToList());
                 else
                     lista.AddRange(Redirecionar);
             }
@@ -183,20 +183,20 @@ namespace BHS.ProjetoBaseMvc.App.Controllers
             Redirecionar = lista;
         }
 
-        public Redirecionar BuscaRedirecionarAtual(string controller = "")
+        public Redirect BuscaRedirecionarAtual(string controller = "")
         {
-            Redirecionar retorno = null;
+            Redirect retorno = null;
 
             if (Redirecionar != null)
             {
                 if (string.IsNullOrWhiteSpace(controller))
                 {
                     var controllerAtual = Request.Url.Segments[1].Replace('/', ' ').Trim();
-                    retorno = Redirecionar.FirstOrDefault(o => o.ControllerAcionado == controllerAtual);
+                    retorno = Redirecionar.FirstOrDefault(o => o.DestinyController == controllerAtual);
                 }
                 else
                 {
-                    retorno = Redirecionar.FirstOrDefault(o => o.ControllerAcionado == controller);
+                    retorno = Redirecionar.FirstOrDefault(o => o.DestinyController == controller);
                 }
             }
 

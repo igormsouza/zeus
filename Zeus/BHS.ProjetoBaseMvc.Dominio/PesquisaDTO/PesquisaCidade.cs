@@ -1,14 +1,14 @@
-﻿using BHS.ProjetoBaseMvc.Dominio;
-using BHS.ProjetoBaseMvc.Dominio.Base;
+﻿using Client.Zeus.Domain;
+using Client.Zeus.Domain.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BHS.ProjetoBaseMvc.Dominio.PesquisaDTO
+namespace Client.Zeus.Domain.PesquisaDTO
 {
-    public class PesquisaCidade : PesquisaBaseCodigoDescricao<TB_CIDADE>
+    public class PesquisaCidade : BaseSearchCodeDescription<TB_CIDADE>
     {
         public PesquisaCidade() { }
 

@@ -90,9 +90,9 @@
       <Project>{1d31fbe5-e15a-4bc6-93d9-9bd102154ecb}</Project>
       <Name>BHS.ProjetoBaseMvc.Dados</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BHS.ProjetoBaseMvc.Dominio\BHS.ProjetoBaseMvc.Dominio.csproj">
+    <ProjectReference Include="..\BHS.ProjetoBaseMvc.Dominio\Client.Zeus.Domain.csproj">
       <Project>{cfc9aa86-fa55-429a-a2c1-ef8608a20ac6}</Project>
-      <Name>BHS.ProjetoBaseMvc.Dominio</Name>
+      <Name>Client.Zeus.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\BHS.ProjetoBaseMvc.Util\Client.Zeus.Util.csproj">
       <Project>{aaef4c65-1961-47b1-996f-8addfec01da0}</Project>

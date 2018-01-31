@@ -1,4 +1,4 @@
-﻿using BHS.ProjetoBaseMvc.Dominio.Base;
+﻿using Client.Zeus.Domain.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,33 +6,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BHS.ProjetoBaseMvc.Dominio.Base
+namespace Client.Zeus.Domain.Base
 {
-    public class PesquisaBaseCodigoDescricao<T> : PesquisaBase where T : DominioBase, new()
+    public class BaseSearchCodeDescription<T> : BaseSearch where T : BaseDomain, new()
     {
-        public PesquisaBaseCodigoDescricao()
+        public BaseSearchCodeDescription()
             : base()
         {
 
         }
 
-        public PesquisaBaseCodigoDescricao(int quantidadePorpagina, int page, string sort, string sortDir)
+        public BaseSearchCodeDescription(int quantidadePorpagina, int page, string sort, string sortDir)
             : base(quantidadePorpagina, page, sort, sortDir)
         {
 
         }
 
-        public PesquisaBaseCodigoDescricao(IList<T> itens, int totalItens)
+        public BaseSearchCodeDescription(IList<T> items, int totalItems)
             : base()
         {
-            this.Itens = itens;
-            this.TotalItens = totalItens;
+            this.Itens = items;
+            this.TotalItens = totalItems;
         }
 
         [DisplayName("Código")]
         public int Id { get; set; }
 
-        public string Descricao { get; set; }
+        public string Description { get; set; }
 
         private T query;
         public T Query

@@ -6,13 +6,13 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BHS.ProjetoBaseMvc.Dominio.Base
+namespace Client.Zeus.Domain.Base
 {
     [DataContract]
     public class BaseDomain
     {
         [DataMember]
-        [DisplayName("Código")]
+        [DisplayName("Id")]
         public int ID { get; set; }
     }
 }

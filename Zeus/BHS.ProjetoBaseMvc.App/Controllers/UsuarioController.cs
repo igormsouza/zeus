@@ -24,7 +24,7 @@ using BHS.ProjetoBaseMvc.Negocio.Gerenciador;
 namespace BHS.ProjetoBaseMvc.App.Controllers
 {
     [CustomAuthorization]
-    public class UsuarioController : CrudControllerBase<TB_USUARIO, PesquisaBaseCodigoDescricao<TB_USUARIO>>
+    public class UsuarioController : CrudControllerBase<TB_USUARIO, BaseSearchCodeDescription<TB_USUARIO>>
     {
         public UsuarioController()
         {

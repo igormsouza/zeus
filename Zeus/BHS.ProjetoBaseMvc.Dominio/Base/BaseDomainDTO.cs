@@ -1,13 +1,13 @@
-﻿using BHS.ProjetoBaseMvc.Dominio.Base;
+﻿using Client.Zeus.Domain.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BHS.ProjetoBaseMvc.Dominio.Base
+namespace Client.Zeus.Domain.Base
 {
-    public class DominioBaseDTO : DominioBase
+    public class DomainBaseDTO : BaseDomain
     {
 
     }

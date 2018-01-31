@@ -1,14 +1,14 @@
-﻿using BHS.ProjetoBaseMvc.Dominio;
-using BHS.ProjetoBaseMvc.Dominio.Base;
+﻿using Client.Zeus.Domain;
+using Client.Zeus.Domain.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BHS.ProjetoBaseMvc.Dominio.PesquisaDTO
+namespace Client.Zeus.Domain.PesquisaDTO
 {
-    public class PesquisaUF : PesquisaBaseCodigoDescricao<TB_UF>
+    public class PesquisaUF : BaseSearchCodeDescription<TB_UF>
     {
         public PesquisaUF() { }
 

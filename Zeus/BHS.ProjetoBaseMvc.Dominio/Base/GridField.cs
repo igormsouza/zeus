@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BHS.ProjetoBaseMvc.Dominio.Base
+namespace Client.Zeus.Domain.Base
 {
     public class GridField
     {

@@ -1,11 +1,11 @@
-﻿using BHS.ProjetoBaseMvc.Dominio.DTO;
+﻿using Client.Zeus.Domain.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BHS.ProjetoBaseMvc.Dominio.Base
+namespace Client.Zeus.Domain.Base
 {
     public class AutomaticModel
     {
@@ -21,7 +21,7 @@ namespace BHS.ProjetoBaseMvc.Dominio.Base
 
         public string Title { get; set; }
 
-        public Redirecionar Redirect { get; set; }
+        public Redirect Redirect { get; set; }
 
         private IList<Field> searchFields;
         public IList<Field> SearchFields
@@ -57,20 +57,20 @@ namespace BHS.ProjetoBaseMvc.Dominio.Base
             }
         }
 
-        private IList<string> camposGridNome;
-        public IList<string> CamposGridNome
+        private IList<string> GridColumns;
+        public IList<string> gridColumns
         {
             get
             {
-                if (camposGridNome == null)
+                if (GridColumns == null)
                 {
-                    camposGridNome = new List<string>();
+                    GridColumns = new List<string>();
                 }
-                return camposGridNome;
+                return GridColumns;
             }
             set
             {
-                camposGridNome = value;
+                GridColumns = value;
             }
         }
 
@@ -207,7 +207,7 @@ namespace BHS.ProjetoBaseMvc.Dominio.Base
 
 #region Enuns
 
-public enum enumTipoCampo : int
+public enum enumFieldType : int
 {
     Default = 0,
     TextArea = 1,
@@ -215,12 +215,12 @@ public enum enumTipoCampo : int
     CustomizedHtml = 3,
     Label = 4
 }
-public enum enumTipoConteudoDinamico : int
+public enum enumDynamicContentType : int
 {
     CustomizedParcial = 0,
     CustomizedHtml = 1
 }
-public enum enumInclusaoReferencia : int
+public enum enumIncludedReference : int
 {
     After = 0,
     Before = 1,

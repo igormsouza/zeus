@@ -10,7 +10,7 @@ using System.Web.Mvc;
 namespace BHS.ProjetoBaseMvc.App.Controllers
 {
 
-    public class PerfilController : CrudControllerBase<TB_PERFIL, PesquisaBaseCodigoDescricao<TB_PERFIL>>
+    public class PerfilController : CrudControllerBase<TB_PERFIL, BaseSearchCodeDescription<TB_PERFIL>>
     {
         public PerfilController()
         {

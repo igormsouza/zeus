@@ -22,7 +22,7 @@ using BHS.ProjetoBaseMvc.Dominio.Base;
 namespace BHS.ProjetoBaseMvc.App.Controllers
 {
     [AllowAnonymous]
-    public class TesteCidadeAutomaticaController : CrudControllerBase<TB_CIDADE, PesquisaBaseCodigoDescricao<TB_CIDADE>>
+    public class TesteCidadeAutomaticaController : CrudControllerBase<TB_CIDADE, BaseSearchCodeDescription<TB_CIDADE>>
     {
         public TesteCidadeAutomaticaController()
         {

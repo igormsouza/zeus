@@ -473,7 +473,7 @@ namespace BHS.ProjetoBaseMvc.Negocio.Base
             }
         }
 
-        public virtual IList<T> Pesquisar(out int countItens, PesquisaBaseCodigoDescricao<T> manterFiltros, string propriedadesAIncluir = null, IList<Tuple<int, string>> entidadesAprofundar = null)
+        public virtual IList<T> Pesquisar(out int countItens, BaseSearchCodeDescription<T> manterFiltros, string propriedadesAIncluir = null, IList<Tuple<int, string>> entidadesAprofundar = null)
         {
             int quantidadeNiveis = 1;
             IQueryable<T> consulta = Query;
@@ -488,7 +488,7 @@ namespace BHS.ProjetoBaseMvc.Negocio.Base
                 propriedadesAIncluir = IncluirEntidades;
             }
 
-            return RepositorioBase.ListarPaginado(out countItens, consulta, propriedadesAIncluir, manterFiltros.Page, manterFiltros.QuantidadePorPagina, manterFiltros.Sort, manterFiltros.SortDir);
+            return RepositorioBase.ListarPaginado(out countItens, consulta, propriedadesAIncluir, manterFiltros.Page, manterFiltros.CountPerPage, manterFiltros.Sort, manterFiltros.SortDir);
         }
 
         private void CriaConstulta(ref IQueryable<T> consulta, object valor, Type classeEntidade, ParameterExpression parametroLambda, int nivelAtual, int quantidadeNiveis, IList<Tuple<int, string>> entidadesAprofundar = null)

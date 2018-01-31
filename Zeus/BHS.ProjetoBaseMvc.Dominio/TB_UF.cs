@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BHS.ProjetoBaseMvc.Dominio
+namespace Client.Zeus.Domain
 {
     using System;
     using System.Collections.Generic;
@@ -17,12 +17,12 @@ namespace BHS.ProjetoBaseMvc.Dominio
     using System.Runtime.Serialization;	 
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-    using BHS.ProjetoBaseMvc.Dominio.Base;
-    using BHS.ProjetoBaseMvc.Util.Attributes;
+    using Client.Zeus.Domain.Base;
+    using Client.Zeus.Util.Attributes;
     
     [MetadataType(typeof(TB_UFMetaData))]
     [DataContract]
-    public partial class TB_UF : DominioBase
+    public partial class TB_UF : BaseDomain
     {
         public TB_UF()
         {

@@ -4,23 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BHS.ProjetoBaseMvc.Dominio.Base
+namespace Client.Zeus.Domain.Base
 {
     public class BaseSearch
     {
         public BaseSearch()
         {
-            QuantidadePorPagina = 5;
+            CountPerPage = 5;
             Page = 1;
             Sort = "ID";
             SortDir = "ASC";
         }
 
-        public BaseSearch(int quantidadePorPagina, int page, string sort, string sortDir)
+        public BaseSearch(int countPerPage, int page, string sort, string sortDir)
             : this()
         {
-            if (quantidadePorPagina > 0)
-                this.QuantidadePorPagina = quantidadePorPagina;
+            if (countPerPage > 0)
+                this.CountPerPage = countPerPage;
 
             if (page > 0)
                 this.Page = page;
@@ -32,7 +32,7 @@ namespace BHS.ProjetoBaseMvc.Dominio.Base
                 this.SortDir = sortDir;
         }
 
-        public int QuantidadePorPagina { get; set; }
+        public int CountPerPage { get; set; }
 
         public int Page { get; set; }
 
@@ -40,6 +40,6 @@ namespace BHS.ProjetoBaseMvc.Dominio.Base
 
         public string SortDir { get; set; }
 
-        public bool AbrirGrid { get; set; }
+        public bool OpenGrid { get; set; }
     }
 }

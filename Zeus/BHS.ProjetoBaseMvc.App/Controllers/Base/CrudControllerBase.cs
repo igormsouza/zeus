@@ -15,7 +15,7 @@ namespace BHS.ProjetoBaseMvc.App.Controllers
 {
     public abstract class CrudControllerBase<T, U> : BaseController
         where T : DominioBase, new()
-        where U : PesquisaBaseCodigoDescricao<T>
+        where U : BaseSearchCodeDescription<T>
     {
         public CrudControllerBase()
         {
@@ -136,7 +136,7 @@ namespace BHS.ProjetoBaseMvc.App.Controllers
                     var itens = Pesquisar(out quantidadeItens, manterFiltros);
                     manterFiltros.Itens = itens;
                     manterFiltros.TotalItens = quantidadeItens;
-                    manterFiltros.AbrirGrid = true;
+                    manterFiltros.OpenGrid = true;
                     Session[PesquisaContexto] = manterFiltros;
 
                     PosPesquisar();

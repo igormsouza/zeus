@@ -326,9 +326,9 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BHS.ProjetoBaseMvc.Dominio\BHS.ProjetoBaseMvc.Dominio.csproj">
+    <ProjectReference Include="..\BHS.ProjetoBaseMvc.Dominio\Client.Zeus.Domain.csproj">
       <Project>{cfc9aa86-fa55-429a-a2c1-ef8608a20ac6}</Project>
-      <Name>BHS.ProjetoBaseMvc.Dominio</Name>
+      <Name>Client.Zeus.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\BHS.ProjetoBaseMvc.Negocio\BHS.ProjetoBaseMvc.Negocio.csproj">
       <Project>{9e433fc0-b8ae-4a0d-a6ff-366bdb216ab1}</Project>

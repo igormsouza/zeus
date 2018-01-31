@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{AB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2AD4A8C9-2A2F-4842-947C-A5B189BFBC69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHS.ProjetoBaseMvc.Dominio", "BHS.ProjetoBaseMvc.Dominio\BHS.ProjetoBaseMvc.Dominio.csproj", "{CFC9AA86-FA55-429A-A2C1-EF8608A20AC6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Zeus.Domain", "BHS.ProjetoBaseMvc.Dominio\Client.Zeus.Domain.csproj", "{CFC9AA86-FA55-429A-A2C1-EF8608A20AC6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHS.ProjetoBaseMvc.Negocio", "BHS.ProjetoBaseMvc.Negocio\BHS.ProjetoBaseMvc.Negocio.csproj", "{9E433FC0-B8AE-4A0D-A6FF-366BDB216AB1}"
 EndProject

@@ -2,43 +2,44 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web.UI.WebControls;
 
-namespace BHS.ProjetoBaseMvc.Dominio.Base
+namespace Client.Zeus.Domain.Base
 {
     public class DynamicContent
     {
         public DynamicContent(string idReferencia = "", string conteudo = "")
-            : this(idReferencia, conteudo, enumTipoConteudoDinamico.CustomizedParcial)
+            : this(idReferencia, conteudo, enumDynamicContentType.CustomizedParcial)
         {
 
         }
 
-        public DynamicContent(string idReferencia = "", string conteudo = "", enumTipoConteudoDinamico tipoConteudo = enumTipoConteudoDinamico.CustomizedParcial, 
-            enumInclusaoReferencia inclusaoReferencia = enumInclusaoReferencia.After, string propriedade = null, string cssDiv = "")
+        public DynamicContent(string idReferencia = "", string content = "", enumDynamicContentType tipoConteudo = enumDynamicContentType.CustomizedParcial, 
+            enumIncludedReference inclusaoReferencia = enumIncludedReference.After, string property = null, string cssDiv = "")
         {
             IdReferencia = idReferencia;
-            Conteudo = conteudo;
-            TipoConteudo = tipoConteudo;
+            Content = content;
+            ContentType = tipoConteudo;
             InclusaoReferencia = inclusaoReferencia;
-            Propriedade = propriedade;
+            Property = property;
             CssDiv = cssDiv;
         }
 
         public string IdReferencia { get; set; }
 
-        public string Conteudo { get; set; }
+        public string Content { get; set; }
 
-        public enumTipoConteudoDinamico TipoConteudo { get; set; }
+        public enumDynamicContentType ContentType { get; set; }
 
-        public enumInclusaoReferencia InclusaoReferencia { get; set; }
+        public enumIncludedReference InclusaoReferencia { get; set; }
 
-        public string Propriedade { get; set; }
+        public string Property { get; set; }
 
         public string CssDiv { get; set; }
 
         public override string ToString()
         {
-            return Conteudo;
+            return Content;
         }
     }
 }
