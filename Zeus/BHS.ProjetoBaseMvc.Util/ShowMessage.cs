@@ -7,29 +7,29 @@ using System.Web.Mvc;
 
 namespace Client.Zeus.Util
 {
-    public static class ExibeMensagem
+    public static class ShowMessage
     {
         public static void Show(Controller controller, Dictionary<string, string> erros,
-            string mensagemSucesso = "",
-            string idMensagemSucesso = "SuccessMessage", string idMensagemFalha = "ErrorMessage",
-            bool sumario = false)
+            string successMessage = "",
+            string idSuccessMessage = "SuccessMessage", string idMessageFail = "ErrorMessage",
+            bool summary = false)
         {
             TempDataDictionary temp = ((ControllerBase)controller).TempData;
 
             if (temp != null)
             {
-                mensagemSucesso = string.IsNullOrEmpty(mensagemSucesso) ? Mensagens.OperacaoRealizadaComSucesso : mensagemSucesso;
+                successMessage = string.IsNullOrEmpty(successMessage) ? Messages.OperacaoRealizadaComSucesso : successMessage;
 
                 if (erros.Count == 0)
                 {
-                    temp[idMensagemSucesso] = mensagemSucesso;
+                    temp[idSuccessMessage] = successMessage;
                 }
                 else
                 {
-                    if (!sumario)
+                    if (!summary)
                     {
                         string mensagemFalha = erros.Select(o => o.Value).First();
-                        temp[idMensagemFalha] = mensagemFalha;
+                        temp[idMessageFail] = mensagemFalha;
                     }
                     else
                     {

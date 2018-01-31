@@ -16,15 +16,14 @@ namespace Client.Zeus.Util
         private string to;
         private string subject;
         private string doby;
-        private string mask;
+        private string displayName;
         private bool bCopia;
-        private string EmailControladoria = string.Empty;
 
         public Mail(string from, string to, string subject, bool copy)
         {
             this.from = from;
             this.to = to;
-            this.mask = ConfigurationManager.AppSettings["MascaraCarteiro"];
+            this.displayName = ConfigurationManager.AppSettings["DisplayNameEmail"];
             this.subject = subject;
             this.bCopia = copy;
         }
@@ -55,25 +54,21 @@ namespace Client.Zeus.Util
             SmtpClient smtp = null;
 
             smtp = new SmtpClient(
-                ConfigurationManager.AppSettings["EnderecoSMTP"],
-                Convert.ToInt32(ConfigurationManager.AppSettings["PortaSMTP"])
+                ConfigurationManager.AppSettings["SMTPAddress"],
+                Convert.ToInt32(ConfigurationManager.AppSettings["SMTPPort"])
                 );
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtp.Credentials = new NetworkCredential(
-                ConfigurationManager.AppSettings["UsuarioSMTP"],
-                ConfigurationManager.AppSettings["SenhaSMTP"]);
+                ConfigurationManager.AppSettings["SMTPUser"],
+                ConfigurationManager.AppSettings["SMTPPassword"]);
             mm = new MailMessage();
             mm.IsBodyHtml = isHtml;
-            mm.From = new MailAddress(this.from, this.mask);
-            mm.Sender = new MailAddress(this.from, this.mask);
+            mm.From = new MailAddress(this.from, this.displayName);
+            mm.Sender = new MailAddress(this.from, this.displayName);
             mm.To.Add(new MailAddress(this.to)); // 1719: Email com formato inválido (vazio)
-            if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["CopiaSMTP"]) && this.bCopia == true)
+            if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["SMTPCopy"]) && this.bCopia == true)
             {
-                mm.CC.Add(new MailAddress(ConfigurationManager.AppSettings["CopiaSMTP"]));
-            }
-            if (!string.IsNullOrEmpty(EmailControladoria))
-            {
-                mm.CC.Add(new MailAddress(EmailControladoria));
+                mm.CC.Add(new MailAddress(ConfigurationManager.AppSettings["SMTPCopy"]));
             }
             mm.Subject = this.subject;
             mm.Body = this.doby;

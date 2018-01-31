@@ -22,14 +22,14 @@ namespace Client.Zeus.Util {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Mensagens {
+    public class Messages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Mensagens() {
+        internal Messages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Client.Zeus.Util {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Client.Zeus.Util.Mensagens", typeof(Mensagens).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Client.Zeus.Util.Messages", typeof(Messages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

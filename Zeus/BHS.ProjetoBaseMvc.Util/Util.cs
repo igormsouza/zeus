@@ -8,11 +8,6 @@ namespace Client.Zeus.Util
 {
     public static class Util
     {
-        /// <summary>
-        /// Metodo que converte uma string em criptografia MD5
-        /// </summary>
-        /// <param name="toConvert">String que sera convertida para MD5</param>
-        /// <returns>Retorna value criptografado</returns>
         public static string StringToMD5(string toConvert)
         {
             var passwordBytes = System.Security.Cryptography.MD5.Create().ComputeHash(ASCIIEncoding.ASCII.GetBytes(toConvert));
@@ -127,7 +122,9 @@ namespace Client.Zeus.Util
 
             return aux;
         }
-        
+
+        #region Brazilian Mask Validator
+
         public static bool ValidateCpf(string cpf)
         {
             string value = cpf.Replace(".", "");
@@ -242,5 +239,7 @@ namespace Client.Zeus.Util
             }
 
         }
+
+        #endregion
     }
 }

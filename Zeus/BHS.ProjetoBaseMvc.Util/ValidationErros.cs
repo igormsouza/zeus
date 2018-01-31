@@ -22,7 +22,7 @@ namespace Client.Zeus.Util
             if (validation == null)
                 validation = new Dictionary<string, string>();
 
-            validation.Add("erro_nao_tratado", ex.Message + " - " + ex.InnerException);
+            validation.Add("error", ex.Message + " - " + ex.InnerException);
         }
     }
 }

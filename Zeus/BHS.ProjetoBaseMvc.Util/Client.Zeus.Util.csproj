@@ -45,8 +45,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -71,17 +71,17 @@
     <Compile Include="Attributes\CpfCnpjAttribute.cs" />
     <Compile Include="CacheSearch.cs" />
     <Compile Include="ValidationErros.cs" />
-    <Compile Include="ExibeMensagem.cs" />
+    <Compile Include="ShowMessage.cs" />
     <Compile Include="Mail.cs" />
     <Compile Include="Map\MapAttribute.cs" />
     <Compile Include="Map\NoMapAttribute.cs" />
     <Compile Include="Map\Property.cs" />
     <Compile Include="Map\PropertyHelper.cs" />
     <Compile Include="Map\TransformHelper.cs" />
-    <Compile Include="Mensagens.Designer.cs">
+    <Compile Include="Messages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Mensagens.resx</DependentUpon>
+      <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
     <Compile Include="Menu\MenuExtensions.cs" />
     <Compile Include="Menu\MenuModel.cs" />
@@ -90,9 +90,9 @@
     <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Mensagens.resx">
+    <EmbeddedResource Include="Messages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Mensagens.Designer.cs</LastGenOutput>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
