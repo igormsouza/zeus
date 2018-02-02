@@ -8,28 +8,28 @@ namespace Client.Zeus.Domain.Base
 {
     public class GridField
     {
-        public GridField(string nome)
-            : this(nome, nome)
+        public GridField(string name)
+            : this(name, name)
         {
 
         }
 
-        public GridField(string nome, string tituloColuna, bool ativo = true)
+        public GridField(string name, string columnTitle, bool active = true)
         {
-            Nome = nome;
-            TituloColuna = tituloColuna;
-            Ativo = ativo;
+            Name = name;
+            ColumnTitle = columnTitle;
+            Active = active;
         }
 
-        public string Nome { get; set; }
+        public string Name { get; set; }
 
-        public string TituloColuna { get; set; }
+        public string ColumnTitle { get; set; }
 
-        public bool Ativo { get; set; }
+        public bool Active { get; set; }
 
         public override string ToString()
         {
-            return string.Format("{0} - {1}", Nome, TituloColuna);
+            return string.Format("{0} - {1}", Name, ColumnTitle);
         }
     }
 }

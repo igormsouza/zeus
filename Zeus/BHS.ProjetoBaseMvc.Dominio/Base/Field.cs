@@ -20,17 +20,17 @@ namespace Client.Zeus.Domain.Base
 
         }
 
-        public Field(string name = "", string cssClass = "", enumFieldType tipo = enumFieldType.Default, 
-            string valorFixo = "", string linkActionGrid = "", string linkControllerGrid = "", string largura = "6", bool ativo = true)
+        public Field(string name = "", string cssClass = "", enumFieldType type = enumFieldType.Default, 
+            string fixedValue = "", string linkActionGrid = "", string linkControllerGrid = "", string width = "6", bool ativo = true)
         {
             Name = name;
             CssClass = cssClass;
-            Tipo = tipo;
-            ValorFixo = valorFixo;
+            Type = type;
+            FixedValue = fixedValue;
             LinkActionGrid = linkActionGrid;
             LinkControllerGrid = linkControllerGrid;
             Active = ativo;
-            Largura = largura;
+            Width = width;
         }
 
         public string Name { get; set; }
@@ -39,15 +39,15 @@ namespace Client.Zeus.Domain.Base
 
         public string LinkControllerGrid { get; set; }
 
-        public string ValorFixo { get; set; }
+        public string FixedValue { get; set; }
 
         public string CssClass { get; set; }
 
-        public enumFieldType Tipo { get; set; }
+        public enumFieldType Type { get; set; }
 
-        public string CarregarControle { get; set; }
+        public string LoadControl { get; set; }
 
-        public string Largura { get; set; }
+        public string Width { get; set; }
 
         public bool Active { get; set; }
 

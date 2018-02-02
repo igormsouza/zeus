@@ -29,7 +29,7 @@ namespace Client.Zeus.Domain.Base
             this.TotalItens = totalItems;
         }
 
-        [DisplayName("Código")]
+        [DisplayName("Id")]
         public int Id { get; set; }
 
         public string Description { get; set; }

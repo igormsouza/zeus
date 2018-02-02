@@ -8,30 +8,30 @@ namespace Client.Zeus.Domain.Base
 {
     public class DynamicContent
     {
-        public DynamicContent(string idReferencia = "", string conteudo = "")
-            : this(idReferencia, conteudo, enumDynamicContentType.CustomizedParcial)
+        public DynamicContent(string referenceId = "", string content = "")
+            : this(referenceId, content, enumDynamicContentType.CustomizedParcial)
         {
 
         }
 
-        public DynamicContent(string idReferencia = "", string content = "", enumDynamicContentType tipoConteudo = enumDynamicContentType.CustomizedParcial, 
-            enumIncludedReference inclusaoReferencia = enumIncludedReference.After, string property = null, string cssDiv = "")
+        public DynamicContent(string referenceId = "", string content = "", enumDynamicContentType contentType = enumDynamicContentType.CustomizedParcial, 
+            enumIncludedReference includedReference = enumIncludedReference.After, string property = null, string cssDiv = "")
         {
-            IdReferencia = idReferencia;
+            ReferenceId = referenceId;
             Content = content;
-            ContentType = tipoConteudo;
-            InclusaoReferencia = inclusaoReferencia;
+            ContentType = contentType;
+            IncludedReference = includedReference;
             Property = property;
             CssDiv = cssDiv;
         }
 
-        public string IdReferencia { get; set; }
+        public string ReferenceId { get; set; }
 
         public string Content { get; set; }
 
         public enumDynamicContentType ContentType { get; set; }
 
-        public enumIncludedReference InclusaoReferencia { get; set; }
+        public enumIncludedReference IncludedReference { get; set; }
 
         public string Property { get; set; }
 
