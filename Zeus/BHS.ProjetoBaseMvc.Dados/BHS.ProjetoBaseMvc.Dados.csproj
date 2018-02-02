@@ -7,8 +7,8 @@
     <ProjectGuid>{1D31FBE5-E15A-4BC6-93D9-9BD102154ECB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BHS.ProjetoBaseMvc.Dados</RootNamespace>
-    <AssemblyName>BHS.ProjetoBaseMvc.Dados</AssemblyName>
+    <RootNamespace>Client.Zeus.Dados</RootNamespace>
+    <AssemblyName>Client.Zeus.Dados</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -53,29 +53,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adaptador.cs" />
+    <Compile Include="Adapter.cs" />
     <Compile Include="Adaptador1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Adaptador.tt</DependentUpon>
     </Compile>
-    <Compile Include="Base\RepositorioGenerico.cs" />
+    <Compile Include="Base\GenericRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositorio\FuncionalidadeRepositorio.cs">
+    <Compile Include="Repository\FuncionalidadeRepositorio.cs">
       <DependentUpon>Repositorio.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repositorio\MenuRepositorio.cs">
+    <Compile Include="Repository\MenuRepositorio.cs">
       <DependentUpon>Repositorio.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repositorio\PerfilRepositorio.cs">
+    <Compile Include="Repository\PerfilRepositorio.cs">
       <DependentUpon>Repositorio.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repositorio\Repositorio.cs">
+    <Compile Include="Repository\Repositorio.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Repositorio.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repositorio\UsuarioRepositorio.cs">
+    <Compile Include="Repository\UsuarioRepositorio.cs">
       <DependentUpon>Repositorio.tt</DependentUpon>
     </Compile>
     <Compile Include="RepositorioDados.Context.cs">
@@ -110,7 +110,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>RepositorioDados.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Repositorio\Repositorio.tt">
+    <None Include="Repository\Repositorio.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Repositorio.cs</LastGenOutput>
     </None>
@@ -127,10 +127,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="RepositorioCustomizado\" />
+    <Folder Include="CustomRepository\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\scrpitAcesso.sql" />
+    <Content Include="Scripts\script.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

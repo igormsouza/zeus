@@ -33,7 +33,7 @@ namespace BHS.ProjetoBaseMvc.Negocio.Gerenciador
 		{
 		}
 
-		public CidadeGerenciador(Adaptador adaptador)
+		public CidadeGerenciador(Adapter adaptador)
 			: base(adaptador)
 		{
 		}		  

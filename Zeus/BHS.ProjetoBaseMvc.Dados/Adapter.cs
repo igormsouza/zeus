@@ -6,26 +6,21 @@ using System.Threading.Tasks;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
-using BHS.ProjetoBaseMvc.Dados.Repositorio;
-using BHS.ProjetoBaseMvc.Dominio.Base;
+using Client.Zeus.Dados.Repository;
+using Client.Zeus.Domain.Base;
 using System.Reflection;
 using System.Data.Entity;
 
-namespace BHS.ProjetoBaseMvc.Dados
+namespace Client.Zeus.Dados
 {
-    public partial class Adaptador
+    public partial class Adapter
     {
-        public Adaptador()
+        public Adapter()
         {
             contexto = new Contexto();
         }
 
-        /// <summary>
-        /// Persiste as modificações
-        /// </summary>
-        /// <param name="errosValidacao">Mensagens de erro</param>
-        /// <returns>Quantidade de registros modificados</returns>
-        public int SalvarModificacoes(Dictionary<string, string> errosValidacao = null)
+        public int Save(Dictionary<string, string> erros = null)
         {
             int quantidadeModificacoes = 0;
 
@@ -35,8 +30,8 @@ namespace BHS.ProjetoBaseMvc.Dados
             }
             catch (DbUpdateConcurrencyException ex)
             {
-                if (errosValidacao != null)
-                    errosValidacao.Add("erro", "O registro foi modificado por outro usuário");
+                if (erros != null)
+                    erros.Add("erro", "O registro foi modificado por outro usuário");
             }
             catch (DbEntityValidationException e)
             {
@@ -48,7 +43,7 @@ namespace BHS.ProjetoBaseMvc.Dados
                     {
                         Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
                             ve.PropertyName, ve.ErrorMessage);
-                        errosValidacao.Add(ve.PropertyName, ve.ErrorMessage);
+                        erros.Add(ve.PropertyName, ve.ErrorMessage);
                     }
                 }
             }
@@ -59,27 +54,27 @@ namespace BHS.ProjetoBaseMvc.Dados
                 if (sqlException != null)
                 {
                     var number = sqlException.Number;
-                    if (errosValidacao != null)
+                    if (erros != null)
                     {
                         if (number == 547)
                         {
                             Exception erro = (((Exception)(ex)).InnerException).InnerException;
-                            errosValidacao.Add("erro", "erro: " + erro.Message + " exeção: " + erro.InnerException + " pilha execução:" + erro.StackTrace);
+                            erros.Add("erro", "erro: " + erro.Message + " exeção: " + erro.InnerException + " pilha execução:" + erro.StackTrace);
 
                             //errosValidacao.Add("impossivelExcluirRegistroFK", Mensagens.ImpossivelExcluirRegistroFK.ToString());
                         }
                         else
                         {
-                            errosValidacao.Add("erro", "erro: " + ex.Message + " exeção: " + ex.InnerException + " pilha execução:" + ex.StackTrace);
+                            erros.Add("erro", "erro: " + ex.Message + " exeção: " + ex.InnerException + " pilha execução:" + ex.StackTrace);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                if (errosValidacao != null)
+                if (erros != null)
                 {
-                    errosValidacao.Add("erro", "erro: " + ex.Message + " exeção: " + ex.InnerException + " pilha execução:" + ex.StackTrace);
+                    erros.Add("erro", "erro: " + ex.Message + " exeção: " + ex.InnerException + " pilha execução:" + ex.StackTrace);
                 }
             }
             return quantidadeModificacoes;
@@ -105,19 +100,19 @@ namespace BHS.ProjetoBaseMvc.Dados
             }
         }
 
-        public void CarregaColecao<T>(T entidade, string colecao) where T : DominioBase
+        public void CarregaColecao<T>(T entidade, string colecao) where T : BaseDomain
         {
             contexto.Entry(entidade).Collection(colecao).Load();
         }
 
-        public void MudarStatusItensParaRemocao(DominioBase dominio)
+        public void MudarStatusItensParaRemocao(DomainBase Domain)
         {
-            MudarStatusItens(dominio, EntityState.Deleted);
+            MudarStatusItens(Domain, EntityState.Deleted);
         }
 
-        public void MudarStatusItens(DominioBase dominio, EntityState novoStatus)
+        public void MudarStatusItens(DomainBase Domain, EntityState novoStatus)
         {
-            contexto.Entry(dominio).State = novoStatus;
+            contexto.Entry(Domain).State = novoStatus;
         }
     }
 }

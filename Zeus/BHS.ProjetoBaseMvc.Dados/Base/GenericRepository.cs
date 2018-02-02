@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity.Infrastructure;
 using System.Linq.Expressions;
-using BHS.ProjetoBaseMvc.Dominio;
-using BHS.ProjetoBaseMvc.Util;
+using Client.Zeus.Domain;
+using Client.Zeus.Util;
 using System.Data.Entity;
 
-namespace BHS.ProjetoBaseMvc.Dados.Base
+namespace Client.Zeus.Dados.Base
 {
-    public class RepositorioGenerico<T>
+    public class GenericRepository<T>
         where T : class
     {
         protected Contexto DBContext { get; set; }
@@ -25,64 +25,64 @@ namespace BHS.ProjetoBaseMvc.Dados.Base
             }
         }
 
-        public RepositorioGenerico(Contexto contexto)
+        public GenericRepository(Contexto context)
         {
-            this.DBContext = contexto;
-            this.DBSet = contexto.Set<T>();
+            this.DBContext = context;
+            this.DBSet = context.Set<T>();
 
             Database.SetInitializer<Contexto>(null);
             DBContext.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
             this.DBContext.Configuration.ProxyCreationEnabled = false;
         }
 
-        public RepositorioGenerico()
+        public GenericRepository()
             : this(new Contexto())
         {
         }
 
-        public virtual List<T> Listar(
-            Expression<Func<T, bool>> filtro = null,
+        public virtual List<T> List(
+            Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>,
-            IOrderedQueryable<T>> ordenacao = null,
-            string propriedadesAIncluir = "")
+            IOrderedQueryable<T>> order = null,
+            string includedProperties = "")
         {
-            IQueryable<T> consulta = Consultar(filtro, ordenacao, propriedadesAIncluir);
+            IQueryable<T> consulta = Search(filter, order, includedProperties);
             return consulta.ToList();
         }
 
-        public virtual List<T> Listar(
-            IQueryable<T> filtro,
+        public virtual List<T> List(
+            IQueryable<T> filter,
             Func<IQueryable<T>,
-            IOrderedQueryable<T>> ordenacao = null,
-            string propriedadesAIncluir = "")
+            IOrderedQueryable<T>> order = null,
+            string includedProperties = "")
         {
-            IQueryable<T> consulta = Consultar(filtro, ordenacao, propriedadesAIncluir);
+            IQueryable<T> consulta = Search(filter, order, includedProperties);
             return consulta.ToList();
         }
 
         public virtual int Count(
-            Expression<Func<T, bool>> filtro = null,
+            Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>,
-            IOrderedQueryable<T>> ordenacao = null,
-            string propriedadesAIncluir = "")
+            IOrderedQueryable<T>> order = null,
+            string includedProperties = "")
         {
-            IQueryable<T> consulta = Consultar(filtro, ordenacao, propriedadesAIncluir);
+            IQueryable<T> consulta = Search(filter, order, includedProperties);
             return consulta.Count();
         }
 
         public virtual int Count(
-            IQueryable<T> filtro,
+            IQueryable<T> filter,
             Func<IQueryable<T>,
-            IOrderedQueryable<T>> ordenacao = null,
-            string propriedadesAIncluir = "")
+            IOrderedQueryable<T>> order = null,
+            string includedProperties = "")
         {
-            IQueryable<T> consulta = Consultar(filtro, ordenacao, propriedadesAIncluir);
+            IQueryable<T> consulta = Search(filter, order, includedProperties);
             return consulta.Count();
         }
 
         public virtual List<T> ListarPaginado(
-            out int itensCount,
-            IQueryable<T> consulta = null,
+            out int itemsCount,
+            IQueryable<T> query = null,
             string propriedadesAIncluir = "",
             int paginaAtual = 1,
             int quantidadePorPagina = 10,
@@ -91,33 +91,33 @@ namespace BHS.ProjetoBaseMvc.Dados.Base
             bool ordenacaoFeita = false
             )
         {
-            itensCount = 0;
+            itemsCount = 0;
             int salto = (paginaAtual - 1) * quantidadePorPagina;
 
-            if (consulta == null)
+            if (query == null)
             {
-                consulta = DBSet;
+                query = DBSet;
             }
 
             if (!string.IsNullOrWhiteSpace(propriedadesAIncluir))
-                consulta = propriedadesAIncluir
+                query = propriedadesAIncluir
                     .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                    .Aggregate(consulta, (current, includeProperty) => current.Include(includeProperty));
+                    .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
 
-            itensCount = consulta.Count();
+            itemsCount = query.Count();
 
             if (ordenacao != null)
             {
-                consulta = ordenacao(consulta);
+                query = ordenacao(query);
             }
             else if (!ordenacaoFeita)
             {
-                consulta = OrderDynamic.OrderBy(consulta, "ID");
+                query = OrderDynamic.OrderBy(query, "ID");
             }
 
-            consulta = consulta.Skip(salto).Take(quantidadePorPagina);
+            query = query.Skip(salto).Take(quantidadePorPagina);
 
-            return consulta.ToList();
+            return query.ToList();
         }
 
 
@@ -220,115 +220,115 @@ namespace BHS.ProjetoBaseMvc.Dados.Base
             return consulta.ToList();
         }
 
-        public virtual IQueryable<T> Consultar(
-            Expression<Func<T, bool>> filtro = null,
+        public virtual IQueryable<T> Search(
+            Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>,
-            IOrderedQueryable<T>> ordenacao = null,
-            string propriedadesAIncluir = "")
+            IOrderedQueryable<T>> order = null,
+            string includedProperties = "")
         {
             IQueryable<T> consulta = DBSet;
 
-            if (filtro != null)
+            if (filter != null)
             {
-                consulta = consulta.Where(filtro);
+                consulta = consulta.Where(filter);
             }
 
-            return Consultar(consulta, ordenacao, propriedadesAIncluir);
+            return Search(consulta, order, includedProperties);
         }
 
-        public virtual IQueryable<T> Consultar(
-           IQueryable<T> consulta,
+        public virtual IQueryable<T> Search(
+           IQueryable<T> query,
            Func<IQueryable<T>,
-           IOrderedQueryable<T>> ordenacao = null,
-           string propriedadesAIncluir = "")
+           IOrderedQueryable<T>> order = null,
+           string includedProperties = "")
         {
 
-            if (!string.IsNullOrWhiteSpace(propriedadesAIncluir))
+            if (!string.IsNullOrWhiteSpace(includedProperties))
             {
-                consulta = propriedadesAIncluir
+                query = includedProperties
                     .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                    .Aggregate(consulta, (current, includeProperty) => current.Include(includeProperty));
+                    .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
             }
 
-            if (ordenacao != null)
+            if (order != null)
             {
-                return ordenacao(consulta);
+                return order(query);
             }
-            return consulta;
+            return query;
         }
 
-        public virtual T BuscarPorId(int chavesPrimarias)
+        public virtual T SearchById(int id)
         {
-            return DBSet.Find(chavesPrimarias);
+            return DBSet.Find(id);
         }
 
-        public virtual void Inserir(T entidadeParaInserir)
+        public virtual void Insert(T entity)
         {
-            DBSet.Add(entidadeParaInserir);
-            DBContext.Entry(entidadeParaInserir).State = System.Data.Entity.EntityState.Added;
+            DBSet.Add(entity);
+            DBContext.Entry(entity).State = System.Data.Entity.EntityState.Added;
         }
 
-        public virtual void Excluir(params object[] chavesPrimarias)
+        public virtual void Delete(params object[] primaryKeys)
         {
-            T entidadeParaExcluir = DBSet.Find(chavesPrimarias);
-            Excluir(entidadeParaExcluir);
+            T entity = DBSet.Find(primaryKeys);
+            Delete(entity);
         }
 
-        public virtual void Excluir(T entidadeParaExcluir)
+        public virtual void Delete(T entity)
         {
-            if (this.DBContext.Entry(entidadeParaExcluir).State == System.Data.Entity.EntityState.Detached)
+            if (this.DBContext.Entry(entity).State == System.Data.Entity.EntityState.Detached)
             {
-                DBSet.Attach(entidadeParaExcluir);
+                DBSet.Attach(entity);
             }
-            DBSet.Remove(entidadeParaExcluir);
+            DBSet.Remove(entity);
         }
 
-        public virtual void Excluir(ICollection<T> listaParaExcluir)
+        public virtual void Delete(ICollection<T> list)
         {
-            var count = listaParaExcluir.Count - 1;
+            var count = list.Count - 1;
 
             for (int i = count; i >= 0; i--)
             {
-                Excluir(listaParaExcluir.ToList()[i]);
+                Delete(list.ToList()[i]);
             }
         }
 
-        public virtual void Atualizar(T entidadeParaAtualizar)
+        public virtual void Update(T enitty)
         {
-            if (this.DBContext.Entry(entidadeParaAtualizar).State == System.Data.Entity.EntityState.Detached)
+            if (this.DBContext.Entry(enitty).State == System.Data.Entity.EntityState.Detached)
             {
-                DBSet.Attach(entidadeParaAtualizar);
+                DBSet.Attach(enitty);
             }
             this.DBContext.ChangeTracker.DetectChanges();
-            this.DBContext.Entry(entidadeParaAtualizar).State = System.Data.Entity.EntityState.Modified;
+            this.DBContext.Entry(enitty).State = System.Data.Entity.EntityState.Modified;
         }
 
-        public virtual IList<T> BuscarPorSQL(string consultaSQL, params object[] parametros)
+        public virtual IList<T> SearchBySQL(string consultaSQL, params object[] parameters)
         {
-            var result = DBSet.SqlQuery(consultaSQL, parametros).ToList();
+            var result = DBSet.SqlQuery(consultaSQL, parameters).ToList();
             return result;
         }
 
-        public virtual void Descartar(T entidadeParaDestacar)
+        public virtual void Discart(T entity)
         {
-            ((IObjectContextAdapter)this.DBContext).ObjectContext.Detach(entidadeParaDestacar);
+            ((IObjectContextAdapter)this.DBContext).ObjectContext.Detach(entity);
         }
 
-        public virtual void Deletar(T entidadeParaDestacar)
+        public virtual void Delete(T entity)
         {
-            ((IObjectContextAdapter)this.DBContext).ObjectContext.DeleteObject(entidadeParaDestacar);
+            ((IObjectContextAdapter)this.DBContext).ObjectContext.DeleteObject(entity);
         }
 
-        public virtual void Descartar(IList<T> listaEntidadeParaDestacar)
+        public virtual void Discart(IList<T> list)
         {
-            foreach (var itemDescartar in listaEntidadeParaDestacar)
-                this.Descartar(itemDescartar);
+            foreach (var item in list)
+                this.Discart(item);
         }
 
-        public virtual void Deletar(IList<T> listaEntidadeParaDestacar)
+        public virtual void Delete(IList<T> list)
         {
-            foreach (var itemDescartar in listaEntidadeParaDestacar)
-                this.Deletar(itemDescartar);
+            foreach (var item in list)
+                this.Delete(item);
         }
 
         public virtual int ExecuteSqlCommand(string sql, params object[] parametros)
@@ -337,15 +337,15 @@ namespace BHS.ProjetoBaseMvc.Dados.Base
             return result;
         }
 
-        public virtual IEnumerable<T> BuscarPorSQL<T>(string sql, params object[] parametros) where T : class
+        public virtual IEnumerable<T> SearchBySQL<T>(string sql, params object[] parameters) where T : class
         {
-            var result = DBContext.Database.SqlQuery<T>(sql, parametros);
+            var result = DBContext.Database.SqlQuery<T>(sql, parameters);
             return result;
         }
 
-        public System.Data.Entity.EntityState VerificaEstadoEntidade(T entidade)
+        public System.Data.Entity.EntityState EntityState(T entity)
         {
-            return this.DBContext.Entry(entidade).State;
+            return this.DBContext.Entry(entity).State;
         }
     }
 }

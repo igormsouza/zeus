@@ -5,15 +5,15 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="5f0756ea7057461895d36a8471760e78" Name="Diagram1" ZoomLevel="85">
-        <EntityTypeShape EntityType="BHS.ProjetoBaseMvc.Dominio.TB_MENU" Width="1.5" PointX="15" PointY="4.75" />
-        <AssociationConnector Association="BHS.ProjetoBaseMvc.Dominio.FK_TB_MENU_MENU_ID" />
-        <EntityTypeShape EntityType="BHS.ProjetoBaseMvc.Dominio.TB_FUNCIONALIDADE" Width="1.5" PointX="15" PointY="8.625" />
-        <AssociationConnector Association="BHS.ProjetoBaseMvc.Dominio.FK_TB_FUNCIONALIDADE_TB_MENU" />
-        <EntityTypeShape EntityType="BHS.ProjetoBaseMvc.Dominio.TB_USUARIO" Width="1.5" PointX="11.25" PointY="5.75" />
-        <EntityTypeShape EntityType="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL" Width="1.5" PointX="9" PointY="5.5" />
-        <AssociationConnector Association="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL_FUNCIONALIDADE" />
-        <AssociationConnector Association="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL_MENU" />
-        <AssociationConnector Association="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL_USUARIO" />
+        <EntityTypeShape EntityType="Client.Zeus.Domain.TB_MENU" Width="1.5" PointX="15" PointY="4.75" />
+        <AssociationConnector Association="Client.Zeus.Domain.FK_TB_MENU_MENU_ID" />
+        <EntityTypeShape EntityType="Client.Zeus.Domain.TB_FUNCIONALIDADE" Width="1.5" PointX="15" PointY="8.625" />
+        <AssociationConnector Association="Client.Zeus.Domain.FK_TB_FUNCIONALIDADE_TB_MENU" />
+        <EntityTypeShape EntityType="Client.Zeus.Domain.TB_USUARIO" Width="1.5" PointX="11.25" PointY="5.75" />
+        <EntityTypeShape EntityType="Client.Zeus.Domain.TB_PERFIL" Width="1.5" PointX="9" PointY="5.5" />
+        <AssociationConnector Association="Client.Zeus.Domain.TB_PERFIL_FUNCIONALIDADE" />
+        <AssociationConnector Association="Client.Zeus.Domain.TB_PERFIL_MENU" />
+        <AssociationConnector Association="Client.Zeus.Domain.TB_PERFIL_USUARIO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

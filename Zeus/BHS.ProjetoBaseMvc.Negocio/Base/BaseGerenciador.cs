@@ -14,22 +14,22 @@ namespace BHS.ProjetoBaseMvc.Negocio.Base
 {
     public abstract class BaseGerenciador<T> where T : DominioBase, new()
     {
-        protected readonly Adaptador adaptador;
+        protected readonly Adapter adaptador;
 
-        private RepositorioGenerico<T> retorno;
-        protected RepositorioGenerico<T> RepositorioBase
+        private GenericRepository<T> retorno;
+        protected GenericRepository<T> RepositorioBase
         {
             get
             {
                 if (retorno == null)
                 {
-                    var propriedades = typeof(Adaptador).GetProperties();
+                    var propriedades = typeof(Adapter).GetProperties();
                     foreach (PropertyInfo i in propriedades)
                     {
                         var propriedade = i.GetValue(adaptador);
-                        if (propriedade is RepositorioGenerico<T>)
+                        if (propriedade is GenericRepository<T>)
                         {
-                            retorno = propriedade as RepositorioGenerico<T>;
+                            retorno = propriedade as GenericRepository<T>;
                             break;
                         }
                     }
@@ -64,17 +64,17 @@ namespace BHS.ProjetoBaseMvc.Negocio.Base
 
         public BaseGerenciador()
         {
-            this.adaptador = new Adaptador();
+            this.adaptador = new Adapter();
         }
 
-        public BaseGerenciador(Adaptador adaptador)
+        public BaseGerenciador(Adapter adaptador)
         {
             this.adaptador = adaptador;
         }
 
         public BaseGerenciador(Contexto contextoExistente)
         {
-            this.adaptador = new Adaptador(contextoExistente);
+            this.adaptador = new Adapter(contextoExistente);
         }
 
         public IQueryable<T> Query
@@ -252,7 +252,7 @@ namespace BHS.ProjetoBaseMvc.Negocio.Base
             {
                 PreInserir(ref objetoNovo);
                 RepositorioBase.Inserir(objetoNovo);
-                quantidadeModificacoes = adaptador.SalvarModificacoes(errosValidacao);
+                quantidadeModificacoes = adaptador.Save(errosValidacao);
             }
             catch (Exception ex)
             {
@@ -286,7 +286,7 @@ namespace BHS.ProjetoBaseMvc.Negocio.Base
                 PosCondicaoEditar(objetoEditado, ref objetoAntigo, contextoEdicao);
 
                 RepositorioBase.Atualizar(objetoAntigo);
-                quantidadeModificacoes = adaptador.SalvarModificacoes(errosValidacao);
+                quantidadeModificacoes = adaptador.Save(errosValidacao);
             }
             catch (Exception ex)
             {
@@ -400,7 +400,7 @@ namespace BHS.ProjetoBaseMvc.Negocio.Base
             {
                 PreEditar(ref objetoExcluido);
                 RepositorioBase.Excluir(objetoExcluido);
-                quantidadeModificacoes = adaptador.SalvarModificacoes(errosValidacao);
+                quantidadeModificacoes = adaptador.Save(errosValidacao);
             }
             catch (Exception ex)
             {
@@ -434,7 +434,7 @@ namespace BHS.ProjetoBaseMvc.Negocio.Base
         {
             int quantidadeModificacoes = 0;
             RepositorioBase.Excluir(objetoExcluido);
-            quantidadeModificacoes = adaptador.SalvarModificacoes();
+            quantidadeModificacoes = adaptador.Save();
         }
 
         public virtual void ExecuteSqlCommand(string query, params object[] parametros)

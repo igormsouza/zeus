@@ -33,7 +33,7 @@ namespace BHS.ProjetoBaseMvc.Negocio.Gerenciador
 		{
 		}
 
-		public UFGerenciador(Adaptador adaptador)
+		public UFGerenciador(Adapter adaptador)
 			: base(adaptador)
 		{
 		}		  

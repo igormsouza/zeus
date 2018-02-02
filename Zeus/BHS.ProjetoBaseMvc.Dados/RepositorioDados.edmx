@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="BHS.ProjetoBaseMvc.Dominio.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Client.Zeus.Domain.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="TB_FUNCIONALIDADE">
           <Key>
             <PropertyRef Name="ID" />
@@ -168,7 +168,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="BHSProjetoBaseMvcDominioStoreContainer">
+        <EntityContainer Name="BHSProjetoBaseMvcDomainStoreContainer">
           <EntitySet Name="TB_FUNCIONALIDADE" EntityType="Self.TB_FUNCIONALIDADE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_MENU" EntityType="Self.TB_MENU" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TB_PERFIL" EntityType="Self.TB_PERFIL" Schema="dbo" store:Type="Tables" />
@@ -212,29 +212,29 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="BHS.ProjetoBaseMvc.Dominio" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Client.Zeus.Domain" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="Contexto" p1:LazyLoadingEnabled="true">
-          <EntitySet Name="TB_MENU" EntityType="BHS.ProjetoBaseMvc.Dominio.TB_MENU" />
-          <AssociationSet Name="FK_TB_MENU_MENU_ID" Association="BHS.ProjetoBaseMvc.Dominio.FK_TB_MENU_MENU_ID">
+          <EntitySet Name="TB_MENU" EntityType="Client.Zeus.Domain.TB_MENU" />
+          <AssociationSet Name="FK_TB_MENU_MENU_ID" Association="Client.Zeus.Domain.FK_TB_MENU_MENU_ID">
             <End Role="TB_MENU" EntitySet="TB_MENU" />
             <End Role="TB_MENU1" EntitySet="TB_MENU" />
           </AssociationSet>
-          <EntitySet Name="TB_FUNCIONALIDADE" EntityType="BHS.ProjetoBaseMvc.Dominio.TB_FUNCIONALIDADE" />
-          <AssociationSet Name="FK_TB_FUNCIONALIDADE_TB_MENU" Association="BHS.ProjetoBaseMvc.Dominio.FK_TB_FUNCIONALIDADE_TB_MENU">
+          <EntitySet Name="TB_FUNCIONALIDADE" EntityType="Client.Zeus.Domain.TB_FUNCIONALIDADE" />
+          <AssociationSet Name="FK_TB_FUNCIONALIDADE_TB_MENU" Association="Client.Zeus.Domain.FK_TB_FUNCIONALIDADE_TB_MENU">
             <End Role="TB_MENU" EntitySet="TB_MENU" />
             <End Role="TB_FUNCIONALIDADE" EntitySet="TB_FUNCIONALIDADE" />
           </AssociationSet>
-          <EntitySet Name="TB_USUARIO" EntityType="BHS.ProjetoBaseMvc.Dominio.TB_USUARIO" />
-          <EntitySet Name="TB_PERFIL" EntityType="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL" />
-          <AssociationSet Name="TB_PERFIL_FUNCIONALIDADE" Association="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL_FUNCIONALIDADE">
+          <EntitySet Name="TB_USUARIO" EntityType="Client.Zeus.Domain.TB_USUARIO" />
+          <EntitySet Name="TB_PERFIL" EntityType="Client.Zeus.Domain.TB_PERFIL" />
+          <AssociationSet Name="TB_PERFIL_FUNCIONALIDADE" Association="Client.Zeus.Domain.TB_PERFIL_FUNCIONALIDADE">
             <End Role="TB_FUNCIONALIDADE" EntitySet="TB_FUNCIONALIDADE" />
             <End Role="TB_PERFIL" EntitySet="TB_PERFIL" />
           </AssociationSet>
-          <AssociationSet Name="TB_PERFIL_MENU" Association="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL_MENU">
+          <AssociationSet Name="TB_PERFIL_MENU" Association="Client.Zeus.Domain.TB_PERFIL_MENU">
             <End Role="TB_PERFIL" EntitySet="TB_PERFIL" />
             <End Role="TB_MENU" EntitySet="TB_MENU" />
           </AssociationSet>
-          <AssociationSet Name="TB_PERFIL_USUARIO" Association="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL_USUARIO">
+          <AssociationSet Name="TB_PERFIL_USUARIO" Association="Client.Zeus.Domain.TB_PERFIL_USUARIO">
             <End Role="TB_PERFIL" EntitySet="TB_PERFIL" />
             <End Role="TB_USUARIO" EntitySet="TB_USUARIO" />
           </AssociationSet>
@@ -250,15 +250,15 @@
           <Property Name="IMAGEM" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="ID_PAI" Type="Int32" />
           <Property Name="URL" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TB_MENU1" Relationship="BHS.ProjetoBaseMvc.Dominio.FK_TB_MENU_MENU_ID" FromRole="TB_MENU" ToRole="TB_MENU1" />
-          <NavigationProperty Name="TB_MENU2" Relationship="BHS.ProjetoBaseMvc.Dominio.FK_TB_MENU_MENU_ID" FromRole="TB_MENU1" ToRole="TB_MENU" />
+          <NavigationProperty Name="TB_MENU1" Relationship="Client.Zeus.Domain.FK_TB_MENU_MENU_ID" FromRole="TB_MENU" ToRole="TB_MENU1" />
+          <NavigationProperty Name="TB_MENU2" Relationship="Client.Zeus.Domain.FK_TB_MENU_MENU_ID" FromRole="TB_MENU1" ToRole="TB_MENU" />
           <Property Name="IND_ABRIR_NOVA_PAGINA" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="TB_FUNCIONALIDADE" Relationship="BHS.ProjetoBaseMvc.Dominio.FK_TB_FUNCIONALIDADE_TB_MENU" FromRole="TB_MENU" ToRole="TB_FUNCIONALIDADE" />
-          <NavigationProperty Name="TB_PERFIL" Relationship="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL_MENU" FromRole="TB_MENU" ToRole="TB_PERFIL" />
+          <NavigationProperty Name="TB_FUNCIONALIDADE" Relationship="Client.Zeus.Domain.FK_TB_FUNCIONALIDADE_TB_MENU" FromRole="TB_MENU" ToRole="TB_FUNCIONALIDADE" />
+          <NavigationProperty Name="TB_PERFIL" Relationship="Client.Zeus.Domain.TB_PERFIL_MENU" FromRole="TB_MENU" ToRole="TB_PERFIL" />
         </EntityType>
         <Association Name="FK_TB_MENU_MENU_ID">
-          <End Type="BHS.ProjetoBaseMvc.Dominio.TB_MENU" Role="TB_MENU" Multiplicity="0..1" />
-          <End Type="BHS.ProjetoBaseMvc.Dominio.TB_MENU" Role="TB_MENU1" Multiplicity="*" />
+          <End Type="Client.Zeus.Domain.TB_MENU" Role="TB_MENU" Multiplicity="0..1" />
+          <End Type="Client.Zeus.Domain.TB_MENU" Role="TB_MENU1" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_MENU">
               <PropertyRef Name="ID" />
@@ -277,12 +277,12 @@
           <Property Name="CONTROLLER" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="ACTION" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="ID_MENU" Type="Int32" />
-          <NavigationProperty Name="TB_MENU" Relationship="BHS.ProjetoBaseMvc.Dominio.FK_TB_FUNCIONALIDADE_TB_MENU" FromRole="TB_FUNCIONALIDADE" ToRole="TB_MENU" />
-          <NavigationProperty Name="TB_PERFIL" Relationship="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL_FUNCIONALIDADE" FromRole="TB_FUNCIONALIDADE" ToRole="TB_PERFIL" />
+          <NavigationProperty Name="TB_MENU" Relationship="Client.Zeus.Domain.FK_TB_FUNCIONALIDADE_TB_MENU" FromRole="TB_FUNCIONALIDADE" ToRole="TB_MENU" />
+          <NavigationProperty Name="TB_PERFIL" Relationship="Client.Zeus.Domain.TB_PERFIL_FUNCIONALIDADE" FromRole="TB_FUNCIONALIDADE" ToRole="TB_PERFIL" />
         </EntityType>
         <Association Name="FK_TB_FUNCIONALIDADE_TB_MENU">
-          <End Type="BHS.ProjetoBaseMvc.Dominio.TB_MENU" Role="TB_MENU" Multiplicity="0..1" />
-          <End Type="BHS.ProjetoBaseMvc.Dominio.TB_FUNCIONALIDADE" Role="TB_FUNCIONALIDADE" Multiplicity="*" />
+          <End Type="Client.Zeus.Domain.TB_MENU" Role="TB_MENU" Multiplicity="0..1" />
+          <End Type="Client.Zeus.Domain.TB_FUNCIONALIDADE" Role="TB_FUNCIONALIDADE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TB_MENU">
               <PropertyRef Name="ID" />
@@ -303,7 +303,7 @@
           <Property Name="SENHA" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
           <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="LOGIN" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TB_PERFIL" Relationship="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL_USUARIO" FromRole="TB_USUARIO" ToRole="TB_PERFIL" />
+          <NavigationProperty Name="TB_PERFIL" Relationship="Client.Zeus.Domain.TB_PERFIL_USUARIO" FromRole="TB_USUARIO" ToRole="TB_PERFIL" />
         </EntityType>
         <EntityType Name="TB_PERFIL">
           <Key>
@@ -312,30 +312,30 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DESCRICAO" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="ADMIN" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="TB_FUNCIONALIDADE" Relationship="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL_FUNCIONALIDADE" FromRole="TB_PERFIL" ToRole="TB_FUNCIONALIDADE" />
-          <NavigationProperty Name="TB_MENU" Relationship="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL_MENU" FromRole="TB_PERFIL" ToRole="TB_MENU" />
-          <NavigationProperty Name="TB_USUARIO" Relationship="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL_USUARIO" FromRole="TB_PERFIL" ToRole="TB_USUARIO" />
+          <NavigationProperty Name="TB_FUNCIONALIDADE" Relationship="Client.Zeus.Domain.TB_PERFIL_FUNCIONALIDADE" FromRole="TB_PERFIL" ToRole="TB_FUNCIONALIDADE" />
+          <NavigationProperty Name="TB_MENU" Relationship="Client.Zeus.Domain.TB_PERFIL_MENU" FromRole="TB_PERFIL" ToRole="TB_MENU" />
+          <NavigationProperty Name="TB_USUARIO" Relationship="Client.Zeus.Domain.TB_PERFIL_USUARIO" FromRole="TB_PERFIL" ToRole="TB_USUARIO" />
         </EntityType>
         <Association Name="TB_PERFIL_FUNCIONALIDADE">
-          <End Type="BHS.ProjetoBaseMvc.Dominio.TB_FUNCIONALIDADE" Role="TB_FUNCIONALIDADE" Multiplicity="*" />
-          <End Type="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL" Role="TB_PERFIL" Multiplicity="*" />
+          <End Type="Client.Zeus.Domain.TB_FUNCIONALIDADE" Role="TB_FUNCIONALIDADE" Multiplicity="*" />
+          <End Type="Client.Zeus.Domain.TB_PERFIL" Role="TB_PERFIL" Multiplicity="*" />
         </Association>
         <Association Name="TB_PERFIL_MENU">
-          <End Type="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL" Role="TB_PERFIL" Multiplicity="*" />
-          <End Type="BHS.ProjetoBaseMvc.Dominio.TB_MENU" Role="TB_MENU" Multiplicity="*" />
+          <End Type="Client.Zeus.Domain.TB_PERFIL" Role="TB_PERFIL" Multiplicity="*" />
+          <End Type="Client.Zeus.Domain.TB_MENU" Role="TB_MENU" Multiplicity="*" />
         </Association>
         <Association Name="TB_PERFIL_USUARIO">
-          <End Type="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL" Role="TB_PERFIL" Multiplicity="*" />
-          <End Type="BHS.ProjetoBaseMvc.Dominio.TB_USUARIO" Role="TB_USUARIO" Multiplicity="*" />
+          <End Type="Client.Zeus.Domain.TB_PERFIL" Role="TB_PERFIL" Multiplicity="*" />
+          <End Type="Client.Zeus.Domain.TB_USUARIO" Role="TB_USUARIO" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="BHSProjetoBaseMvcDominioStoreContainer" CdmEntityContainer="Contexto">
+        <EntityContainerMapping StorageEntityContainer="BHSProjetoBaseMvcDomainStoreContainer" CdmEntityContainer="Contexto">
           <EntitySetMapping Name="TB_MENU">
-            <EntityTypeMapping TypeName="BHS.ProjetoBaseMvc.Dominio.TB_MENU">
+            <EntityTypeMapping TypeName="Client.Zeus.Domain.TB_MENU">
               <MappingFragment StoreEntitySet="TB_MENU">
                 <ScalarProperty Name="IND_ABRIR_NOVA_PAGINA" ColumnName="IND_ABRIR_NOVA_PAGINA" />
                 <ScalarProperty Name="URL" ColumnName="URL" />
@@ -349,7 +349,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TB_FUNCIONALIDADE">
-            <EntityTypeMapping TypeName="BHS.ProjetoBaseMvc.Dominio.TB_FUNCIONALIDADE">
+            <EntityTypeMapping TypeName="Client.Zeus.Domain.TB_FUNCIONALIDADE">
               <MappingFragment StoreEntitySet="TB_FUNCIONALIDADE">
                 <ScalarProperty Name="ID_MENU" ColumnName="ID_MENU" />
                 <ScalarProperty Name="ACTION" ColumnName="ACTION" />
@@ -360,7 +360,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TB_USUARIO">
-            <EntityTypeMapping TypeName="BHS.ProjetoBaseMvc.Dominio.TB_USUARIO">
+            <EntityTypeMapping TypeName="Client.Zeus.Domain.TB_USUARIO">
               <MappingFragment StoreEntitySet="TB_USUARIO">
                 <ScalarProperty Name="LOGIN" ColumnName="LOGIN" />
                 <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
@@ -373,7 +373,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TB_PERFIL">
-            <EntityTypeMapping TypeName="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL">
+            <EntityTypeMapping TypeName="Client.Zeus.Domain.TB_PERFIL">
               <MappingFragment StoreEntitySet="TB_PERFIL">
                 <ScalarProperty Name="ADMIN" ColumnName="ADMIN" />
                 <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
@@ -381,7 +381,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="TB_PERFIL_FUNCIONALIDADE" TypeName="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL_FUNCIONALIDADE" StoreEntitySet="TB_PERFIL_FUNCIONALIDADE">
+          <AssociationSetMapping Name="TB_PERFIL_FUNCIONALIDADE" TypeName="Client.Zeus.Domain.TB_PERFIL_FUNCIONALIDADE" StoreEntitySet="TB_PERFIL_FUNCIONALIDADE">
             <EndProperty Name="TB_PERFIL">
               <ScalarProperty Name="ID" ColumnName="ID_PERFIL" />
             </EndProperty>
@@ -389,7 +389,7 @@
               <ScalarProperty Name="ID" ColumnName="ID_FUNCIONALIDADE" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="TB_PERFIL_MENU" TypeName="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL_MENU" StoreEntitySet="TB_PERFIL_MENU">
+          <AssociationSetMapping Name="TB_PERFIL_MENU" TypeName="Client.Zeus.Domain.TB_PERFIL_MENU" StoreEntitySet="TB_PERFIL_MENU">
             <EndProperty Name="TB_MENU">
               <ScalarProperty Name="ID" ColumnName="ID_MENU" />
             </EndProperty>
@@ -397,7 +397,7 @@
               <ScalarProperty Name="ID" ColumnName="ID_PERFIL" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="TB_PERFIL_USUARIO" TypeName="BHS.ProjetoBaseMvc.Dominio.TB_PERFIL_USUARIO" StoreEntitySet="TB_PERFIL_USUARIO">
+          <AssociationSetMapping Name="TB_PERFIL_USUARIO" TypeName="Client.Zeus.Domain.TB_PERFIL_USUARIO" StoreEntitySet="TB_PERFIL_USUARIO">
             <EndProperty Name="TB_USUARIO">
               <ScalarProperty Name="ID" ColumnName="ID_USUARIO" />
             </EndProperty>

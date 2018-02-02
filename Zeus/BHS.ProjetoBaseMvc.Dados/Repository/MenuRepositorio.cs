@@ -7,20 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BHS.ProjetoBaseMvc.Dados.Repositorio
+namespace Client.Zeus.Dados.Repository
 {
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
 	using System.Text;
 	using System.Threading.Tasks;
-	using BHS.ProjetoBaseMvc.Dados;
-	using BHS.ProjetoBaseMvc.Dados.Base;
-	using BHS.ProjetoBaseMvc.Dominio;
+	using Client.Zeus.Dados;
+	using Client.Zeus.Dados.Base;
+	using Client.Zeus.Domain;
 
-	public partial class MenuRepositorio : RepositorioGenerico<TB_MENU>
+	public partial class MenuRepository : GenericRepository<TB_MENU>
 	{
-		public MenuRepositorio(Contexto contexto)
+		public MenuRepository(Contexto contexto)
 			: base(contexto)
 		{
 		}

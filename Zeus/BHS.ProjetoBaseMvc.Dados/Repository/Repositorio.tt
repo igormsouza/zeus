@@ -2,7 +2,7 @@
 <#@ include file="EF.Utility.CS.ttinclude"#>
 <#@ import namespace="System.Xml.XPath" #><#
 
-const string inputFile = @"..\..\BHS.ProjetoBaseMvc.Dados\RepositorioDados.edmx";
+const string inputFile = @"..\..\Client.Zeus.Dados\RepositoryDados.edmx";
 var textTransform = DynamicTextTransformation.Create(this);
 var code = new CodeGenerationTools(this);
 //var ef = new MetadataTools(this);
@@ -14,7 +14,7 @@ var itemCollection = loader.CreateEdmItemCollection(inputFile);
 foreach (var entity in itemCollection.OfType<EntityType>().OrderBy(i => i.Name))
 {
 	var className = String.Join("", entity.Name.Replace("TB_", "")); 
-    className = CodigoCustomizadoTT.GeraNomeClasse(className) + "Repositorio";
+    className = CodigoCustomizadoTT.GeraNomeClasse(className) + "Repository";
 	fileManager.StartNewFile(className + ".cs");
 	
 #>
@@ -34,11 +34,11 @@ namespace <#= code.VsNamespaceSuggestion() #>
 	using System.Linq;
 	using System.Text;
 	using System.Threading.Tasks;
-	using BHS.ProjetoBaseMvc.Dados;
-	using BHS.ProjetoBaseMvc.Dados.Base;
-	using BHS.ProjetoBaseMvc.Dominio;
+	using Client.Zeus.Dados;
+	using Client.Zeus.Dados.Base;
+	using Client.Zeus.Domain;
 
-	public partial class <#= className #> : RepositorioGenerico<<#=entity.Name#>>
+	public partial class <#= className #> : RepositoryGenerico<<#=entity.Name#>>
 	{
 		public <#= className #>(Contexto contexto)
 			: base(contexto)

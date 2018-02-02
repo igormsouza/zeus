@@ -2,7 +2,7 @@
 <#@ include file="EF.Utility.CS.ttinclude"#>
 <#@ import namespace="System.Xml.XPath" #><#
 
-const string inputFile = @"..\BHS.ProjetoBaseMvc.Dados\RepositorioDados.edmx";
+const string inputFile = @"..\Client.Zeus.Dados\RepositoryDados.edmx";
 var textTransform = DynamicTextTransformation.Create(this);
 var code = new CodeGenerationTools(this);
 //var ef = new MetadataTools(this);
@@ -21,11 +21,11 @@ using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Reflection;
 using System.Data.Entity;
-using BHS.ProjetoBaseMvc.Dados;
-using BHS.ProjetoBaseMvc.Dados.Repositorio;
-using BHS.ProjetoBaseMvc.Dominio.Base;
+using Client.Zeus.Dados;
+using Client.Zeus.Dados.Repository;
+using Client.Zeus.Domain.Base;
 
-namespace BHS.ProjetoBaseMvc.Dados
+namespace Client.Zeus.Dados
 {
     public partial class Adaptador
     {
@@ -36,13 +36,13 @@ namespace BHS.ProjetoBaseMvc.Dados
             contexto = contextoExistente;
         }
 
-		// Implementa Repositorios
-		#region [ Repositorios ]
+		// Implementa Repositorys
+		#region [ Repositorys ]
 <#
 foreach (var entity in itemCollection.OfType<EntityType>().OrderBy(i => i.Name))
 {
 	var className = String.Join("", entity.Name.Replace("TB_", "")) ;
-	className = CodigoCustomizadoTT.GeraNomeClasse(className) + "Repositorio";
+	className = CodigoCustomizadoTT.GeraNomeClasse(className) + "Repository";
 #>
 
 		private <#= className #> <#= className.ToLower() #>;
