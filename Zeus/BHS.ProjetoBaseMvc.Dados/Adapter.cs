@@ -6,27 +6,27 @@ using System.Threading.Tasks;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
-using Client.Zeus.Dados.Repository;
+using Client.Zeus.Data.Repository;
 using Client.Zeus.Domain.Base;
 using System.Reflection;
 using System.Data.Entity;
 
-namespace Client.Zeus.Dados
+namespace Client.Zeus.Data
 {
     public partial class Adapter
     {
         public Adapter()
         {
-            contexto = new Contexto();
+            context = new Context();
         }
 
         public int Save(Dictionary<string, string> erros = null)
         {
-            int quantidadeModificacoes = 0;
+            int coutModified = 0;
 
             try
             {
-                quantidadeModificacoes = contexto.SaveChanges();
+                coutModified = context.SaveChanges();
             }
             catch (DbUpdateConcurrencyException ex)
             {
@@ -59,13 +59,11 @@ namespace Client.Zeus.Dados
                         if (number == 547)
                         {
                             Exception erro = (((Exception)(ex)).InnerException).InnerException;
-                            erros.Add("erro", "erro: " + erro.Message + " exeção: " + erro.InnerException + " pilha execução:" + erro.StackTrace);
-
-                            //errosValidacao.Add("impossivelExcluirRegistroFK", Mensagens.ImpossivelExcluirRegistroFK.ToString());
+                            erros.Add("erro", "erro: " + erro.Message + " exception: " + erro.InnerException + " pilha execução:" + erro.StackTrace);
                         }
                         else
                         {
-                            erros.Add("erro", "erro: " + ex.Message + " exeção: " + ex.InnerException + " pilha execução:" + ex.StackTrace);
+                            erros.Add("erro", "erro: " + ex.Message + " exception: " + ex.InnerException + " pilha execução:" + ex.StackTrace);
                         }
                     }
                 }
@@ -74,45 +72,45 @@ namespace Client.Zeus.Dados
             {
                 if (erros != null)
                 {
-                    erros.Add("erro", "erro: " + ex.Message + " exeção: " + ex.InnerException + " pilha execução:" + ex.StackTrace);
+                    erros.Add("erro", "erro: " + ex.Message + " exception: " + ex.InnerException + " pilha execução:" + ex.StackTrace);
                 }
             }
-            return quantidadeModificacoes;
+            return coutModified;
         }
 
-        public void AtualizaEntidades()
+        public void ReloadEntities()
         {
-            foreach (DbEntityEntry entry in contexto.ChangeTracker.Entries())
-                entry.Reload();
+            foreach (DbEntityEntry item in context.ChangeTracker.Entries())
+                item.Reload();
         }
 
         public void VerificaEntidadesAuxiliares(string propriedadesAIncluir)
         {
-            string[] propriedades = propriedadesAIncluir.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] property = propriedadesAIncluir.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-            foreach (DbEntityEntry entry in contexto.ChangeTracker.Entries())
+            foreach (DbEntityEntry item in context.ChangeTracker.Entries())
             {
-                var tipo = ((MemberInfo)((entry.Entity.GetType().BaseType).UnderlyingSystemType)).Name;
-                if (propriedades.Contains(tipo))
+                var tipo = ((MemberInfo)((item.Entity.GetType().BaseType).UnderlyingSystemType)).Name;
+                if (property.Contains(tipo))
                 {
-                    entry.State = EntityState.Modified;
+                    item.State = EntityState.Modified;
                 }
             }
         }
 
-        public void CarregaColecao<T>(T entidade, string colecao) where T : BaseDomain
+        public void LoadList<T>(T entity, string nameList) where T : BaseDomain
         {
-            contexto.Entry(entidade).Collection(colecao).Load();
+            context.Entry(entity).Collection(nameList).Load();
         }
 
-        public void MudarStatusItensParaRemocao(DomainBase Domain)
+        public void ChangeEntityStatusToDelete(BaseDomain domain)
         {
-            MudarStatusItens(Domain, EntityState.Deleted);
+            ChangeEntityStatus(domain, EntityState.Deleted);
         }
 
-        public void MudarStatusItens(DomainBase Domain, EntityState novoStatus)
+        public void ChangeEntityStatus(BaseDomain domain, EntityState novoStatus)
         {
-            contexto.Entry(Domain).State = novoStatus;
+            context.Entry(domain).State = novoStatus;
         }
     }
 }

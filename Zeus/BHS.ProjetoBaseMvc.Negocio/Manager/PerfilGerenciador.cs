@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BHS.ProjetoBaseMvc.Negocio.Gerenciador
+namespace Client.Zeus.Business.Gerenciador
 {
 	using System;
 	using System.Collections.Generic;
@@ -15,34 +15,34 @@ namespace BHS.ProjetoBaseMvc.Negocio.Gerenciador
 	using System.Linq.Expressions;
 	using System.Text;
 	using System.Threading.Tasks;
-	using BHS.ProjetoBaseMvc.Dados;
-	using BHS.ProjetoBaseMvc.Dados.Repositorio;
-	using BHS.ProjetoBaseMvc.Dominio;	 
-	using BHS.ProjetoBaseMvc.Dominio.PesquisaDTO;
-	using BHS.ProjetoBaseMvc.Negocio.Base;
+	using Client.Zeus.Data;
+	using Client.Zeus.Data.Repository;
+	using Client.Zeus.Domain;	 
+	using Client.Zeus.Domain.PesquisaDTO;
+	using Client.Zeus.Business.Base;
 
-	public partial class CidadeGerenciador : BaseGerenciador<TB_CIDADE>
+	public partial class PerfilGerenciador : BaseManager<TB_PERFIL>
 	{
-		public CidadeGerenciador()
+		public PerfilGerenciador()
 			: base()
 		{
 		}
 
-		public CidadeGerenciador(Contexto contexto)
+		public PerfilGerenciador(Contexto contexto)
 			: base(contexto)
 		{
 		}
 
-		public CidadeGerenciador(Adapter adaptador)
+		public PerfilGerenciador(Adapter adaptador)
 			: base(adaptador)
 		{
 		}		  
 
-		public CidadeRepositorio Repositorio
+		public PerfilRepositorio Repositorio
 		{
 			get
 			{
-				return (CidadeRepositorio)base.RepositorioBase;
+				return (PerfilRepositorio)base.BaseRepository;
 			}
 		}
 	}

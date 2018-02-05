@@ -2,7 +2,7 @@
 <#@ include file="EF.Utility.CS.ttinclude"#>
 <#@ import namespace="System.Xml.XPath" #><#
 
-const string inputFile = @"..\..\BHS.ProjetoBaseMvc.Dados\RepositorioDados.edmx";
+const string inputFile = @"..\..\Client.Zeus.Data\RepositorioData.edmx";
 var textTransform = DynamicTextTransformation.Create(this);
 var code = new CodeGenerationTools(this);
 var ef = new MetadataTools(this);
@@ -35,34 +35,34 @@ namespace <#= code.VsNamespaceSuggestion() #>
 	using System.Linq.Expressions;
 	using System.Text;
 	using System.Threading.Tasks;
-	using BHS.ProjetoBaseMvc.Dados;
-	using BHS.ProjetoBaseMvc.Dados.Repositorio;
-	using BHS.ProjetoBaseMvc.Dominio;	 
-	using BHS.ProjetoBaseMvc.Dominio.PesquisaDTO;
-	using BHS.ProjetoBaseMvc.Negocio.Base;
+	using Client.Zeus.Data;
+	using Client.Zeus.Data.Repository;
+	using Client.Zeus.Domain;	 
+	using Client.Zeus.Domain.PesquisaDTO;
+	using Client.Zeus.Business.Base;
 
 	public partial class <#= className #>Gerenciador : BaseGerenciador<<#=entity.Name#>>
 	{
-		public <#= className #>Gerenciador()
+		public <#= className #>Manger()
 			: base()
 		{
 		}
 
-		public <#= className #>Gerenciador(Contexto contexto)
-			: base(contexto)
+		public <#= className #>Manger(Contexto contexto)
+			: base(context)
 		{
 		}
 
-		public <#= className #>Gerenciador(Adaptador adaptador)
-			: base(adaptador)
+		public <#= className #>Manger(Adapter adapter)
+			: base(adapter)
 		{
 		}		  
 
-		public <#= className #>Repositorio Repositorio
+		public <#= className #>Repository Repository
 		{
 			get
 			{
-				return (<#= className #>Repositorio)base.RepositorioBase;
+				return (<#= className #>Repository)base.BaseRepository;
 			}
 		}
 	}

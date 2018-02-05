@@ -6,16 +6,16 @@ using System.Text;
 using System.IO;
 using System.Threading;
 using System.Linq.Expressions;
-using BHS.ProjetoBaseMvc.Dominio;
-using BHS.ProjetoBaseMvc.Dados;
-using BHS.ProjetoBaseMvc.Negocio.Base;
-using BHS.ProjetoBaseMvc.Dados.Repositorio;
+using Client.Zeus.Domain;
+using Client.Zeus.Data;
+using Client.Zeus.Business.Base;
+using Client.Zeus.Data.Repository;
 
-namespace BHS.ProjetoBaseMvc.Negocio.Gerenciador
+namespace Client.Zeus.Business.Gerenciador
 {
-    public partial class MenuGerenciador : BaseGerenciador<TB_MENU>
+    public partial class MenuGerenciador : BaseManager<TB_MENU>
     {
-        public IList<TB_MENU> ConsultarMenuPorPerfil(int idPerfil)
+        public IList<TB_MENU> SearchByPerfilId(int idPerfil)
         {
             var query = (from a in base.Query
                          from b in a.TB_PERFIL

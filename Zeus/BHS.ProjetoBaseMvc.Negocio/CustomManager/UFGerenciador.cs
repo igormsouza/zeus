@@ -6,14 +6,14 @@ using System.Text;
 using System.IO;
 using System.Threading;
 using System.Linq.Expressions;
-using BHS.ProjetoBaseMvc.Dominio;
-using BHS.ProjetoBaseMvc.Dados;
-using BHS.ProjetoBaseMvc.Negocio.Base;
-using BHS.ProjetoBaseMvc.Dados.Repositorio;
+using Client.Zeus.Domain;
+using Client.Zeus.Data;
+using Client.Zeus.Business.Base;
+using Client.Zeus.Data.Repository;
 
-namespace BHS.ProjetoBaseMvc.Negocio.Gerenciador
+namespace Client.Zeus.Business.Gerenciador
 {
-    public partial class UFGerenciador : BaseGerenciador<TB_UF>
+    public partial class UFGerenciador : BaseManager<TB_UF>
     {
         public IList<TB_UF> Pesquisar(out int countItens, string nome, string sigla, int id, int page, string sort, string sortDir, int quantidadePorPagina = 10)
         {
@@ -34,7 +34,7 @@ namespace BHS.ProjetoBaseMvc.Negocio.Gerenciador
                 consulta = consulta.Where(o => o.ID> 0);
             }
 
-            return RepositorioBase.ListarPaginado(out countItens, consulta, null, page, quantidadePorPagina, sort, sortDir);
+            return BaseRepository.PagingList(out countItens, consulta, null, page, quantidadePorPagina, sort, sortDir);
         }
     }
 }

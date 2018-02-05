@@ -7,15 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Client.Zeus.Dados.Repository
+namespace Client.Zeus.Data.Repository
 {
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
 	using System.Text;
 	using System.Threading.Tasks;
-	using Client.Zeus.Dados;
-	using Client.Zeus.Dados.Base;
+	using Client.Zeus.Data;
+	using Client.Zeus.Data.Base;
 	using Client.Zeus.Domain;
 
 	public partial class PerfilRepository : GenericRepository<TB_PERFIL>

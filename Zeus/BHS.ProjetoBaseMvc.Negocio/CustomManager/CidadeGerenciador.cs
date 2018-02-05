@@ -4,14 +4,14 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using BHS.ProjetoBaseMvc.Dados;
-using BHS.ProjetoBaseMvc.Dados.Repositorio;
-using BHS.ProjetoBaseMvc.Dominio;
-using BHS.ProjetoBaseMvc.Negocio.Base;
+using Client.Zeus.Data;
+using Client.Zeus.Data.Repository;
+using Client.Zeus.Domain;
+using Client.Zeus.Business.Base;
 
-namespace BHS.ProjetoBaseMvc.Negocio.Gerenciador
+namespace Client.Zeus.Business.Gerenciador
 {
-   public partial class CidadeGerenciador : BaseGerenciador<TB_CIDADE>
+   public partial class CidadeGerenciador : BaseManager<TB_CIDADE>
     {
         public IList<TB_CIDADE> Pesquisar(out int countItens, string nome, int idUF, int id, int page, string sort, string sortDir, int quantidadePorPagina = 10)
         {
@@ -32,7 +32,7 @@ namespace BHS.ProjetoBaseMvc.Negocio.Gerenciador
                 consulta = consulta.Where(o => o.ID > 0);
             }
 
-            return RepositorioBase.ListarPaginado(out countItens, consulta, null, page, quantidadePorPagina, sort, sortDir);
+            return BaseRepository.PagingList(out countItens, consulta, null, page, quantidadePorPagina, sort, sortDir);
         }
     }
 }

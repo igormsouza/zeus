@@ -7,9 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{AB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Zeus.Domain", "BHS.ProjetoBaseMvc.Dominio\Client.Zeus.Domain.csproj", "{CFC9AA86-FA55-429A-A2C1-EF8608A20AC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHS.ProjetoBaseMvc.Negocio", "BHS.ProjetoBaseMvc.Negocio\BHS.ProjetoBaseMvc.Negocio.csproj", "{9E433FC0-B8AE-4A0D-A6FF-366BDB216AB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Zeus.Business", "BHS.ProjetoBaseMvc.Negocio\Client.Zeus.Business.csproj", "{9E433FC0-B8AE-4A0D-A6FF-366BDB216AB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHS.ProjetoBaseMvc.Dados", "BHS.ProjetoBaseMvc.Dados\BHS.ProjetoBaseMvc.Dados.csproj", "{1D31FBE5-E15A-4BC6-93D9-9BD102154ECB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Zeus.Data", "BHS.ProjetoBaseMvc.Dados\Client.Zeus.Data.csproj", "{1D31FBE5-E15A-4BC6-93D9-9BD102154ECB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Zeus.Util", "BHS.ProjetoBaseMvc.Util\Client.Zeus.Util.csproj", "{AAEF4C65-1961-47B1-996F-8ADDFEC01DA0}"
 EndProject

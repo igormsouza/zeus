@@ -9,12 +9,12 @@ using Client.Zeus.Domain;
 using Client.Zeus.Util;
 using System.Data.Entity;
 
-namespace Client.Zeus.Dados.Base
+namespace Client.Zeus.Data.Base
 {
     public class GenericRepository<T>
         where T : class
     {
-        protected Contexto DBContext { get; set; }
+        protected Context DBContext { get; set; }
         internal DbSet<T> DBSet;
 
         public IQueryable<T> DBSetQuerable
@@ -25,18 +25,18 @@ namespace Client.Zeus.Dados.Base
             }
         }
 
-        public GenericRepository(Contexto context)
+        public GenericRepository(Context context)
         {
             this.DBContext = context;
             this.DBSet = context.Set<T>();
 
-            Database.SetInitializer<Contexto>(null);
+            Database.SetInitializer<Context>(null);
             DBContext.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
             this.DBContext.Configuration.ProxyCreationEnabled = false;
         }
 
         public GenericRepository()
-            : this(new Contexto())
+            : this(new Context())
         {
         }
 
@@ -46,8 +46,8 @@ namespace Client.Zeus.Dados.Base
             IOrderedQueryable<T>> order = null,
             string includedProperties = "")
         {
-            IQueryable<T> consulta = Search(filter, order, includedProperties);
-            return consulta.ToList();
+            IQueryable<T> query = Search(filter, order, includedProperties);
+            return query.ToList();
         }
 
         public virtual List<T> List(
@@ -56,8 +56,8 @@ namespace Client.Zeus.Dados.Base
             IOrderedQueryable<T>> order = null,
             string includedProperties = "")
         {
-            IQueryable<T> consulta = Search(filter, order, includedProperties);
-            return consulta.ToList();
+            IQueryable<T> query = Search(filter, order, includedProperties);
+            return query.ToList();
         }
 
         public virtual int Count(
@@ -66,8 +66,8 @@ namespace Client.Zeus.Dados.Base
             IOrderedQueryable<T>> order = null,
             string includedProperties = "")
         {
-            IQueryable<T> consulta = Search(filter, order, includedProperties);
-            return consulta.Count();
+            IQueryable<T> query = Search(filter, order, includedProperties);
+            return query.Count();
         }
 
         public virtual int Count(
@@ -76,148 +76,148 @@ namespace Client.Zeus.Dados.Base
             IOrderedQueryable<T>> order = null,
             string includedProperties = "")
         {
-            IQueryable<T> consulta = Search(filter, order, includedProperties);
-            return consulta.Count();
+            IQueryable<T> query = Search(filter, order, includedProperties);
+            return query.Count();
         }
 
-        public virtual List<T> ListarPaginado(
+        public virtual List<T> PagingList(
             out int itemsCount,
             IQueryable<T> query = null,
-            string propriedadesAIncluir = "",
-            int paginaAtual = 1,
-            int quantidadePorPagina = 10,
+            string includedProperties = "",
+            int currentPage = 1,
+            int countPerPage = 10,
             Func<IQueryable<T>,
-            IOrderedQueryable<T>> ordenacao = null,
-            bool ordenacaoFeita = false
+            IOrderedQueryable<T>> order = null,
+            bool defaultOrder = false
             )
         {
             itemsCount = 0;
-            int salto = (paginaAtual - 1) * quantidadePorPagina;
+            int skip = (currentPage - 1) * countPerPage;
 
             if (query == null)
             {
                 query = DBSet;
             }
 
-            if (!string.IsNullOrWhiteSpace(propriedadesAIncluir))
-                query = propriedadesAIncluir
+            if (!string.IsNullOrWhiteSpace(includedProperties))
+                query = includedProperties
                     .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                     .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
 
             itemsCount = query.Count();
 
-            if (ordenacao != null)
+            if (order != null)
             {
-                query = ordenacao(query);
+                query = order(query);
             }
-            else if (!ordenacaoFeita)
+            else if (!defaultOrder)
             {
                 query = OrderDynamic.OrderBy(query, "ID");
             }
 
-            query = query.Skip(salto).Take(quantidadePorPagina);
+            query = query.Skip(skip).Take(countPerPage);
 
             return query.ToList();
         }
 
 
-        public virtual List<T> ListarPaginado(
-            out int itensCount,
-            IQueryable<T> consulta = null,
-            string propriedadesAIncluir = "",
-            int paginaAtual = 1,
-            int quantidadePorPagina = 10,
-            string ordenacao = "",
-            string direcaoOrdenacao = ""
+        public virtual List<T> PagingList(
+            out int itemsCount,
+            IQueryable<T> query = null,
+            string includedProperties = "",
+            int currentPage = 1,
+            int countPerPage = 10,
+            string order = "",
+            string orderDirection = ""
             )
         {
-            itensCount = 0;
-            int salto = (paginaAtual - 1) * quantidadePorPagina;
+            itemsCount = 0;
+            int skip = (currentPage - 1) * countPerPage;
 
-            if (consulta == null)
+            if (query == null)
             {
-                consulta = DBSet;
+                query = DBSet;
             }
 
-            if (!string.IsNullOrWhiteSpace(propriedadesAIncluir))
-                consulta = propriedadesAIncluir
+            if (!string.IsNullOrWhiteSpace(includedProperties))
+                query = includedProperties
                     .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                    .Aggregate(consulta, (current, includeProperty) => current.Include(includeProperty));
+                    .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
 
-            itensCount = consulta.Count();
+            itemsCount = query.Count();
 
-            if (!string.IsNullOrWhiteSpace(ordenacao))
+            if (!string.IsNullOrWhiteSpace(order))
             {
-                if (direcaoOrdenacao.Trim().ToUpper() == "DESC")
+                if (orderDirection.Trim().ToUpper() == "DESC")
                 {
-                    consulta = OrderDynamic.OrderByDescending(consulta, ordenacao);
+                    query = OrderDynamic.OrderByDescending(query, order);
                 }
                 else
                 {
-                    consulta = OrderDynamic.OrderBy(consulta, ordenacao);
+                    query = OrderDynamic.OrderBy(query, order);
                 }
             }
             else
             {
-                consulta = OrderDynamic.OrderBy(consulta, "ID");
+                query = OrderDynamic.OrderBy(query, "ID");
             }
 
-            consulta = consulta.Skip(salto).Take(quantidadePorPagina);
+            query = query.Skip(skip).Take(countPerPage);
 
-            return consulta.ToList();
+            return query.ToList();
         }
 
-        public virtual List<T> ListarPaginado(
-          out int itensCount,
-          Expression<Func<T, bool>> filtro = null,
-          string propriedadesAIncluir = "",
-          int paginaAtual = 1,
-          int quantidadePorPagina = 10,
-          string ordenacao = "",
-          string direcaoOrdenacao = ""
+        public virtual List<T> PagingList(
+          out int itemsCount,
+          Expression<Func<T, bool>> filter = null,
+          string includedProperties = "",
+          int currentPage = 1,
+          int countPerPage = 10,
+          string order = "",
+          string orderDirection = ""
           )
         {
-            if (quantidadePorPagina == 0)
-                quantidadePorPagina = 10;
+            if (countPerPage == 0)
+                countPerPage = 10;
 
-            if (paginaAtual == 0)
-                paginaAtual = 1;
+            if (currentPage == 0)
+                currentPage = 1;
 
-            itensCount = 0;
-            int salto = (paginaAtual - 1) * quantidadePorPagina;
-            IQueryable<T> consulta = DBSet;
+            itemsCount = 0;
+            int skip = (currentPage - 1) * countPerPage;
+            IQueryable<T> query = DBSet;
 
-            if (filtro != null)
+            if (filter != null)
             {
-                consulta = consulta.Where(filtro);
+                query = query.Where(filter);
             }
 
-            if (!string.IsNullOrWhiteSpace(propriedadesAIncluir))
-                consulta = propriedadesAIncluir
+            if (!string.IsNullOrWhiteSpace(includedProperties))
+                query = includedProperties
                     .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                    .Aggregate(consulta, (current, includeProperty) => current.Include(includeProperty));
+                    .Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
 
-            itensCount = consulta.Count();
+            itemsCount = query.Count();
 
-            if (!string.IsNullOrWhiteSpace(ordenacao))
+            if (!string.IsNullOrWhiteSpace(order))
             {
-                if (direcaoOrdenacao.Trim().ToUpper() == "DESC")
+                if (orderDirection.Trim().ToUpper() == "DESC")
                 {
-                    consulta = OrderDynamic.OrderByDescending(consulta, ordenacao);
+                    query = OrderDynamic.OrderByDescending(query, order);
                 }
                 else
                 {
-                    consulta = OrderDynamic.OrderBy(consulta, ordenacao);
+                    query = OrderDynamic.OrderBy(query, order);
                 }
             }
             else
             {
-                consulta = OrderDynamic.OrderBy(consulta, "ID");
+                query = OrderDynamic.OrderBy(query, "ID");
             }
 
-            consulta = consulta.Skip(salto).Take(quantidadePorPagina);
+            query = query.Skip(skip).Take(countPerPage);
 
-            return consulta.ToList();
+            return query.ToList();
         }
 
         public virtual IQueryable<T> Search(
@@ -226,14 +226,14 @@ namespace Client.Zeus.Dados.Base
             IOrderedQueryable<T>> order = null,
             string includedProperties = "")
         {
-            IQueryable<T> consulta = DBSet;
+            IQueryable<T> query = DBSet;
 
             if (filter != null)
             {
-                consulta = consulta.Where(filter);
+                query = query.Where(filter);
             }
 
-            return Search(consulta, order, includedProperties);
+            return Search(query, order, includedProperties);
         }
 
         public virtual IQueryable<T> Search(
@@ -280,6 +280,7 @@ namespace Client.Zeus.Dados.Base
             {
                 DBSet.Attach(entity);
             }
+
             DBSet.Remove(entity);
         }
 
@@ -293,19 +294,19 @@ namespace Client.Zeus.Dados.Base
             }
         }
 
-        public virtual void Update(T enitty)
+        public virtual void Update(T entity)
         {
-            if (this.DBContext.Entry(enitty).State == System.Data.Entity.EntityState.Detached)
+            if (this.DBContext.Entry(entity).State == System.Data.Entity.EntityState.Detached)
             {
-                DBSet.Attach(enitty);
+                DBSet.Attach(entity);
             }
             this.DBContext.ChangeTracker.DetectChanges();
-            this.DBContext.Entry(enitty).State = System.Data.Entity.EntityState.Modified;
+            this.DBContext.Entry(entity).State = System.Data.Entity.EntityState.Modified;
         }
 
-        public virtual IList<T> SearchBySQL(string consultaSQL, params object[] parameters)
+        public virtual IList<T> SearchBySQL(string query, params object[] parameters)
         {
-            var result = DBSet.SqlQuery(consultaSQL, parameters).ToList();
+            var result = DBSet.SqlQuery(query, parameters).ToList();
             return result;
         }
 
@@ -314,21 +315,20 @@ namespace Client.Zeus.Dados.Base
             ((IObjectContextAdapter)this.DBContext).ObjectContext.Detach(entity);
         }
 
-        public virtual void Delete(T entity)
-        {
-            ((IObjectContextAdapter)this.DBContext).ObjectContext.DeleteObject(entity);
-        }
-
         public virtual void Discart(IList<T> list)
         {
             foreach (var item in list)
+            {
                 this.Discart(item);
+            }
         }
 
         public virtual void Delete(IList<T> list)
         {
             foreach (var item in list)
+            {
                 this.Delete(item);
+            }
         }
 
         public virtual int ExecuteSqlCommand(string sql, params object[] parametros)

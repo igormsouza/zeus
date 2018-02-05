@@ -2,7 +2,7 @@
 <#@ include file="EF.Utility.CS.ttinclude"#>
 <#@ import namespace="System.Xml.XPath" #><#
 
-const string inputFile = @"..\Client.Zeus.Dados\RepositoryDados.edmx";
+const string inputFile = @"..\Client.Zeus.Data\RepositoryDados.edmx";
 var textTransform = DynamicTextTransformation.Create(this);
 var code = new CodeGenerationTools(this);
 //var ef = new MetadataTools(this);
@@ -21,23 +21,23 @@ using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Reflection;
 using System.Data.Entity;
-using Client.Zeus.Dados;
-using Client.Zeus.Dados.Repository;
+using Client.Zeus.Data;
+using Client.Zeus.Data.Repository;
 using Client.Zeus.Domain.Base;
 
-namespace Client.Zeus.Dados
+namespace Client.Zeus.Data
 {
-    public partial class Adaptador
+    public partial class Adapter
     {
-		private Contexto contexto;
+		private Context context;
 
-        public Adaptador(Contexto contextoExistente)
+        public Adapter(Contexto existContext)
         {
-            contexto = contextoExistente;
+            context = existContext;
         }
 
 		// Implementa Repositorys
-		#region [ Repositorys ]
+		#region [ Repositories ]
 <#
 foreach (var entity in itemCollection.OfType<EntityType>().OrderBy(i => i.Name))
 {
