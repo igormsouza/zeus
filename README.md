@@ -18,6 +18,6 @@ Some videos explaining the way to use and build the structue are comming...
 A quick way to generate a new structure of a Zeus project.
 
 ### Do you like it?
-Follow my my blog and check the updates about Zeus and others things.
+Follow my personal blog and check the updates about Zeus and others things.
 
 [https://igormsouza.wordpress.com](https://igormsouza.wordpress.com/)
