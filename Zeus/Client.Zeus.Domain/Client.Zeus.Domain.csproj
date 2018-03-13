@@ -63,26 +63,26 @@
     <Compile Include="Base\Field.cs" />
     <Compile Include="Base\GridField.cs" />
     <Compile Include="Base\LinkField.cs" />
+    <Compile Include="Domain.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Domain.tt</DependentUpon>
+    </Compile>
     <Compile Include="DTO\Redirect.cs" />
     <Compile Include="PesquisaDTO\PesquisaCidade.cs" />
     <Compile Include="PesquisaDTO\PesquisaUF.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TB_FUNCTIONALITY.cs">
-      <DependentUpon>Dominio.tt</DependentUpon>
+      <DependentUpon>Domain.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_MENU.cs">
-      <DependentUpon>Dominio.tt</DependentUpon>
+      <DependentUpon>Domain.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_PERFIL.cs">
-      <DependentUpon>Dominio.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Dominio.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Dominio.tt</DependentUpon>
+      <DependentUpon>Domain.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_USER.cs">
-      <DependentUpon>Dominio.tt</DependentUpon>
+      <DependentUpon>Domain.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -94,9 +94,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Dominio.tt">
+    <None Include="Domain.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Dominio.cs</LastGenOutput>
+      <LastGenOutput>Domain.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
