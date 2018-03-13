@@ -2,12 +2,12 @@ ZEUS | ASP.NET MVC
 ===========================
 
 This is an open source project that provides you an easy and fast way to create ASP .NET MVC projects.
-After some projects was developped this structure and it had some incentives by the team of [BHS](http://bhs.com.br/) .
+It has been improving during some projects and some incentives by [BHS'](http://bhs.com.br/) team.
 But now this structure is free and everyone can contribute and take its advantages...
 
 ### Want to contribute? Great!
 
-You can also contribuite as tester, developer and with some suggestions to improve the project.
+You can contribuite as tester, developer and with some suggestions to improve the project.
 
 ### How to beginning?
 
@@ -15,9 +15,9 @@ Some videos explaining the way to use and build the structue are comming...
 
 ### What is Cronos?
 
-A quick way to generate a new structure of one Zeus project.
+A quick way to generate a new structure of a Zeus project.
 
-### Do you like?
-Following my last posts you can find my last updates about Zeus and others things.
+### Do you like it?
+Follow my my blog and check the updates about Zeus and others things.
 
 [https://igormsouza.wordpress.com](https://igormsouza.wordpress.com/)
