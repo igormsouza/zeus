@@ -5,9 +5,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using BHS.ProjetoBaseMvc.App.Models;
+using Client.Zeus.App.Models;
 
-namespace BHS.ProjetoBaseMvc.App
+namespace Client.Zeus.App
 {
     public partial class Startup
     {

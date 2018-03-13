@@ -1,5 +1,5 @@
-﻿using BHS.ProjetoBaseMvc.Dominio;
-using BHS.ProjetoBaseMvc.Negocio.Gerenciador;
+﻿using Client.Zeus.Dominio;
+using Client.Zeus.Negocio.Gerenciador;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
-namespace BHS.ProjetoBaseMvc.App.Custom
+namespace Client.Zeus.App.Custom
 {
     public static class LoginManager
     {

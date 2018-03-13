@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BHS.ProjetoBaseMvc.App</RootNamespace>
-    <AssemblyName>BHS.ProjetoBaseMvc.App</AssemblyName>
+    <RootNamespace>Client.Zeus.App</RootNamespace>
+    <AssemblyName>Client.Zeus.App</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -232,13 +232,19 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Service References\CrudService\BHS.ProjetoBaseMvc.App.CrudService.RetornoComMensagem.datasource">
+    <Content Include="Service References\CrudService\Client.Zeus.App.CrudService.RetornoComMensagem.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\CrudService\BHS.ProjetoBaseMvc.App.CrudService.RetornoListaTotalOfTB_CIDADE_Suar5u8q.datasource">
+    <Content Include="Service References\CrudService\Client.Zeus.App.CrudService.RetornoListaTotalOfTB_CIDADE_Suar5u8q.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\CrudService\BHS.ProjetoBaseMvc.App.CrudService.RetornoListaTotalOfTB_UF_Suar5u8q.datasource">
+    <Content Include="Service References\CrudService\Client.Zeus.App.CrudService.RetornoListaTotalOfTB_UF_Suar5u8q.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CrudService\Client.Zeus.App.CrudService.TB_CIDADE.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CrudService\Client.Zeus.App.CrudService.TB_UF.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Service References\CrudService\configuration91.svcinfo" />

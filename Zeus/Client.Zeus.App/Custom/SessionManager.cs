@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BHS.ProjetoBaseMvc.App.Custom
+namespace Client.Zeus.App.Custom
 {
     public class SessionManager
     {

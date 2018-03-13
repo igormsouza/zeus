@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace BHS.ProjetoBaseMvc.App.Models
+namespace Client.Zeus.App.Models
 {
     public class IndexViewModel
     {

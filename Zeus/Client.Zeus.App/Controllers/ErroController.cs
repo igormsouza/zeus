@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace BHS.ProjetoBaseMvc.App.Controllers
+namespace Client.Zeus.App.Controllers
 {
     public class ErroController : BaseController
     {

@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using BHS.ProjetoBaseMvc.Dominio.Base;
-using BHS.ProjetoBaseMvc.Negocio.Base;
-using BHS.ProjetoBaseMvc.Util;
-using BHS.ProjetoBaseMvc.App.Models;
-using BHS.ProjetoBaseMvc.App.Models.Base;
+using Client.Zeus.Domain.Base;
+using Client.Zeus.Business.Base;
+using Client.Zeus.Util;
+using Client.Zeus.App.Models;
+using Client.Zeus.App.Models.Base;
 using System.Reflection;
 
-namespace BHS.ProjetoBaseMvc.App.Controllers
+namespace Client.Zeus.App.Controllers
 {
     public abstract class CrudControllerBase<T, U> : BaseController
-        where T : DominioBase, new()
+        where T : BaseDomain, new()
         where U : BaseSearchCodeDescription<T>
     {
         public CrudControllerBase()

@@ -2,7 +2,7 @@
 <#@ include file="EF.Utility.CS.ttinclude"#>
 <#@ import namespace="System.Xml.XPath" #><#
 
-const string inputFile = @"..\..\..\BHS.ProjetoBaseMvc.Dados\VendaAtivos.edmx";
+const string inputFile = @"..\..\..\Client.Zeus.Dados\VendaAtivos.edmx";
 var textTransform = DynamicTextTransformation.Create(this);
 var code = new CodeGenerationTools(this);
 //var ef = new MetadataTools(this);
@@ -17,17 +17,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using BHS.ProjetoBaseMvc.Dominio;
-using BHS.ProjetoBaseMvc.Negocio;
-using BHS.ProjetoBaseMvc.Util;
+using Client.Zeus.Dominio;
+using Client.Zeus.Negocio;
+using Client.Zeus.Util;
 using System.Configuration;
-using BHS.ProjetoBaseMvc.Dominio.Base;
+using Client.Zeus.Dominio.Base;
 using System.Linq.Expressions;
-using BHS.ProjetoBaseMvc.Negocio.Base;
+using Client.Zeus.Negocio.Base;
 using System.Reflection;
-using BHS.ProjetoBaseMvc.Negocio.Gerenciador;
+using Client.Zeus.Negocio.Gerenciador;
 
-namespace BHS.ProjetoBaseMvc.App.Controllers
+namespace Client.Zeus.App.Controllers
 {
     public partial class BaseController : Controller
     {

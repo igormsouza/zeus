@@ -8,10 +8,10 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using BHS.ProjetoBaseMvc.App.Models;
-using BHS.ProjetoBaseMvc.App.Custom;
+using Client.Zeus.App.Models;
+using Client.Zeus.App.Custom;
 
-namespace BHS.ProjetoBaseMvc.App.Controllers
+namespace Client.Zeus.App.Controllers
 {
     [Authorize]
     public class AccountController : BaseController

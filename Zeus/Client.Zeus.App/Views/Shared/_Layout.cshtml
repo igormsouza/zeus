@@ -25,16 +25,16 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    @BHS.ProjetoBaseMvc.Util.Menu.MenuExtensions.BhsMenu(ViewBag.Menus)
+                    @Client.Zeus.Util.Menu.MenuExtensions.BhsMenu(ViewBag.Menus)
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
                     @{
-                        if (BHS.ProjetoBaseMvc.App.Custom.LoginManager.IsUsuarioLogado)
+                        if (Client.Zeus.App.Custom.LoginManager.IsUsuarioLogado)
                         {
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    Olá @BHS.ProjetoBaseMvc.App.Custom.LoginManager.UsuarioLogado.NOME <span class="caret"></span>
+                                    Olá @Client.Zeus.App.Custom.LoginManager.UsuarioLogado.NOME <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">

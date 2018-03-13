@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace BHS.ProjetoBaseMvc.App.Models
+namespace Client.Zeus.App.Models
 {
     public class ExternalLoginConfirmationViewModel
     {

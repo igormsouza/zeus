@@ -5,7 +5,7 @@ using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.WebPages;
 
-namespace BHS.ProjetoBaseMvc.App
+namespace Client.Zeus.App
 {
     public static class WebGridExtensions
     {

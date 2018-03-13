@@ -1,14 +1,14 @@
-﻿using BHS.ProjetoBaseMvc.App.CrudService;
-using BHS.ProjetoBaseMvc.App.Models;
-using BHS.ProjetoBaseMvc.Dominio;
-using BHS.ProjetoBaseMvc.Dominio.PesquisaDTO;
+﻿using Client.Zeus.App.CrudService;
+using Client.Zeus.App.Models;
+using Client.Zeus.Dominio;
+using Client.Zeus.Dominio.PesquisaDTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace BHS.ProjetoBaseMvc.App.Controllers
+namespace Client.Zeus.App.Controllers
 {
     [AllowAnonymous]
     public class CidadeController : CrudServicoControllerBase<TB_CIDADE, PesquisaCidade>

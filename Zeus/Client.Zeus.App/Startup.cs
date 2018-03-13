@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(BHS.ProjetoBaseMvc.App.Startup))]
-namespace BHS.ProjetoBaseMvc.App
+[assembly: OwinStartupAttribute(typeof(Client.Zeus.App.Startup))]
+namespace Client.Zeus.App
 {
     public partial class Startup
     {

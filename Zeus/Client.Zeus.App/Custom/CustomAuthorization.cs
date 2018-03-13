@@ -1,4 +1,4 @@
-﻿using BHS.ProjetoBaseMvc.Negocio.Gerenciador;
+﻿using Client.Zeus.Negocio.Gerenciador;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace BHS.ProjetoBaseMvc.App.Custom
+namespace Client.Zeus.App.Custom
 {
     public class CustomAuthorization : AuthorizeAttribute
     {

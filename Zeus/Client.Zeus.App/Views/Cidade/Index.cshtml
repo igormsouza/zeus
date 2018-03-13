@@ -1,4 +1,4 @@
-﻿@model BHS.ProjetoBaseMvc.Dominio.PesquisaDTO.PesquisaCidade
+﻿@model Client.Zeus.Dominio.PesquisaDTO.PesquisaCidade
 @{
 
 
@@ -67,7 +67,7 @@
 
     if (grid.HasSelection)
     {
-        var ItemGrid = (BHS.ProjetoBaseMvc.Dominio.TB_CIDADE)grid.Rows[grid.SelectedIndex].Value;
+        var ItemGrid = (Client.Zeus.Dominio.TB_CIDADE)grid.Rows[grid.SelectedIndex].Value;
         <b>Id</b> @ItemGrid.ID<br />
         <b>Nome</b>  @ItemGrid.NOME<br />
         <b>UF</b>  @ItemGrid.TB_UF.SIGLA<br />

@@ -4,9 +4,9 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/BHS.ProjetoBaseMvc.Dominio" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/BHS.ProjetoBaseMvc.Dominio.Base" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/BHS.ProjetoBaseMvc.Contrato.Entidade" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Client.Zeus.Dominio" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Client.Zeus.Dominio.Base" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Client.Zeus.Contrato.Entidade" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
@@ -302,7 +302,7 @@
   </wsdl:binding>
   <wsdl:service name="CrudServico">
     <wsdl:port name="BasicHttpBinding_ICrudContrato" binding="tns:BasicHttpBinding_ICrudContrato">
-      <soap:address location="http://localhost:8733/BHS.ProjetoBaseMvc.Servico/CrudServico/" />
+      <soap:address location="http://localhost:8733/Client.Zeus.Servico/CrudServico/" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

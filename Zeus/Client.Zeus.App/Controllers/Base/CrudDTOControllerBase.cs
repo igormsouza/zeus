@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using BHS.ProjetoBaseMvc.Dominio.Base;
-using BHS.ProjetoBaseMvc.Negocio.Base;
-using BHS.ProjetoBaseMvc.Util;
-using BHS.ProjetoBaseMvc.App.Models;
-using BHS.ProjetoBaseMvc.App.Models.Base;
-using BHS.ProjetoBaseMvc.Util.Map;
+using Client.Zeus.Dominio.Base;
+using Client.Zeus.Negocio.Base;
+using Client.Zeus.Util;
+using Client.Zeus.App.Models;
+using Client.Zeus.App.Models.Base;
+using Client.Zeus.Util.Map;
 using System.Reflection;
 
-namespace BHS.ProjetoBaseMvc.App.Controllers
+namespace Client.Zeus.App.Controllers
 {
     public abstract class CrudDTOControllerBase<T, U, D> : BaseController
         where T : DominioBase, new()

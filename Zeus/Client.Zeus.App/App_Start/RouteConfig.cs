@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace BHS.ProjetoBaseMvc.App
+namespace Client.Zeus.App
 {
     public class RouteConfig
     {

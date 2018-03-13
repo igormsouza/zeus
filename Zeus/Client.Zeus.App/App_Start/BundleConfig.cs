@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace BHS.ProjetoBaseMvc.App
+namespace Client.Zeus.App
 {
     public class BundleConfig
     {

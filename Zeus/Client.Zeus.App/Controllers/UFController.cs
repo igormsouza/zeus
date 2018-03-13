@@ -1,14 +1,14 @@
-﻿using BHS.ProjetoBaseMvc.App.Custom;
-using BHS.ProjetoBaseMvc.App.Models;
-using BHS.ProjetoBaseMvc.Dominio;
-using BHS.ProjetoBaseMvc.Dominio.PesquisaDTO;
+﻿using Client.Zeus.App.Custom;
+using Client.Zeus.App.Models;
+using Client.Zeus.Dominio;
+using Client.Zeus.Dominio.PesquisaDTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace BHS.ProjetoBaseMvc.App.Controllers
+namespace Client.Zeus.App.Controllers
 {
     [CustomAuthorization]
     public class UFController : CrudControllerBase<TB_UF, PesquisaUF>

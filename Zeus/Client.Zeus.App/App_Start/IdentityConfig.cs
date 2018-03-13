@@ -10,9 +10,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using BHS.ProjetoBaseMvc.App.Models;
+using Client.Zeus.App.Models;
 
-namespace BHS.ProjetoBaseMvc.App
+namespace Client.Zeus.App
 {
     public class EmailService : IIdentityMessageService
     {

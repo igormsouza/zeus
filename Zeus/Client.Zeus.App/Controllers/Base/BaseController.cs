@@ -4,30 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using BHS.ProjetoBaseMvc.Dominio;
-using BHS.ProjetoBaseMvc.Negocio;
-using BHS.ProjetoBaseMvc.Util;
+using Client.Zeus.Domain;
+using Client.Zeus.Business;
+using Client.Zeus.Util;
 using System.Configuration;
-using BHS.ProjetoBaseMvc.App.CrudService;
-using BHS.ProjetoBaseMvc.Dominio.Base;
+using Client.Zeus.App.CrudService;
+using Client.Zeus.Domain.Base;
 using System.Linq.Expressions;
-using BHS.ProjetoBaseMvc.Negocio.Base;
+using Client.Zeus.Business.Base;
 using System.Reflection;
-using BHS.ProjetoBaseMvc.Negocio.Gerenciador;
-using BHS.ProjetoBaseMvc.Dominio.DTO;
-using BHS.ProjetoBaseMvc.Util.Map;
-using BHS.ProjetoBaseMvc.Util.Menu;
-using BHS.ProjetoBaseMvc.App.Custom;
+using Client.Zeus.Business.Manager;
+using Client.Zeus.Domain.DTO;
+using Client.Zeus.Util.Map;
+using Client.Zeus.Util.Menu;
+using Client.Zeus.App.Custom;
 using Microsoft.AspNet.Identity;
 
-namespace BHS.ProjetoBaseMvc.App.Controllers
+namespace Client.Zeus.App.Controllers
 {
     public partial class BaseController : Controller
     {
         public BaseController()
         {
             //Verificar se usuario estao logado, se sim buscar os menus e por no cache.
-            ViewBag.Menus = (LoginManager.IsUsuarioLogado) ? TransformHelper.TransformList<MenuModel>(new MenuGerenciador().ConsultarMenuPorPerfil(1)).ToList() : null;
+            ViewBag.Menus = (LoginManager.IsUsuarioLogado) ? TransformHelper.TransformList<MenuModel>(new MenuManager().ConsultarMenuPorPerfil(1)).ToList() : null;
         }
 
         private CrudContratoClient servicoCrudContrato;
@@ -218,27 +218,27 @@ namespace BHS.ProjetoBaseMvc.App.Controllers
         public SelectList SelectList<T>(
             Expression<Func<T, object>> CampoDescricao = null,
             Expression<Func<T, object>> CampoID = null)
-            where T : DominioBase, new()
+            where T : BaseDomain, new()
         {
             var NomeID = ObterNomePropriedade<T>(CampoID) ?? "ID";
             var NomeDescricao = ObterNomePropriedade<T>(CampoDescricao) ?? "DESCRICAO";
 
             var propriedades = typeof(BaseController).GetProperties();
-            BaseGerenciador<T> gerenciador = null;
+            BaseManager<T> gerenciador = null;
             foreach (PropertyInfo i in propriedades)
             {
                 var propriedade = i.GetValue(this);
-                if (propriedade is BaseGerenciador<T>)
+                if (propriedade is BaseManager<T>)
                 {
-                    gerenciador = propriedade as BaseGerenciador<T>;
+                    gerenciador = propriedade as BaseManager<T>;
                     break;
                 }
             }
 
             if (gerenciador == null)
-                gerenciador = Activator.CreateInstance<BaseGerenciador<T>>();
+                gerenciador = Activator.CreateInstance<BaseManager<T>>();
 
-            return new SelectList(gerenciador.Listar(), NomeID, NomeDescricao);
+            return new SelectList(gerenciador.List(), NomeID, NomeDescricao);
         }
 
         #endregion

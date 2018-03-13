@@ -14,12 +14,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using BHS.ProjetoBaseMvc.App.Models;
-using BHS.ProjetoBaseMvc.Dominio;
-using BHS.ProjetoBaseMvc.App.Models.Base;
-using BHS.ProjetoBaseMvc.Dominio.Base;
+using Client.Zeus.App.Models;
+using Client.Zeus.Dominio;
+using Client.Zeus.App.Models.Base;
+using Client.Zeus.Dominio.Base;
 
-namespace BHS.ProjetoBaseMvc.App.Controllers
+namespace Client.Zeus.App.Controllers
 {
     [AllowAnonymous]
     public class TesteCidadeAutomaticaController : CrudControllerBase<TB_CIDADE, BaseSearchCodeDescription<TB_CIDADE>>
