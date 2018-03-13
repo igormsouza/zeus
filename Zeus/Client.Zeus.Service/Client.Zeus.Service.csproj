@@ -9,8 +9,8 @@
     <ProjectGuid>{15B3E0D2-6217-493A-A690-158C497F5318}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BHS.ProjetoBaseMvc.Servico</RootNamespace>
-    <AssemblyName>BHS.ProjetoBaseMvc.Servico</AssemblyName>
+    <RootNamespace>Client.Zeus.Service</RootNamespace>
+    <AssemblyName>Client.Zeus.Service</AssemblyName>
     <ProjectTypeGuids>{3D9AD99F-2412-4246-B90B-4EAA41C64699};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <StartArguments>/client:"WcfTestClient.exe"</StartArguments>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -62,9 +62,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CidadeServico.cs" />
-    <Compile Include="CrudServico.cs" />
-    <Compile Include="UFServico.cs" />
+    <Compile Include="UserService.cs" />
+    <Compile Include="CrudService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -72,9 +71,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BHS.ProjetoBaseMvc.Contrato\BHS.ProjetoBaseMvc.Contrato.csproj">
+    <ProjectReference Include="..\Client.Zeus.Contract\Client.Zeus.Service.Contract.csproj">
       <Project>{d6982829-2bd3-410f-8ea0-b1fac4e56827}</Project>
-      <Name>BHS.ProjetoBaseMvc.Contrato</Name>
+      <Name>Client.Zeus.Service.Contract</Name>
     </ProjectReference>
     <ProjectReference Include="..\Client.Zeus.Domain\Client.Zeus.Domain.csproj">
       <Project>{cfc9aa86-fa55-429a-a2c1-ef8608a20ac6}</Project>
@@ -84,7 +83,7 @@
       <Project>{9e433fc0-b8ae-4a0d-a6ff-366bdb216ab1}</Project>
       <Name>Client.Zeus.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BHS.ProjetoBaseMvc.Util\Client.Zeus.Util.csproj">
+    <ProjectReference Include="..\Client.Zeus.Util\Client.Zeus.Util.csproj">
       <Project>{aaef4c65-1961-47b1-996f-8addfec01da0}</Project>
       <Name>Client.Zeus.Util</Name>
     </ProjectReference>

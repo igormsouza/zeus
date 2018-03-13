@@ -18,9 +18,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Zeus.App", "Client.Z
 		{15B3E0D2-6217-493A-A690-158C497F5318} = {15B3E0D2-6217-493A-A690-158C497F5318}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHS.ProjetoBaseMvc.Contrato", "BHS.ProjetoBaseMvc.Contrato\BHS.ProjetoBaseMvc.Contrato.csproj", "{D6982829-2BD3-410F-8EA0-B1FAC4E56827}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Zeus.Service.Contract", "Client.Zeus.Contract\Client.Zeus.Service.Contract.csproj", "{D6982829-2BD3-410F-8EA0-B1FAC4E56827}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHS.ProjetoBaseMvc.Servico", "BHS.ProjetoBaseMvc.Servico\BHS.ProjetoBaseMvc.Servico.csproj", "{15B3E0D2-6217-493A-A690-158C497F5318}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Zeus.Service", "Client.Zeus.Service\Client.Zeus.Service.csproj", "{15B3E0D2-6217-493A-A690-158C497F5318}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

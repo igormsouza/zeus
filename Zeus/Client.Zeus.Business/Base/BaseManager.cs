@@ -185,9 +185,9 @@ namespace Client.Zeus.Business.Base
             return result;
         }
 
-        public virtual IList<T> PagingList(out int totalItems, int currentPagel = 0, string order = "", string orderDirection = "", int countPerPage = 10)
+        public virtual IList<T> PagingList(out int totalItems, int currentPage = 0, string order = "", string orderDirection = "", int countPerPage = 10)
         {
-            IList<T> result = PagingList(out totalItems, null, currentPagel, order, orderDirection, countPerPage);
+            IList<T> result = PagingList(out totalItems, null, currentPage, order, orderDirection, countPerPage);
             return result;
         }
 

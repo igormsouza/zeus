@@ -5,15 +5,15 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BHS.ProjetoBaseMvc.Contrato.Entidade
+namespace Client.Zeus.Contract.Entity
 {
     [DataContract]
-    public class RetornoComMensagem
+    public class ReturnMessage
     {
         [DataMember]
-        public bool Retorno { get; set; }
+        public bool Result { get; set; }
         
         [DataMember]
-        public Dictionary<string, string> ErrosValidacao { get; set; }
+        public Dictionary<string, string> Erros { get; set; }
     }
 }

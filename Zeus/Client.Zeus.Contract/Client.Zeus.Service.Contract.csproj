@@ -7,8 +7,8 @@
     <ProjectGuid>{D6982829-2BD3-410F-8EA0-B1FAC4E56827}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BHS.ProjetoBaseMvc.Contrato</RootNamespace>
-    <AssemblyName>BHS.ProjetoBaseMvc.Contrato</AssemblyName>
+    <RootNamespace>Client.Zeus.Service.Contract</RootNamespace>
+    <AssemblyName>Client.Zeus.Service.Contract</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -45,14 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContratoBase.cs" />
-    <Compile Include="Entidade\RetornoComMensagem.cs" />
-    <Compile Include="Entidade\RetornoListaTotal.cs" />
-    <Compile Include="ContratoCrud.cs" />
-    <Compile Include="Interface\Base\IContratoBase.cs" />
-    <Compile Include="Interface\ICrudContrato.cs" />
-    <Compile Include="Interface\IUFContrato.cs" />
-    <Compile Include="Interface\ICidadeContrato.cs" />
+    <Compile Include="BaseContract.cs" />
+    <Compile Include="Entity\ReturnMessage.cs" />
+    <Compile Include="Entity\ReturnTotalList.cs" />
+    <Compile Include="CrudContract.cs" />
+    <Compile Include="Interface\Base\IBaseContract.cs" />
+    <Compile Include="Interface\ICrudContract.cs" />
+    <Compile Include="Interface\IUserContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,7 +63,7 @@
       <Project>{9e433fc0-b8ae-4a0d-a6ff-366bdb216ab1}</Project>
       <Name>Client.Zeus.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BHS.ProjetoBaseMvc.Util\Client.Zeus.Util.csproj">
+    <ProjectReference Include="..\Client.Zeus.Util\Client.Zeus.Util.csproj">
       <Project>{aaef4c65-1961-47b1-996f-8addfec01da0}</Project>
       <Name>Client.Zeus.Util</Name>
     </ProjectReference>
