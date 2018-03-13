@@ -7,33 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BHS.ProjetoBaseMvc.Dados
+namespace Client.Zeus.Data
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using BHS.ProjetoBaseMvc.Dominio;
+    using Client.Zeus.Domain;
     
-    public partial class Contexto : DbContext
+    public partial class Context : DbContext
     {
-        public Contexto()
-            : base("name=Contexto")
+        public Context()
+            : base("name=Context")
         {
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            throw new UnintentionalCodeFirstException();
+            //throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<TB_UF> TB_UF { get; set; }
-        public DbSet<TB_CIDADE> TB_CIDADE { get; set; }
-        public DbSet<TB_USUARIO> TB_USUARIO { get; set; }
+        public DbSet<TB_FUNCTIONALITY> TB_FUNCTIONALITY { get; set; }
         public DbSet<TB_MENU> TB_MENU { get; set; }
         public DbSet<TB_PERFIL> TB_PERFIL { get; set; }
-        public DbSet<TB_PERFIL_MENU> TB_PERFIL_MENU { get; set; }
-        public DbSet<TB_PERFIL_USUARIO> TB_PERFIL_USUARIO { get; set; }
-        public DbSet<TB_FUNCIONALIDADE> TB_FUNCIONALIDADE { get; set; }
-        public DbSet<TB_PERFIL_FUNCIONALIDADE> TB_PERFIL_FUNCIONALIDADE { get; set; }
+        public DbSet<TB_USER> TB_USER { get; set; }
     }
 }

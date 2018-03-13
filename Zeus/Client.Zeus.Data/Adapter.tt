@@ -2,7 +2,7 @@
 <#@ include file="EF.Utility.CS.ttinclude"#>
 <#@ import namespace="System.Xml.XPath" #><#
 
-const string inputFile = @"..\Client.Zeus.Data\RepositoryDados.edmx";
+const string inputFile = @"..\Client.Zeus.Data\RepositorioDados.edmx";
 var textTransform = DynamicTextTransformation.Create(this);
 var code = new CodeGenerationTools(this);
 //var ef = new MetadataTools(this);
@@ -31,7 +31,7 @@ namespace Client.Zeus.Data
     {
 		private Context context;
 
-        public Adapter(Contexto existContext)
+        public Adapter(Context existContext)
         {
             context = existContext;
         }
@@ -52,7 +52,7 @@ foreach (var entity in itemCollection.OfType<EntityType>().OrderBy(i => i.Name))
             {
                 if (this.<#= className.ToLower() #> == null)
                 {
-                    this.<#= className.ToLower() #> = new <#= className #>(contexto);
+                    this.<#= className.ToLower() #> = new <#= className #>(context);
                 }
                 return this.<#= className.ToLower() #>;
             }

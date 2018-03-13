@@ -8,22 +8,22 @@ using System.Threading.Tasks;
 
 namespace Client.Zeus.Business.Gerenciador
 {
-    public partial class UsuarioGerenciador : BaseManager<TB_USUARIO>
+    public partial class UsuarioGerenciador : BaseManager<TB_USER>
     {
-        public TB_USUARIO BuscarPorEmailOuLogin(string emailOuLogin)
+        public TB_USER BuscarPorEmailOuLogin(string emailOuLogin)
         {
             var includesConsulta = "TB_PERFIL, TB_PERFIL.TB_MENU, TB_PERFIL.TB_FUNCIONALIDADE";
 
-            var consulta = base.Query.Where(o => o.EMAIL == emailOuLogin || o.LOGIN == emailOuLogin);
+            var query = base.Query.Where(o => o.EMAIL == emailOuLogin || o.LOGIN == emailOuLogin);
 
-            var usuario = adapter.UsuarioRepositorio.Consultar(consulta, null, includesConsulta).FirstOrDefault();
+            var result = adapter.UserRepository.Search(query, null, includesConsulta).FirstOrDefault();
 
-            return usuario;
+            return result;
         }
 
-        public override IList<TB_USUARIO> PagingList(out int totalItems, IQueryable<TB_USUARIO> filter = null, string includedProperty = "", int currentPage = 1, int countPerPage = 10, string order = "", string orderDirection = "")
+        public override IList<TB_USER> PagingList(out int totalItems, IQueryable<TB_USER> filter = null, string includedProperty = "", int currentPage = 1, int countPerPage = 10, string order = "", string orderDirection = "")
         {
-            filter = filter.Where(o => o.NOME != "admin");
+            filter = filter.Where(o => o.NAME != "admin");
             return base.PagingList(out totalItems, filter, includedProperty, currentPage, countPerPage, order, orderDirection);
         }
     }

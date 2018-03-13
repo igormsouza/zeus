@@ -61,18 +61,13 @@
     </Compile>
     <Compile Include="Base\GenericRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RepositorioDados.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RepositorioDados.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Repository\FuncionalidadeRepositorio.cs">
+    <Compile Include="Repository\FunctionalityRepository.cs">
       <DependentUpon>Repository.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repository\MenuRepositorio.cs">
+    <Compile Include="Repository\MenuRepository.cs">
       <DependentUpon>Repository.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repository\PerfilRepositorio.cs">
+    <Compile Include="Repository\PerfilRepository.cs">
       <DependentUpon>Repository.tt</DependentUpon>
     </Compile>
     <Compile Include="Repository\Repository.cs">
@@ -80,25 +75,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Repository.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repository\UsuarioRepositorio.cs">
-      <DependentUpon>Repository.tt</DependentUpon>
-    </Compile>
     <Compile Include="RepositorioDados.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RepositorioDados.edmx</DependentUpon>
     </Compile>
-    <Compile Include="TB_FUNCTIONALITY.cs">
-      <DependentUpon>RepositorioDados.tt</DependentUpon>
+    <Compile Include="Repository\UserRepository.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
     </Compile>
-    <Compile Include="TB_MENU.cs">
-      <DependentUpon>RepositorioDados.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TB_PERFIL.cs">
-      <DependentUpon>RepositorioDados.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TB_USER.cs">
-      <DependentUpon>RepositorioDados.tt</DependentUpon>
+    <Compile Include="Repository.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Repository.Context.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -137,12 +125,11 @@
     <Folder Include="CustomRepository\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="RepositorioDados.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>RepositorioDados.cs</LastGenOutput>
-      <DependentUpon>RepositorioDados.edmx</DependentUpon>
-    </Content>
     <Content Include="Scripts\script.sql" />
+    <Content Include="Repository.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Repository.Context.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -2,7 +2,7 @@
 <#@ include file="EF.Utility.CS.ttinclude"#>
 <#@ import namespace="System.Xml.XPath" #><#
 
-const string inputFile = @"..\..\Client.Zeus.Data\RepositoryDados.edmx";
+const string inputFile = @"..\..\Client.Zeus.Data\RepositorioDados.edmx";
 var textTransform = DynamicTextTransformation.Create(this);
 var code = new CodeGenerationTools(this);
 //var ef = new MetadataTools(this);
@@ -38,7 +38,7 @@ namespace <#= code.VsNamespaceSuggestion() #>
 	using Client.Zeus.Data.Base;
 	using Client.Zeus.Domain;
 
-	public partial class <#= className #> : RepositoryGenerico<<#=entity.Name#>>
+	public partial class <#= className #> : GenericRepository<<#=entity.Name#>>
 	{
 		public <#= className #>(Context context)
 			: base(context)

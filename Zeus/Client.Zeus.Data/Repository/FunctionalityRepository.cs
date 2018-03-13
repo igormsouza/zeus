@@ -18,10 +18,10 @@ namespace Client.Zeus.Data.Repository
 	using Client.Zeus.Data.Base;
 	using Client.Zeus.Domain;
 
-	public partial class MenuRepository : GenericRepository<TB_MENU>
+	public partial class FunctionalityRepository : GenericRepository<TB_FUNCTIONALITY>
 	{
-		public MenuRepository(Contexto contexto)
-			: base(contexto)
+		public FunctionalityRepository(Context context)
+			: base(context)
 		{
 		}
 	}

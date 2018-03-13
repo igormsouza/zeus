@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Client.Zeus.Business.Gerenciador
+namespace Client.Zeus.Business.Manager
 {
 	using System;
 	using System.Collections.Generic;
@@ -21,28 +21,28 @@ namespace Client.Zeus.Business.Gerenciador
 	using Client.Zeus.Domain.PesquisaDTO;
 	using Client.Zeus.Business.Base;
 
-	public partial class MenuGerenciador : BaseManager<TB_MENU>
+	public partial class MenuGerenciador : BaseGerenciador<TB_MENU>
 	{
-		public MenuGerenciador()
+		public MenuManger()
 			: base()
 		{
 		}
 
-		public MenuGerenciador(Contexto contexto)
-			: base(contexto)
+		public MenuManger(Contexto contexto)
+			: base(context)
 		{
 		}
 
-		public MenuGerenciador(Adapter adaptador)
-			: base(adaptador)
+		public MenuManger(Adapter adapter)
+			: base(adapter)
 		{
 		}		  
 
-		public MenuRepositorio Repositorio
+		public MenuRepository Repository
 		{
 			get
 			{
-				return (MenuRepositorio)base.BaseRepository;
+				return (MenuRepository)base.BaseRepository;
 			}
 		}
 	}

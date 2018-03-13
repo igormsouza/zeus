@@ -18,10 +18,10 @@ namespace Client.Zeus.Data.Repository
 	using Client.Zeus.Data.Base;
 	using Client.Zeus.Domain;
 
-	public partial class UsuarioRepository : GenericRepository<TB_USUARIO>
+	public partial class UserRepository : GenericRepository<TB_USER>
 	{
-		public UsuarioRepository(Contexto contexto)
-			: base(contexto)
+		public UserRepository(Context context)
+			: base(context)
 		{
 		}
 	}

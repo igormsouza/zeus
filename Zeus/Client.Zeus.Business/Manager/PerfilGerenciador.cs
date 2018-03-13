@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Client.Zeus.Business.Gerenciador
+namespace Client.Zeus.Business.Manager
 {
 	using System;
 	using System.Collections.Generic;
@@ -21,28 +21,28 @@ namespace Client.Zeus.Business.Gerenciador
 	using Client.Zeus.Domain.PesquisaDTO;
 	using Client.Zeus.Business.Base;
 
-	public partial class PerfilGerenciador : BaseManager<TB_PERFIL>
+	public partial class PerfilGerenciador : BaseGerenciador<TB_PERFIL>
 	{
-		public PerfilGerenciador()
+		public PerfilManger()
 			: base()
 		{
 		}
 
-		public PerfilGerenciador(Contexto contexto)
-			: base(contexto)
+		public PerfilManger(Contexto contexto)
+			: base(context)
 		{
 		}
 
-		public PerfilGerenciador(Adapter adaptador)
-			: base(adaptador)
+		public PerfilManger(Adapter adapter)
+			: base(adapter)
 		{
 		}		  
 
-		public PerfilRepositorio Repositorio
+		public PerfilRepository Repository
 		{
 			get
 			{
-				return (PerfilRepositorio)base.BaseRepository;
+				return (PerfilRepository)base.BaseRepository;
 			}
 		}
 	}

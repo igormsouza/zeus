@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Client.Zeus.Business.Gerenciador
+namespace Client.Zeus.Business.Manager
 {
 	using System;
 	using System.Collections.Generic;
@@ -21,28 +21,28 @@ namespace Client.Zeus.Business.Gerenciador
 	using Client.Zeus.Domain.PesquisaDTO;
 	using Client.Zeus.Business.Base;
 
-	public partial class FuncionalidadeGerenciador : BaseManager<TB_FUNCIONALIDADE>
+	public partial class FunctionalityGerenciador : BaseGerenciador<TB_FUNCTIONALITY>
 	{
-		public FuncionalidadeGerenciador()
+		public FunctionalityManger()
 			: base()
 		{
 		}
 
-		public FuncionalidadeGerenciador(Contexto contexto)
-			: base(contexto)
+		public FunctionalityManger(Contexto contexto)
+			: base(context)
 		{
 		}
 
-		public FuncionalidadeGerenciador(Adapter adaptador)
-			: base(adaptador)
+		public FunctionalityManger(Adapter adapter)
+			: base(adapter)
 		{
 		}		  
 
-		public FuncionalidadeRepositorio Repositorio
+		public FunctionalityRepository Repository
 		{
 			get
 			{
-				return (FuncionalidadeRepositorio)base.BaseRepository;
+				return (FunctionalityRepository)base.BaseRepository;
 			}
 		}
 	}

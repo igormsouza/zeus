@@ -20,8 +20,8 @@ namespace Client.Zeus.Data.Repository
 
 	public partial class PerfilRepository : GenericRepository<TB_PERFIL>
 	{
-		public PerfilRepository(Contexto contexto)
-			: base(contexto)
+		public PerfilRepository(Context context)
+			: base(context)
 		{
 		}
 	}

@@ -56,10 +56,7 @@
     <Compile Include="CustomManager\MenuGerenciador.cs" />
     <Compile Include="CustomManager\UFGerenciador.cs" />
     <Compile Include="CustomManager\UsuarioGerenciador.cs" />
-    <Compile Include="Manager\CidadeGerenciador.cs">
-      <DependentUpon>Manager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Manager\FuncionalidadeGerenciador.cs">
+    <Compile Include="Manager\FunctionalityGerenciador.cs">
       <DependentUpon>Manager.tt</DependentUpon>
     </Compile>
     <Compile Include="Manager\Manager.cs">
@@ -73,13 +70,7 @@
     <Compile Include="Manager\PerfilGerenciador.cs">
       <DependentUpon>Manager.tt</DependentUpon>
     </Compile>
-    <Compile Include="Manager\SugestoesGerenciador.cs">
-      <DependentUpon>Manager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Manager\UFGerenciador.cs">
-      <DependentUpon>Manager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Manager\UsuarioGerenciador.cs">
+    <Compile Include="Manager\UserGerenciador.cs">
       <DependentUpon>Manager.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
