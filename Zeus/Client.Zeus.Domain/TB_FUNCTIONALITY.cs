@@ -20,48 +20,35 @@ namespace Client.Zeus.Domain
     using Client.Zeus.Domain.Base;
     using Client.Zeus.Util.Attributes;
     
-    [MetadataType(typeof(TB_USUARIOMetaData))]
+    [MetadataType(typeof(TB_FUNCTIONALITYMetaData))]
     [DataContract]
-    public partial class TB_USUARIO : BaseDomain
+    public partial class TB_FUNCTIONALITY : BaseDomain
     {
-        public TB_USUARIO()
+        public TB_FUNCTIONALITY()
         {
             this.TB_PERFIL = new HashSet<TB_PERFIL>();
         }
     
         
-        [StringLength(50, ErrorMessage="Este campo não pode ser maior que 50 caracteres")]
+        [StringLength(128, ErrorMessage="Este campo não pode ser maior que 128 caracteres")]
         [Required(ErrorMessage = "Campo obrigatório")]
     	[DataMember]
-        public string NOME { get; set; }
-      
-    	[RegularExpression(@"([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})", ErrorMessage = "CPF inválido")]
-        
-        [StringLength(14, ErrorMessage="Este campo não pode ser maior que 14 caracteres")]
-    	[DataMember]
-        public string CPF { get; set; }
-    	[DataMember]
-        public Nullable<int> ID_CIDADE { get; set; }
-        
-        [StringLength(256, ErrorMessage="Este campo não pode ser maior que 256 caracteres")]
-        [Required(ErrorMessage = "Campo obrigatório")]
-    	[DataMember]
-        public string SENHA { get; set; }
-        
-        [EmailAddress(ErrorMessage = "E-mail inválido")]
+        public string NAME { get; set; }
         
         [StringLength(128, ErrorMessage="Este campo não pode ser maior que 128 caracteres")]
         [Required(ErrorMessage = "Campo obrigatório")]
     	[DataMember]
-        public string EMAIL { get; set; }
+        public string CONTROLLER { get; set; }
         
-        [StringLength(20, ErrorMessage="Este campo não pode ser maior que 20 caracteres")]
+        [StringLength(128, ErrorMessage="Este campo não pode ser maior que 128 caracteres")]
         [Required(ErrorMessage = "Campo obrigatório")]
     	[DataMember]
-        public string LOGIN { get; set; }
+        public string ACTION { get; set; }
+    	[DataMember]
+        public Nullable<int> ID_MENU { get; set; }
     
     	[DataMember]
-        public virtual TB_CIDADE TB_CIDADE { get; set; }
+        public virtual TB_MENU TB_MENU { get; set; }
     	[DataMember]
         public virtual ICollection<TB_PERFIL> TB_PERFIL { get; set; }
     }
@@ -69,7 +56,7 @@ namespace Client.Zeus.Domain
     /// <summary>
     /// Classe opcional para configurar alguma validação não padrão.
     /// </summary>
-    public partial class TB_USUARIOMetaData 
+    public partial class TB_FUNCTIONALITYMetaData 
     {
     }
 }

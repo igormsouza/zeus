@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9E433FC0-B8AE-4A0D-A6FF-366BDB216AB1}</ProjectGuid>
+    <ProjectGuid>{1D31FBE5-E15A-4BC6-93D9-9BD102154ECB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Client.Zeus.Business</RootNamespace>
-    <AssemblyName>Client.Zeus.Business</AssemblyName>
+    <RootNamespace>Client.Zeus.Data</RootNamespace>
+    <AssemblyName>Client.Zeus.Data</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -43,6 +43,9 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,64 +53,96 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\BaseManager.cs" />
-    <Compile Include="CustomManager\CidadeGerenciador.cs" />
-    <Compile Include="CustomManager\FuncionalidadeGerenciador.cs" />
-    <Compile Include="CustomManager\MenuGerenciador.cs" />
-    <Compile Include="CustomManager\UFGerenciador.cs" />
-    <Compile Include="CustomManager\UsuarioGerenciador.cs" />
-    <Compile Include="Manager\CidadeGerenciador.cs">
-      <DependentUpon>Manager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Manager\FuncionalidadeGerenciador.cs">
-      <DependentUpon>Manager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Manager\Manager.cs">
+    <Compile Include="Adapter.cs" />
+    <Compile Include="Adapter1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Manager.tt</DependentUpon>
+      <DependentUpon>Adapter.tt</DependentUpon>
     </Compile>
-    <Compile Include="Manager\MenuGerenciador.cs">
-      <DependentUpon>Manager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Manager\PerfilGerenciador.cs">
-      <DependentUpon>Manager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Manager\SugestoesGerenciador.cs">
-      <DependentUpon>Manager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Manager\UFGerenciador.cs">
-      <DependentUpon>Manager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Manager\UsuarioGerenciador.cs">
-      <DependentUpon>Manager.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Base\GenericRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositorioDados.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepositorioDados.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\FuncionalidadeRepositorio.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\MenuRepositorio.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\PerfilRepositorio.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\Repository.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\UsuarioRepositorio.cs">
+      <DependentUpon>Repository.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioDados.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepositorioDados.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="TB_FUNCTIONALITY.cs">
+      <DependentUpon>RepositorioDados.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_MENU.cs">
+      <DependentUpon>RepositorioDados.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_PERFIL.cs">
+      <DependentUpon>RepositorioDados.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TB_USER.cs">
+      <DependentUpon>RepositorioDados.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BHS.ProjetoBaseMvc.Dados\Client.Zeus.Data.csproj">
-      <Project>{1d31fbe5-e15a-4bc6-93d9-9bd102154ecb}</Project>
-      <Name>Client.Zeus.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BHS.ProjetoBaseMvc.Dominio\Client.Zeus.Domain.csproj">
+    <ProjectReference Include="..\Client.Zeus.Domain\Client.Zeus.Domain.csproj">
       <Project>{cfc9aa86-fa55-429a-a2c1-ef8608a20ac6}</Project>
       <Name>Client.Zeus.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BHS.ProjetoBaseMvc.Util\Client.Zeus.Util.csproj">
+    <ProjectReference Include="..\Client.Zeus.Util\Client.Zeus.Util.csproj">
       <Project>{aaef4c65-1961-47b1-996f-8addfec01da0}</Project>
       <Name>Client.Zeus.Util</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="Manager\Manager.tt">
+    <None Include="Adapter.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Manager.cs</LastGenOutput>
+      <LastGenOutput>Adapter1.cs</LastGenOutput>
     </None>
+    <None Include="App.config" />
     <None Include="packages.config" />
+    <EntityDeploy Include="RepositorioDados.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>RepositorioDados.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Repository\Repository.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Repository.cs</LastGenOutput>
+    </None>
+    <None Include="RepositorioDados.edmx.diagram">
+      <DependentUpon>RepositorioDados.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CustomRepository\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="RepositorioDados.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RepositorioDados.cs</LastGenOutput>
+      <DependentUpon>RepositorioDados.edmx</DependentUpon>
+    </Content>
+    <Content Include="Scripts\script.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

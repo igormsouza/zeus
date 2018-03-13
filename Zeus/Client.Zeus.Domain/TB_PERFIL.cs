@@ -20,28 +20,38 @@ namespace Client.Zeus.Domain
     using Client.Zeus.Domain.Base;
     using Client.Zeus.Util.Attributes;
     
-    [MetadataType(typeof(TB_SUGESTOESMetaData))]
+    [MetadataType(typeof(TB_PERFILMetaData))]
     [DataContract]
-    public partial class TB_SUGESTOES : BaseDomain
+    public partial class TB_PERFIL : BaseDomain
     {
+        public TB_PERFIL()
+        {
+            this.TB_FUNCTIONALITY = new HashSet<TB_FUNCTIONALITY>();
+            this.TB_MENU = new HashSet<TB_MENU>();
+            this.TB_USER = new HashSet<TB_USER>();
+        }
+    
+        
+        [StringLength(128, ErrorMessage="Este campo não pode ser maior que 128 caracteres")]
         [Required(ErrorMessage = "Campo obrigatório")]
     	[DataMember]
-        public int NOTA { get; set; }
-        
-        [StringLength(1000, ErrorMessage="Este campo não pode ser maior que 1000 caracteres")]
-    	[DataMember]
-        public string OBSERVACAO { get; set; }
-        
-        [StringLength(100, ErrorMessage="Este campo não pode ser maior que 100 caracteres")]
+        public string NAME { get; set; }
         [Required(ErrorMessage = "Campo obrigatório")]
     	[DataMember]
-        public string USUARIO { get; set; }
+        public bool ADMIN { get; set; }
+    
+    	[DataMember]
+        public virtual ICollection<TB_FUNCTIONALITY> TB_FUNCTIONALITY { get; set; }
+    	[DataMember]
+        public virtual ICollection<TB_MENU> TB_MENU { get; set; }
+    	[DataMember]
+        public virtual ICollection<TB_USER> TB_USER { get; set; }
     }
     
     /// <summary>
     /// Classe opcional para configurar alguma validação não padrão.
     /// </summary>
-    public partial class TB_SUGESTOESMetaData 
+    public partial class TB_PERFILMetaData 
     {
     }
 }

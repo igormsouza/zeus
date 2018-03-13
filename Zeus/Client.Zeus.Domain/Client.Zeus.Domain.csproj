@@ -67,10 +67,7 @@
     <Compile Include="PesquisaDTO\PesquisaCidade.cs" />
     <Compile Include="PesquisaDTO\PesquisaUF.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TB_CIDADE.cs">
-      <DependentUpon>Dominio.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TB_FUNCIONALIDADE.cs">
+    <Compile Include="TB_FUNCTIONALITY.cs">
       <DependentUpon>Dominio.tt</DependentUpon>
     </Compile>
     <Compile Include="TB_MENU.cs">
@@ -79,23 +76,17 @@
     <Compile Include="TB_PERFIL.cs">
       <DependentUpon>Dominio.tt</DependentUpon>
     </Compile>
-    <Compile Include="TB_SUGESTOES.cs">
-      <DependentUpon>Dominio.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TB_UF.cs">
-      <DependentUpon>Dominio.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TB_USUARIO.cs">
-      <DependentUpon>Dominio.tt</DependentUpon>
-    </Compile>
     <Compile Include="Dominio.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Dominio.tt</DependentUpon>
     </Compile>
+    <Compile Include="TB_USER.cs">
+      <DependentUpon>Dominio.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BHS.ProjetoBaseMvc.Util\Client.Zeus.Util.csproj">
+    <ProjectReference Include="..\Client.Zeus.Util\Client.Zeus.Util.csproj">
       <Project>{aaef4c65-1961-47b1-996f-8addfec01da0}</Project>
       <Name>Client.Zeus.Util</Name>
     </ProjectReference>

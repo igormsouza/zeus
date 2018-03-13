@@ -20,38 +20,46 @@ namespace Client.Zeus.Domain
     using Client.Zeus.Domain.Base;
     using Client.Zeus.Util.Attributes;
     
-    [MetadataType(typeof(TB_PERFILMetaData))]
+    [MetadataType(typeof(TB_USERMetaData))]
     [DataContract]
-    public partial class TB_PERFIL : BaseDomain
+    public partial class TB_USER : BaseDomain
     {
-        public TB_PERFIL()
+        public TB_USER()
         {
-            this.TB_FUNCIONALIDADE = new HashSet<TB_FUNCIONALIDADE>();
-            this.TB_MENU = new HashSet<TB_MENU>();
-            this.TB_USUARIO = new HashSet<TB_USUARIO>();
+            this.TB_PERFIL = new HashSet<TB_PERFIL>();
         }
     
+        
+        [StringLength(50, ErrorMessage="Este campo não pode ser maior que 50 caracteres")]
+        [Required(ErrorMessage = "Campo obrigatório")]
+    	[DataMember]
+        public string NAME { get; set; }
+        
+        [StringLength(256, ErrorMessage="Este campo não pode ser maior que 256 caracteres")]
+        [Required(ErrorMessage = "Campo obrigatório")]
+    	[DataMember]
+        public string PASSWORD { get; set; }
+        
+        [EmailAddress(ErrorMessage = "E-mail inválido")]
         
         [StringLength(128, ErrorMessage="Este campo não pode ser maior que 128 caracteres")]
         [Required(ErrorMessage = "Campo obrigatório")]
     	[DataMember]
-        public string DESCRICAO { get; set; }
+        public string EMAIL { get; set; }
+        
+        [StringLength(20, ErrorMessage="Este campo não pode ser maior que 20 caracteres")]
         [Required(ErrorMessage = "Campo obrigatório")]
     	[DataMember]
-        public bool ADMIN { get; set; }
+        public string LOGIN { get; set; }
     
     	[DataMember]
-        public virtual ICollection<TB_FUNCIONALIDADE> TB_FUNCIONALIDADE { get; set; }
-    	[DataMember]
-        public virtual ICollection<TB_MENU> TB_MENU { get; set; }
-    	[DataMember]
-        public virtual ICollection<TB_USUARIO> TB_USUARIO { get; set; }
+        public virtual ICollection<TB_PERFIL> TB_PERFIL { get; set; }
     }
     
     /// <summary>
     /// Classe opcional para configurar alguma validação não padrão.
     /// </summary>
-    public partial class TB_PERFILMetaData 
+    public partial class TB_USERMetaData 
     {
     }
 }

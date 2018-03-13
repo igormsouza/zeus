@@ -26,8 +26,8 @@ namespace Client.Zeus.Domain
     {
         public TB_MENU()
         {
+            this.TB_FUNCTIONALITY = new HashSet<TB_FUNCTIONALITY>();
             this.TB_MENU1 = new HashSet<TB_MENU>();
-            this.TB_FUNCIONALIDADE = new HashSet<TB_FUNCIONALIDADE>();
             this.TB_PERFIL = new HashSet<TB_PERFIL>();
         }
     
@@ -35,7 +35,7 @@ namespace Client.Zeus.Domain
         [StringLength(128, ErrorMessage="Este campo não pode ser maior que 128 caracteres")]
         [Required(ErrorMessage = "Campo obrigatório")]
     	[DataMember]
-        public string TITULO { get; set; }
+        public string TITLE { get; set; }
         
         [StringLength(128, ErrorMessage="Este campo não pode ser maior que 128 caracteres")]
     	[DataMember]
@@ -47,23 +47,23 @@ namespace Client.Zeus.Domain
         
         [StringLength(128, ErrorMessage="Este campo não pode ser maior que 128 caracteres")]
     	[DataMember]
-        public string IMAGEM { get; set; }
+        public string IMAGE { get; set; }
     	[DataMember]
-        public Nullable<int> ID_PAI { get; set; }
+        public Nullable<int> ID_PARENT { get; set; }
         
         [StringLength(128, ErrorMessage="Este campo não pode ser maior que 128 caracteres")]
     	[DataMember]
         public string URL { get; set; }
         [Required(ErrorMessage = "Campo obrigatório")]
     	[DataMember]
-        public bool IND_ABRIR_NOVA_PAGINA { get; set; }
+        public bool FLAG_NEW_PAGE { get; set; }
     
+    	[DataMember]
+        public virtual ICollection<TB_FUNCTIONALITY> TB_FUNCTIONALITY { get; set; }
     	[DataMember]
         public virtual ICollection<TB_MENU> TB_MENU1 { get; set; }
     	[DataMember]
         public virtual TB_MENU TB_MENU2 { get; set; }
-    	[DataMember]
-        public virtual ICollection<TB_FUNCIONALIDADE> TB_FUNCIONALIDADE { get; set; }
     	[DataMember]
         public virtual ICollection<TB_PERFIL> TB_PERFIL { get; set; }
     }

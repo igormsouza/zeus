@@ -1,19 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{AB5223E7-A5B1-4222-BF08-77FE1DB08B8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Zeus.Domain", "BHS.ProjetoBaseMvc.Dominio\Client.Zeus.Domain.csproj", "{CFC9AA86-FA55-429A-A2C1-EF8608A20AC6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Zeus.Domain", "Client.Zeus.Domain\Client.Zeus.Domain.csproj", "{CFC9AA86-FA55-429A-A2C1-EF8608A20AC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Zeus.Business", "BHS.ProjetoBaseMvc.Negocio\Client.Zeus.Business.csproj", "{9E433FC0-B8AE-4A0D-A6FF-366BDB216AB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Zeus.Business", "Client.Zeus.Business\Client.Zeus.Business.csproj", "{9E433FC0-B8AE-4A0D-A6FF-366BDB216AB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Zeus.Data", "BHS.ProjetoBaseMvc.Dados\Client.Zeus.Data.csproj", "{1D31FBE5-E15A-4BC6-93D9-9BD102154ECB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Zeus.Data", "Client.Zeus.Data\Client.Zeus.Data.csproj", "{1D31FBE5-E15A-4BC6-93D9-9BD102154ECB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Zeus.Util", "BHS.ProjetoBaseMvc.Util\Client.Zeus.Util.csproj", "{AAEF4C65-1961-47B1-996F-8ADDFEC01DA0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Zeus.Util", "Client.Zeus.Util\Client.Zeus.Util.csproj", "{AAEF4C65-1961-47B1-996F-8ADDFEC01DA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHS.ProjetoBaseMvc.App", "BHS.ProjetoBaseMvc.App\BHS.ProjetoBaseMvc.App.csproj", "{5627E401-B782-4AB3-9B6B-6E627E9044FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Zeus.App", "Client.Zeus.App\Client.Zeus.App.csproj", "{5627E401-B782-4AB3-9B6B-6E627E9044FB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{15B3E0D2-6217-493A-A690-158C497F5318} = {15B3E0D2-6217-493A-A690-158C497F5318}
 	EndProjectSection
@@ -63,5 +63,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D6982829-2BD3-410F-8EA0-B1FAC4E56827} = {AB5223E7-A5B1-4222-BF08-77FE1DB08B8A}
 		{15B3E0D2-6217-493A-A690-158C497F5318} = {AB5223E7-A5B1-4222-BF08-77FE1DB08B8A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BBD04396-692B-4FF4-9B7B-8D44E650702B}
 	EndGlobalSection
 EndGlobal
