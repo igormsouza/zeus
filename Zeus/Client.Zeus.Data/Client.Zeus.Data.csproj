@@ -75,18 +75,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Repository.tt</DependentUpon>
     </Compile>
-    <Compile Include="RepositorioDados.Designer.cs">
+    <Compile Include="DataRepository.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RepositorioDados.edmx</DependentUpon>
+      <DependentUpon>DataRepository.edmx</DependentUpon>
     </Compile>
     <Compile Include="Repository\UserRepository.cs">
       <DependentUpon>Repository.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repository.Context.cs">
+    <Compile Include="DataRepository.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Repository.Context.tt</DependentUpon>
+      <DependentUpon>DataRepository.Context.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -106,16 +106,16 @@
     </None>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <EntityDeploy Include="RepositorioDados.edmx">
+    <EntityDeploy Include="DataRepository.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>RepositorioDados.Designer.cs</LastGenOutput>
+      <LastGenOutput>DataRepository.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="Repository\Repository.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Repository.cs</LastGenOutput>
     </None>
-    <None Include="RepositorioDados.edmx.diagram">
-      <DependentUpon>RepositorioDados.edmx</DependentUpon>
+    <None Include="DataRepository.edmx.diagram">
+      <DependentUpon>DataRepository.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -126,9 +126,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\script.sql" />
-    <Content Include="Repository.Context.tt">
+    <Content Include="DataRepository.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Repository.Context.cs</LastGenOutput>
+      <LastGenOutput>DataRepository.Context.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -51,12 +51,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\BaseManager.cs" />
-    <Compile Include="CustomManager\CidadeGerenciador.cs" />
-    <Compile Include="CustomManager\FuncionalidadeGerenciador.cs" />
+    <Compile Include="CustomManager\FunctionalityManager.cs" />
     <Compile Include="CustomManager\MenuGerenciador.cs" />
-    <Compile Include="CustomManager\UFGerenciador.cs" />
-    <Compile Include="CustomManager\UsuarioGerenciador.cs" />
-    <Compile Include="Manager\FunctionalityGerenciador.cs">
+    <Compile Include="CustomManager\UserManager.cs" />
+    <Compile Include="Manager\FunctionalityManager.cs">
       <DependentUpon>Manager.tt</DependentUpon>
     </Compile>
     <Compile Include="Manager\Manager.cs">
@@ -64,13 +62,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Manager.tt</DependentUpon>
     </Compile>
-    <Compile Include="Manager\MenuGerenciador.cs">
+    <Compile Include="Manager\MenuManager.cs">
       <DependentUpon>Manager.tt</DependentUpon>
     </Compile>
-    <Compile Include="Manager\PerfilGerenciador.cs">
+    <Compile Include="Manager\PerfilManager.cs">
       <DependentUpon>Manager.tt</DependentUpon>
     </Compile>
-    <Compile Include="Manager\UserGerenciador.cs">
+    <Compile Include="Manager\UserManager.cs">
       <DependentUpon>Manager.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

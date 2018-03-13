@@ -18,31 +18,30 @@ namespace Client.Zeus.Business.Manager
 	using Client.Zeus.Data;
 	using Client.Zeus.Data.Repository;
 	using Client.Zeus.Domain;	 
-	using Client.Zeus.Domain.PesquisaDTO;
 	using Client.Zeus.Business.Base;
 
-	public partial class FunctionalityGerenciador : BaseGerenciador<TB_FUNCTIONALITY>
+	public partial class PerfilManager : BaseManager<TB_PERFIL>
 	{
-		public FunctionalityManger()
+		public PerfilManager()
 			: base()
 		{
 		}
 
-		public FunctionalityManger(Contexto contexto)
+		public PerfilManager(Context context)
 			: base(context)
 		{
 		}
 
-		public FunctionalityManger(Adapter adapter)
+		public PerfilManager(Adapter adapter)
 			: base(adapter)
 		{
 		}		  
 
-		public FunctionalityRepository Repository
+		public PerfilRepository Repository
 		{
 			get
 			{
-				return (FunctionalityRepository)base.BaseRepository;
+				return (PerfilRepository)base.BaseRepository;
 			}
 		}
 	}

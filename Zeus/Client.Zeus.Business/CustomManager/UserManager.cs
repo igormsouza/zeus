@@ -10,13 +10,13 @@ namespace Client.Zeus.Business.Gerenciador
 {
     public partial class UsuarioGerenciador : BaseManager<TB_USER>
     {
-        public TB_USER BuscarPorEmailOuLogin(string emailOuLogin)
+        public TB_USER BuscarPorEmailOuLogin(string emailOrLogin)
         {
-            var includesConsulta = "TB_PERFIL, TB_PERFIL.TB_MENU, TB_PERFIL.TB_FUNCIONALIDADE";
+            var includedProperty = "TB_PERFIL, TB_PERFIL.TB_MENU, TB_PERFIL.TB_FUNCIONALITY";
 
-            var query = base.Query.Where(o => o.EMAIL == emailOuLogin || o.LOGIN == emailOuLogin);
+            var query = base.Query.Where(o => o.EMAIL == emailOrLogin || o.LOGIN == emailOrLogin);
 
-            var result = adapter.UserRepository.Search(query, null, includesConsulta).FirstOrDefault();
+            var result = adapter.UserRepository.Search(query, null, includedProperty).FirstOrDefault();
 
             return result;
         }
