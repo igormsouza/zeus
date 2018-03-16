@@ -27,7 +27,7 @@ namespace Client.Zeus.App.Controllers
         public BaseController()
         {
             //Verificar se usuario estao logado, se sim buscar os menus e por no cache.
-            ViewBag.Menus = (LoginManager.IsUsuarioLogado) ? TransformHelper.TransformList<MenuModel>(new MenuManager().ConsultarMenuPorPerfil(1)).ToList() : null;
+            ViewBag.Menus = (LoginManager.IsLogged) ? TransformHelper.TransformList<MenuModel>(new MenuManager().SearchByPerfilId(1)).ToList() : null;
         }
 
         private CrudContratoClient servicoCrudContrato;
@@ -62,11 +62,11 @@ namespace Client.Zeus.App.Controllers
             }
         }
 
-        public TB_USUARIO UsuarioSessao
+        public TB_USER UsuarioSessao
         {
             get
             {
-                return LoginManager.UsuarioLogado;
+                return LoginManager.LoggedUser;
             }
         }
 
@@ -106,25 +106,25 @@ namespace Client.Zeus.App.Controllers
         public virtual void ErroCatchPadrao(Dictionary<string, string> errosValidacao, Exception ex)
         {
             ModelState.ShowErros(errosValidacao, ex);
-            ExibeMensagem.Show((Controller)this, errosValidacao);
+            ShowMessage.Show((Controller)this, errosValidacao);
         }
 
-        protected virtual bool VerificarPermissaoPesquisar()
+        protected virtual bool CheckSearchPermission()
         {
             return true;
         }
 
-        protected virtual bool VerificarPermissaoInserir()
+        protected virtual bool CheckCreatePermission()
         {
             return true;
         }
 
-        protected virtual bool VerificarPermissaoEditar()
+        protected virtual bool CheckEditPermission()
         {
             return true;
         }
 
-        protected virtual bool VerificarPermissaoExcluir()
+        protected virtual bool CheckDeletePermission()
         {
             return true;
         }
@@ -134,19 +134,19 @@ namespace Client.Zeus.App.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        private IList<Redirect> redirecionar;
-        public IList<Redirect> Redirecionar
+        private IList<Redirect> redirect;
+        public IList<Redirect> Redirect
         {
             get
             {
-                redirecionar = redirecionar ?? new List<Redirect>();
+                redirect = redirect ?? new List<Redirect>();
 
                 if (Session["Redirecionar"] != null && Session["Redirecionar"] is IList<Redirect>)
                 {
-                    redirecionar = Session["Redirecionar"] as IList<Redirect>;
+                    redirect = Session["Redirecionar"] as IList<Redirect>;
                 }
 
-                return redirecionar;
+                return redirect;
             }
             set
             {
@@ -154,49 +154,49 @@ namespace Client.Zeus.App.Controllers
             }
         }
 
-        public void AdicionaRedirecionar(Redirect redirecionarItem, bool removeItensMesmoController, string limparController = "")
+        public void AdicionaRedirecionar(Redirect redirect, bool removeItensMesmoController, string cleanController = "")
         {
-            var lista = new List<Redirect>();
+            var result = new List<Redirect>();
 
-            if (redirecionarItem != null)
+            if (redirect != null)
             {
                 if (removeItensMesmoController)
-                    lista.AddRange(Redirecionar.Where(o => o.OrginController != redirecionarItem.OrginController).ToList());
+                    result.AddRange(Redirect.Where(o => o.OrginController != redirect.OrginController).ToList());
                 else
-                    lista.AddRange(Redirecionar);
+                    result.AddRange(Redirect);
 
-                lista.Add(redirecionarItem);
+                result.Add(redirect);
             }
-            else if (!string.IsNullOrWhiteSpace(limparController))
+            else if (!string.IsNullOrWhiteSpace(cleanController))
             {
-                limparController = limparController.Replace('/', ' ').Trim();
+                cleanController = cleanController.Replace('/', ' ').Trim();
                 if (removeItensMesmoController)
-                    lista.AddRange(Redirecionar.Where(o => o.OrginController != limparController).ToList());
+                    result.AddRange(Redirect.Where(o => o.OrginController != cleanController).ToList());
                 else
-                    lista.AddRange(Redirecionar);
+                    result.AddRange(Redirect);
             }
             else
             {
-                lista.AddRange(Redirecionar);
+                result.AddRange(Redirect);
             }
 
-            Redirecionar = lista;
+            Redirect = result;
         }
 
         public Redirect BuscaRedirecionarAtual(string controller = "")
         {
             Redirect retorno = null;
 
-            if (Redirecionar != null)
+            if (Redirect != null)
             {
                 if (string.IsNullOrWhiteSpace(controller))
                 {
                     var controllerAtual = Request.Url.Segments[1].Replace('/', ' ').Trim();
-                    retorno = Redirecionar.FirstOrDefault(o => o.DestinyController == controllerAtual);
+                    retorno = Redirect.FirstOrDefault(o => o.DestinyController == controllerAtual);
                 }
                 else
                 {
-                    retorno = Redirecionar.FirstOrDefault(o => o.DestinyController == controller);
+                    retorno = Redirect.FirstOrDefault(o => o.DestinyController == controller);
                 }
             }
 
@@ -205,7 +205,7 @@ namespace Client.Zeus.App.Controllers
 
         #region Utilitarios
 
-        public string ObterNomePropriedade<T>(Expression<Func<T, object>> expressao) where T : DominioBase, new()
+        public string ObterNomePropriedade<T>(Expression<Func<T, object>> expressao) where T : BaseDomain, new()
         {
             if (expressao != null && expressao.Body is MemberExpression)
                 return (expressao.Body as MemberExpression).Member.Name;

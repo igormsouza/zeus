@@ -80,7 +80,7 @@ namespace Client.Zeus.App.Controllers
         {
             try
             {
-                if (!VerificarPermissaoPesquisar())
+                if (!CheckSearchPermission())
                     return RedirectToAction("Autorizacao", "Erro");
 
                 PrePesquisar();
@@ -145,7 +145,7 @@ namespace Client.Zeus.App.Controllers
         [Authorize]
         public virtual ActionResult LimparPesquisa()
         {
-            if (!VerificarPermissaoPesquisar())
+            if (!CheckSearchPermission())
                 return RedirectToAction("Autorizacao", "Erro");
 
             PrePesquisar();
@@ -169,7 +169,7 @@ namespace Client.Zeus.App.Controllers
         {
             try
             {
-                if (!VerificarPermissaoInserir())
+                if (!CheckCreatePermission())
                     return RedirectToAction("Autorizacao", "Erro");
 
                 Session[PesquisaContexto] = null;
@@ -201,7 +201,7 @@ namespace Client.Zeus.App.Controllers
 
             try
             {
-                if (!VerificarPermissaoInserir())
+                if (!CheckCreatePermission())
                     return RedirectToAction("Autorizacao", "Erro");
 
                 PreInserirPost(ref dominio);
@@ -281,7 +281,7 @@ namespace Client.Zeus.App.Controllers
         {
             try
             {
-                if (!VerificarPermissaoEditar())
+                if (!CheckEditPermission())
                     return RedirectToAction("Autorizacao", "Erro");
 
                 T dominio = GerenciadorBase.BuscarPorId(id);
@@ -317,7 +317,7 @@ namespace Client.Zeus.App.Controllers
 
             try
             {
-                if (!VerificarPermissaoEditar())
+                if (!CheckEditPermission())
                     return RedirectToAction("Autorizacao", "Erro");
 
                 PreEditarPost(ref dominio);
@@ -409,7 +409,7 @@ namespace Client.Zeus.App.Controllers
 
             try
             {
-                if (!VerificarPermissaoExcluir())
+                if (!CheckDeletePermission())
                     return RedirectToAction("Autorizacao", "Erro");
 
                 PreDeletar(id);

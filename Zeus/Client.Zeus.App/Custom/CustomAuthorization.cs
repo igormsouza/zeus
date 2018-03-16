@@ -32,7 +32,7 @@ namespace Client.Zeus.App.Custom
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            if (!LoginManager.IsUsuarioLogado)
+            if (!LoginManager.IsLogged)
                 return false;
 
             var action = httpContext.Request.RequestContext.RouteData.Values["action"].ToString();
@@ -44,7 +44,7 @@ namespace Client.Zeus.App.Custom
             }
             else
             {
-                var temPermissao = (from a in LoginManager.UsuarioLogado.TB_PERFIL
+                var temPermissao = (from a in LoginManager.LoggedUser.TB_PERFIL
                                    from b in a.TB_FUNCIONALIDADE
                                    where b.ACTION == action && b.CONTROLLER == controller
                                    select b).Count();

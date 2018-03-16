@@ -9,7 +9,7 @@ using Client.Zeus.Data.Repository;
 using Client.Zeus.Domain;
 using Client.Zeus.Business.Base;
 
-namespace Client.Zeus.Business.Gerenciador
+namespace Client.Zeus.Business.Manager
 {
 
     public partial class FunctionalityManager : BaseManager<TB_FUNCTIONALITY>

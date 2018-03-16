@@ -52,7 +52,7 @@
   <ItemGroup>
     <Compile Include="Base\BaseManager.cs" />
     <Compile Include="CustomManager\FunctionalityManager.cs" />
-    <Compile Include="CustomManager\MenuGerenciador.cs" />
+    <Compile Include="CustomManager\MenuManager.cs" />
     <Compile Include="CustomManager\UserManager.cs" />
     <Compile Include="Manager\FunctionalityManager.cs">
       <DependentUpon>Manager.tt</DependentUpon>

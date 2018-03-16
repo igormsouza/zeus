@@ -58,7 +58,7 @@ namespace Client.Zeus.App.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            if (LoginManager.IsUsuarioLogado)
+            if (LoginManager.IsLogged)
                 return base.RedirectHome();
 
             ViewBag.ReturnUrl = returnUrl;
@@ -81,15 +81,15 @@ namespace Client.Zeus.App.Controllers
 
             switch (statusLogin)
             {
-                case LoginManager.StatusLogin.SenhaIncorreta:
+                case LoginManager.StatusLogin.WrongPassword:
                     ModelState.AddModelError("", "Senha incorreta.");
                     break;
-                case LoginManager.StatusLogin.Sucesso:
+                case LoginManager.StatusLogin.Success:
                     return RedirectToLocal(returnUrl);
-                case LoginManager.StatusLogin.Erro:
+                case LoginManager.StatusLogin.Error:
                     ModelState.AddModelError("", "Ocorreu um erro ao realizar o login.");
                     break;
-                case LoginManager.StatusLogin.UsuarioNaoExiste:
+                case LoginManager.StatusLogin.UserNotFound:
                     ModelState.AddModelError("", "Usuário não existe.");
                     break;
                 default:

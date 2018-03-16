@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client.Zeus.Business.Gerenciador
+namespace Client.Zeus.Business.Manager
 {
-    public partial class UsuarioGerenciador : BaseManager<TB_USER>
+    public partial class UserManager : BaseManager<TB_USER>
     {
-        public TB_USER BuscarPorEmailOuLogin(string emailOrLogin)
+        public TB_USER GetByEmailOrLogin(string emailOrLogin)
         {
             var includedProperty = "TB_PERFIL, TB_PERFIL.TB_MENU, TB_PERFIL.TB_FUNCIONALITY";
 

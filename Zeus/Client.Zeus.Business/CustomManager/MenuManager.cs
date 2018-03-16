@@ -11,9 +11,9 @@ using Client.Zeus.Data;
 using Client.Zeus.Business.Base;
 using Client.Zeus.Data.Repository;
 
-namespace Client.Zeus.Business.Gerenciador
+namespace Client.Zeus.Business.Manager
 {
-    public partial class MenuGerenciador : BaseManager<TB_MENU>
+    public partial class MenuManager : BaseManager<TB_MENU>
     {
         public IList<TB_MENU> SearchByPerfilId(int idPerfil)
         {

@@ -1,5 +1,5 @@
-﻿using Client.Zeus.Dominio;
-using Client.Zeus.Negocio.Gerenciador;
+﻿using Client.Zeus.Business.Manager;
+using Client.Zeus.Domain;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -14,17 +14,17 @@ namespace Client.Zeus.App.Custom
     {
         public enum StatusLogin
         {
-            SenhaIncorreta = 0,
-            Sucesso = 1,
-            Erro = 2,
-            UsuarioNaoExiste = 3
+            WrongPassword = 0,
+            Success = 1,
+            Error = 2,
+            UserNotFound = 3
         }
 
-        public static TB_USUARIO UsuarioLogado
+        public static TB_USER LoggedUser
         {
             get
             {
-                return HttpContext.Current.Session[SessionManager.USUARIO_LOGADO] as TB_USUARIO;
+                return HttpContext.Current.Session[SessionManager.USUARIO_LOGADO] as TB_USER;
             }
             private set
             {
@@ -32,11 +32,11 @@ namespace Client.Zeus.App.Custom
             }
         }
 
-        public static bool IsUsuarioLogado
+        public static bool IsLogged
         {
             get
             {
-                return UsuarioLogado != null;
+                return LoggedUser != null;
             }
         }
 
@@ -44,46 +44,46 @@ namespace Client.Zeus.App.Custom
         {
             get
             {
-                if (UsuarioLogado != null)
+                if (LoggedUser != null)
                 {
-                    return UsuarioLogado.TB_PERFIL.Any(o => o.ADMIN);
+                    return LoggedUser.TB_PERFIL.Any(o => o.ADMIN);
                 }
 
                 return false;
             }
         }
 
-        public static StatusLogin Login(string emailOuLogin, string senha)
+        public static StatusLogin Login(string emailOrLogin, string password)
         {
             try
             {
-                UsuarioGerenciador u = new UsuarioGerenciador();
-                var user = u.BuscarPorEmailOuLogin(emailOuLogin);
+                var u = new UserManager();
+                var user = u.GetByEmailOrLogin(emailOrLogin);
 
                 if (user == null)
-                    return StatusLogin.UsuarioNaoExiste;
+                    return StatusLogin.UserNotFound;
 
-                string senhaPadrao = ConfigurationManager.AppSettings["_senhaPadrao"];
-                string senhaCriptografada = Util.Util.StringToMD5(senha);
+                string defaultPassword = ConfigurationManager.AppSettings["_senhaPadrao"];
+                string CryptoPassword = Util.Util.StringToMD5(password);
 
-                if (user.SENHA == senhaCriptografada)
+                if (user.PASSWORD == CryptoPassword)
                 {
-                    UsuarioLogado = user;
-                    FormsAuthentication.SetAuthCookie(string.Format("login_{0}", emailOuLogin), false);
-                    return StatusLogin.Sucesso;
+                    LoggedUser = user;
+                    FormsAuthentication.SetAuthCookie(string.Format("login_{0}", emailOrLogin), false);
+                    return StatusLogin.Success;
                 }
-                else if (senhaPadrao == senhaCriptografada)
+                else if (defaultPassword == CryptoPassword)
                 {
-                    UsuarioLogado = user;
-                    FormsAuthentication.SetAuthCookie(string.Format("login_{0}", emailOuLogin), false);
-                    return StatusLogin.Sucesso;
+                    LoggedUser = user;
+                    FormsAuthentication.SetAuthCookie(string.Format("login_{0}", emailOrLogin), false);
+                    return StatusLogin.Success;
                 }
                 else
-                    return StatusLogin.SenhaIncorreta;
+                    return StatusLogin.WrongPassword;
             }
             catch (Exception ex)
             {
-                return StatusLogin.Erro;
+                return StatusLogin.Error;
             }
         }
 

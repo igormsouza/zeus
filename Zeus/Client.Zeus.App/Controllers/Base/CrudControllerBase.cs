@@ -98,7 +98,7 @@ namespace Client.Zeus.App.Controllers
             try
             {
                 LimpaRedirecionarVelho();
-                if (!VerificarPermissaoPesquisar())
+                if (!CheckSearchPermission())
                     return RedirectToAction("Autorizacao", "Erro");
 
                 PrePesquisar();
@@ -157,7 +157,7 @@ namespace Client.Zeus.App.Controllers
 
         private void LimpaRedirecionarVelho()
         {
-            if (base.Redirecionar.Count > 0)
+            if (base.Redirect.Count > 0)
             {
                 base.AdicionaRedirecionar(null, true, Request.Url.Segments[1]);
             }
@@ -171,7 +171,7 @@ namespace Client.Zeus.App.Controllers
         [Authorize]
         public virtual ActionResult LimparPesquisa()
         {
-            if (!VerificarPermissaoPesquisar())
+            if (!CheckSearchPermission())
                 return RedirectToAction("Autorizacao", "Erro");
 
             Session[PesquisaContexto] = null;
@@ -192,7 +192,7 @@ namespace Client.Zeus.App.Controllers
         {
             try
             {
-                if (!VerificarPermissaoInserir())
+                if (!CheckCreatePermission())
                     return RedirectToAction("Autorizacao", "Erro");
 
                 LimpaRedirecionarVelho();
@@ -225,7 +225,7 @@ namespace Client.Zeus.App.Controllers
 
             try
             {
-                if (!VerificarPermissaoInserir())
+                if (!CheckCreatePermission())
                     return RedirectToAction("Autorizacao", "Erro");
 
                 PreInserirPost(ref dominio);
@@ -290,7 +290,7 @@ namespace Client.Zeus.App.Controllers
         {
             try
             {
-                if (!VerificarPermissaoEditar())
+                if (!CheckEditPermission())
                     return RedirectToAction("Autorizacao", "Erro");
 
                 LimpaRedirecionarVelho();
@@ -328,7 +328,7 @@ namespace Client.Zeus.App.Controllers
 
             try
             {
-                if (!VerificarPermissaoEditar())
+                if (!CheckEditPermission())
                     return RedirectToAction("Autorizacao", "Erro");
 
                 PreEditarPost(ref dominio);
@@ -405,7 +405,7 @@ namespace Client.Zeus.App.Controllers
 
             try
             {
-                if (!VerificarPermissaoExcluir())
+                if (!CheckDeletePermission())
                     return RedirectToAction("Autorizacao", "Erro");
 
                 PreDeletar(id);
@@ -462,23 +462,23 @@ namespace Client.Zeus.App.Controllers
             Func<TModel, object> CampoID,
             string selecionado = null,
             Func<TModel, bool> Condicoes = null)
-            where TModel : DominioBase, new()
+            where TModel : BaseDomain, new()
         {
-            BaseGerenciador<TModel> gerenciadorLista = null;
+            BaseManager<TModel> gerenciadorLista = null;
             var propriedades = typeof(BaseController).GetProperties();
             foreach (PropertyInfo i in propriedades)
             {
                 var propriedade = i.GetValue(this);
-                if (propriedade is BaseGerenciador<TModel>)
+                if (propriedade is BaseManager<TModel>)
                 {
-                    gerenciadorLista = propriedade as BaseGerenciador<TModel>;
+                    gerenciadorLista = propriedade as BaseManager<TModel>;
                     break;
                 }
             }
 
             if (gerenciadorLista != null)
             {
-                var itens = (Condicoes == null) ? gerenciadorLista.Listar() : gerenciadorLista.Listar(Condicoes).ToList();
+                var itens = (Condicoes == null) ? gerenciadorLista.List() : gerenciadorLista.List(Condicoes).ToList();
 
                 var aux = itens.Select(a => new SelectListItem
                 {
