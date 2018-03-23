@@ -17,7 +17,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Início", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Index", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 @*@Html.ActionLink("Backlog", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 @Html.ActionLink("Criticas e sugestões", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 @Html.ActionLink("Como requisitar acesso", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
@@ -25,16 +25,16 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    @Client.Zeus.Util.Menu.MenuExtensions.BhsMenu(ViewBag.Menus)
+                    @Client.Zeus.Util.Menu.MenuExtensions.CustomMenu(ViewBag.Menus)
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
                     @{
-                        if (Client.Zeus.App.Custom.LoginManager.IsUsuarioLogado)
+                        if (Client.Zeus.App.Custom.LoginManager.IsLogged)
                         {
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    Olá @Client.Zeus.App.Custom.LoginManager.UsuarioLogado.NOME <span class="caret"></span>
+                                    Olá @Client.Zeus.App.Custom.LoginManager.LoggedUser.NAME <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu">
@@ -60,7 +60,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; BHS</p>
+            <p>&copy; Base Project</p>
         </footer>
     </div>
 

@@ -49,7 +49,7 @@ namespace Client.Zeus.App.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email ou login")]
+        [Display(Name = "Email or login")]
         public string Email { get; set; }
 
         [Required]

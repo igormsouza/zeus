@@ -12,7 +12,7 @@ namespace Client.Zeus.Business.Manager
     {
         public TB_USER GetByEmailOrLogin(string emailOrLogin)
         {
-            var includedProperty = "TB_PERFIL, TB_PERFIL.TB_MENU, TB_PERFIL.TB_FUNCIONALITY";
+            var includedProperty = "TB_PERFIL, TB_PERFIL.TB_MENU, TB_PERFIL.TB_FUNCTIONALITY";
 
             var query = base.Query.Where(o => o.EMAIL == emailOrLogin || o.LOGIN == emailOrLogin);
 

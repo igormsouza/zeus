@@ -8,11 +8,6 @@
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <div class="form-group" style="display:none;">
-                    <b>Login:</b> teste@bhs.com.br
-                    <br />
-                    <b>Senha:</b> 1234
-                </div>         
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
@@ -45,11 +40,10 @@
                 <p>
                     @*@Html.ActionLink("Novo Usuário", "Register")*@
                 </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>
-                *@
+                <p>
+                    @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                </p>
+                
             }
         </section>
     </div>
