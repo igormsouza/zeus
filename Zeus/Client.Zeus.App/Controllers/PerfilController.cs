@@ -1,6 +1,6 @@
 ﻿using Client.Zeus.App.Custom;
-using Client.Zeus.Dominio;
-using Client.Zeus.Dominio.Base;
+using Client.Zeus.Domain;
+using Client.Zeus.Domain.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +15,10 @@ namespace Client.Zeus.App.Controllers
         public PerfilController()
         {
             ViewBag.Titulo = "Perfil";
-            ViewBag.CamposPesquisa = new[] { "DESCRICAO" };
-            ViewBag.CamposGrid = new[] { "ID", "DESCRICAO" };
-            //ViewBag.Detalhe = new[] { "Assinatura_Pagseguro_Cobranca", "Assinatura_Pagseguro_Notificacao" };
-            //ViewBag.DetalheTitulo = new[] { "Cobranças", "Histórico" };
-            ViewBag.Acoes = new[] { "Editar", "Deletar" };
+            ViewBag.CamposPesquisa = new[] { "NAME" };
+            ViewBag.CamposGrid = new[] { "ID", "NAME" };
+            ViewBag.Acoes = new[] { "Edit", "Delete" };
             ViewBag.ExibirNovo = true;
-
-            //IncluirTabelas = "TB_ASSINATURA.TB_CIDADE";
         }
     }
 }

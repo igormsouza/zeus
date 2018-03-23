@@ -14,13 +14,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Zeus.Util", "Client.Zeus.Util\Client.Zeus.Util.csproj", "{AAEF4C65-1961-47B1-996F-8ADDFEC01DA0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Zeus.App", "Client.Zeus.App\Client.Zeus.App.csproj", "{5627E401-B782-4AB3-9B6B-6E627E9044FB}"
-	ProjectSection(ProjectDependencies) = postProject
-		{15B3E0D2-6217-493A-A690-158C497F5318} = {15B3E0D2-6217-493A-A690-158C497F5318}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Zeus.Service.Contract", "Client.Zeus.Contract\Client.Zeus.Service.Contract.csproj", "{D6982829-2BD3-410F-8EA0-B1FAC4E56827}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.Zeus.Service", "Client.Zeus.Service\Client.Zeus.Service.csproj", "{15B3E0D2-6217-493A-A690-158C497F5318}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,21 +41,9 @@ Global
 		{5627E401-B782-4AB3-9B6B-6E627E9044FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5627E401-B782-4AB3-9B6B-6E627E9044FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5627E401-B782-4AB3-9B6B-6E627E9044FB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D6982829-2BD3-410F-8EA0-B1FAC4E56827}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D6982829-2BD3-410F-8EA0-B1FAC4E56827}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D6982829-2BD3-410F-8EA0-B1FAC4E56827}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D6982829-2BD3-410F-8EA0-B1FAC4E56827}.Release|Any CPU.Build.0 = Release|Any CPU
-		{15B3E0D2-6217-493A-A690-158C497F5318}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{15B3E0D2-6217-493A-A690-158C497F5318}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{15B3E0D2-6217-493A-A690-158C497F5318}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{15B3E0D2-6217-493A-A690-158C497F5318}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{D6982829-2BD3-410F-8EA0-B1FAC4E56827} = {AB5223E7-A5B1-4222-BF08-77FE1DB08B8A}
-		{15B3E0D2-6217-493A-A690-158C497F5318} = {AB5223E7-A5B1-4222-BF08-77FE1DB08B8A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BBD04396-692B-4FF4-9B7B-8D44E650702B}

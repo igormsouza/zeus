@@ -71,10 +71,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Client.Zeus.Contract\Client.Zeus.Service.Contract.csproj">
-      <Project>{d6982829-2bd3-410f-8ea0-b1fac4e56827}</Project>
-      <Name>Client.Zeus.Service.Contract</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Client.Zeus.Domain\Client.Zeus.Domain.csproj">
       <Project>{cfc9aa86-fa55-429a-a2c1-ef8608a20ac6}</Project>
       <Name>Client.Zeus.Domain</Name>

@@ -19,60 +19,59 @@ namespace Client.Zeus.App.Controllers
     {
         public CrudControllerBase()
         {
-            ViewBag.Modelo = ModelAutomaticoTela;
+            ViewBag.Modelo = AutomaticModel;
         }
 
         public bool CarregaEmpresa { get; set; }
 
-        private ModelAutomaticoTela modelAutomaticoTela;
-        public ModelAutomaticoTela ModelAutomaticoTela
+        private AutomaticModel automaticModel;
+        public AutomaticModel AutomaticModel
         {
             get
             {
-                if (modelAutomaticoTela == null)
-                    modelAutomaticoTela = new ModelAutomaticoTela();
-                return modelAutomaticoTela;
+                if (automaticModel == null)
+                    automaticModel = new AutomaticModel();
+                return automaticModel;
             }
-            set { modelAutomaticoTela = value; }
+            set { automaticModel = value; }
         }
 
-        private BaseGerenciador<T> retorno;
-        protected BaseGerenciador<T> GerenciadorBase
+        private BaseManager<T> baseManager;
+        protected BaseManager<T> BaseManager
         {
             get
             {
-                if (retorno == null)
+                if (baseManager == null)
                 {
-                    var propriedades = typeof(BaseController).GetProperties();
-                    //Gerenciadores que utilizam o domínio do tipo T
-                    var Tproperties = new List<BaseGerenciador<T>>();
+                    var properties = typeof(BaseController).GetProperties();
+                    var Tproperties = new List<BaseManager<T>>();
                     string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
-                    foreach (PropertyInfo i in propriedades)
+                    foreach (PropertyInfo i in properties)
                     {
-                        var propriedade = i.GetValue(this);
-                        if (propriedade is BaseGerenciador<T>)
+                        var item = i.GetValue(this);
+                        if (item is BaseManager<T>)
                         {
-                            Tproperties.Add((BaseGerenciador<T>)propriedade);
+                            Tproperties.Add((BaseManager<T>)item);
                         }
                     }
 
-                    foreach (BaseGerenciador<T> Tprop in Tproperties)
+                    foreach (BaseManager<T> Tprop in Tproperties)
                     {
                         var propName = Tprop.GetType().Name;
                         if (propName.Substring(0, propName.IndexOf("Gerenciador")).Equals(controllerName))
                         {
-                            retorno = Tprop;
+                            baseManager = Tprop;
                             break;
                         }
                     }
                 }
 
-                return retorno;
+                return baseManager;
             }
         }
 
-        public string PesquisaContexto
+        public string ContextSerach
         {
             get
             {
@@ -80,24 +79,24 @@ namespace Client.Zeus.App.Controllers
             }
         }
 
-        #region Pesquisar
+        #region Search
 
-        protected virtual IList<T> Pesquisar(out int quantidadeItens, U manterFiltros)
+        protected virtual IList<T> Search(out int countItems, U maintenFilters)
         {
-            return GerenciadorBase.Pesquisar(out quantidadeItens, manterFiltros);
+            return BaseManager.Search(out countItems, maintenFilters);
         }
 
         public virtual void PrePesquisar()
         {
-            CarregaOcultos(null);
+            LoadHidden(null);
         }
 
         [Authorize]
-        public virtual ActionResult Index(U manterFiltros = null)
+        public virtual ActionResult Index(U maintenFilters = null)
         {
             try
             {
-                LimpaRedirecionarVelho();
+                CleanOldRedirect();
                 if (!CheckSearchPermission())
                     return RedirectToAction("Autorizacao", "Erro");
 
@@ -107,74 +106,74 @@ namespace Client.Zeus.App.Controllers
                 {
                     int quantidadeItens;
 
-                    if (FlagPreservaValoresAcaoVoltar && TempData["AcaoVoltar"] != null && Convert.ToBoolean(TempData["AcaoVoltar"]) && Session[PesquisaContexto] != null && Session[PesquisaContexto] is U)
+                    if (FlagPreservaValoresAcaoVoltar && TempData["AcaoVoltar"] != null && Convert.ToBoolean(TempData["AcaoVoltar"]) && Session[ContextSerach] != null && Session[ContextSerach] is U)
                     {
-                        manterFiltros = Session[PesquisaContexto] as U;
+                        maintenFilters = Session[ContextSerach] as U;
                     }
-                    else if (manterFiltros == null)
+                    else if (maintenFilters == null)
                     {
-                        manterFiltros = Activator.CreateInstance<U>();
+                        maintenFilters = Activator.CreateInstance<U>();
                     }
 
                     // Para casos de paginação
-                    if (Request.HttpMethod == "GET" && Session[PesquisaContexto] != null && Session[PesquisaContexto] is U)
+                    if (Request.HttpMethod == "GET" && Session[ContextSerach] != null && Session[ContextSerach] is U)
                     {
                         // Guarda novas condições de paginação / ordenação
-                        var sort = manterFiltros.Sort;
-                        var sortDir = manterFiltros.SortDir;
-                        var page = manterFiltros.Page;
+                        var sort = maintenFilters.Sort;
+                        var sortDir = maintenFilters.SortDir;
+                        var page = maintenFilters.Page;
 
                         // Obtém filtro mantido na sessão
-                        manterFiltros = Session[PesquisaContexto] as U;
+                        maintenFilters = Session[ContextSerach] as U;
 
                         // Restaura paginação ordenação
-                        manterFiltros.Sort = sort;
-                        manterFiltros.SortDir = sortDir;
-                        manterFiltros.Page = page;
+                        maintenFilters.Sort = sort;
+                        maintenFilters.SortDir = sortDir;
+                        maintenFilters.Page = page;
                     }
 
-                    var itens = Pesquisar(out quantidadeItens, manterFiltros);
-                    manterFiltros.Itens = itens;
-                    manterFiltros.TotalItens = quantidadeItens;
-                    manterFiltros.OpenGrid = true;
-                    Session[PesquisaContexto] = manterFiltros;
+                    var itens = Search(out quantidadeItens, maintenFilters);
+                    maintenFilters.Itens = itens;
+                    maintenFilters.TotalItens = quantidadeItens;
+                    maintenFilters.OpenGrid = true;
+                    Session[ContextSerach] = maintenFilters;
 
-                    PosPesquisar();
+                    PostSearch();
                 }
                 else
                 {
-                    manterFiltros = Activator.CreateInstance<U>();
+                    maintenFilters = Activator.CreateInstance<U>();
                 }
 
-                return View("Index", manterFiltros);
+                return View("Index", maintenFilters);
             }
             catch (Exception ex)
             {
                 Dictionary<string, string> errosValidacao = new Dictionary<string, string>();
-                return ErroCatchPadraoRedirecionando(errosValidacao, ex);
+                return DefaultErrosTreatment(errosValidacao, ex);
             }
         }
 
-        private void LimpaRedirecionarVelho()
+        private void CleanOldRedirect()
         {
             if (base.Redirect.Count > 0)
             {
-                base.AdicionaRedirecionar(null, true, Request.Url.Segments[1]);
+                base.AddRedirect(null, true, Request.Url.Segments[1]);
             }
         }
 
-        public virtual void PosPesquisar()
+        public virtual void PostSearch()
         {
 
         }
 
         [Authorize]
-        public virtual ActionResult LimparPesquisa()
+        public virtual ActionResult CleanSearch()
         {
             if (!CheckSearchPermission())
                 return RedirectToAction("Autorizacao", "Erro");
 
-            Session[PesquisaContexto] = null;
+            Session[ContextSerach] = null;
             return RedirectToAction("Index");
         }
 
@@ -182,193 +181,193 @@ namespace Client.Zeus.App.Controllers
 
         #region Inserir
 
-        public virtual void PreInserirGet(ref T dominio)
+        public virtual void PreInsertGet(ref T entity)
         {
-            CarregaOcultos(dominio);
+            LoadHidden(entity);
         }
 
         [Authorize]
-        public virtual ActionResult Inserir()
+        public virtual ActionResult Insert()
         {
             try
             {
                 if (!CheckCreatePermission())
                     return RedirectToAction("Autorizacao", "Erro");
 
-                LimpaRedirecionarVelho();
-                Session[PesquisaContexto] = null;
+                CleanOldRedirect();
+                Session[ContextSerach] = null;
 
                 if (FlagPreservaValoresAcaoVoltar)
                     TempData["AcaoVoltar"] = null;
 
-                T dominio = new T();
-                PreInserirGet(ref dominio);
-                return View(dominio);
+                T entity = new T();
+                PreInsertGet(ref entity);
+                return View(entity);
             }
             catch (Exception ex)
             {
-                Dictionary<string, string> errosValidacao = new Dictionary<string, string>();
-                return ErroCatchPadraoRedirecionando(errosValidacao, ex);
+                Dictionary<string, string> erros = new Dictionary<string, string>();
+                return DefaultErrosTreatment(erros, ex);
             }
         }
 
-        public virtual void PreInserirPost(ref T id)
+        public virtual void PreInsertPost(ref T id)
         {
 
         }
 
         [HttpPost]
         [Authorize]
-        public virtual ActionResult Inserir(T dominio)
+        public virtual ActionResult Insert(T entity)
         {
-            Dictionary<string, string> errosValidacao = new Dictionary<string, string>();
+            Dictionary<string, string> erros = new Dictionary<string, string>();
 
             try
             {
                 if (!CheckCreatePermission())
                     return RedirectToAction("Autorizacao", "Erro");
 
-                PreInserirPost(ref dominio);
-                if (ValidaModelStateInserir(dominio))
+                PreInsertPost(ref entity);
+                if (ValidaModelStateInserir(entity))
                 {
-                    bool retorno = AcaoInserir(dominio, out errosValidacao);
-                    PosInserirPost(dominio, retorno);
+                    bool retorno = AcaoInserir(entity, out erros);
+                    PosInsertPost(entity, retorno);
                 }
                 else
                 {
-                    errosValidacao = new Dictionary<string, string>();
-                    errosValidacao.Add("modelStatusInvalido", Mensagens.ModelStateInvalido);
+                    erros = new Dictionary<string, string>();
+                    erros.Add("modelStatusInvalido", Messages.ModelStateInvalido);
                 }
 
-                ExibeMensagemAposInserir(errosValidacao);
+                ShowMessageAfterInsert(erros);
 
-                return ReturnCreate(dominio, errosValidacao);
+                return ReturnCreate(entity, erros);
 
             }
             catch (Exception ex)
             {
-                return ErroCatchPadraoRedirecionando(errosValidacao, ex);
+                return DefaultErrosTreatment(erros, ex);
             }
         }
 
-        private bool ValidaModelStateInserir(T dominio)
+        private bool ValidaModelStateInserir(T entity)
         {
             return ModelState.IsValid;
         }
 
-        private bool AcaoInserir(T dominio, out Dictionary<string, string> errosValidacao)
+        private bool AcaoInserir(T entity, out Dictionary<string, string> erros)
         {
-            bool retorno = GerenciadorBase.Criar(dominio, out errosValidacao);
-            return retorno;
+            bool result = BaseManager.Create(entity, out erros);
+            return result;
         }
 
-        public virtual void ExibeMensagemAposInserir(Dictionary<string, string> errosValidacao)
+        public virtual void ShowMessageAfterInsert(Dictionary<string, string> erros)
         {
-            ModelState.ShowErros(errosValidacao);
-            ExibeMensagem.Show((Controller)this, errosValidacao);
+            ModelState.ShowErros(erros);
+            ShowMessage.Show((Controller)this, erros);
         }
 
-        public virtual ActionResult ReturnCreate(T dominio, Dictionary<string, string> erros)
+        public virtual ActionResult ReturnCreate(T entity, Dictionary<string, string> erros)
         {
             if (ModelState.IsValid && erros.Count == 0)
                 return RedirectToAction("Index");
             else
-                return View(dominio);
+                return View(entity);
         }
 
-        public virtual void PosInserirPost(T idDominio, bool retorno)
+        public virtual void PosInsertPost(T id, bool result)
         {
 
         }
 
         #endregion
 
-        #region Editar
+        #region Edit
 
         [Authorize]
-        public ActionResult Editar(int id)
+        public ActionResult Edit(int id)
         {
             try
             {
                 if (!CheckEditPermission())
                     return RedirectToAction("Autorizacao", "Erro");
 
-                LimpaRedirecionarVelho();
+                CleanOldRedirect();
 
-                T dominio = GerenciadorBase.BuscarPorId(id);
-                if (dominio == null)
+                T entity = BaseManager.GetById(id);
+                if (entity == null)
                     return RedirectToAction("Error", "Error");
                 else
-                    PosEditarGet(ref dominio);
+                    PosEditGet(ref entity);
 
-                return View(dominio);
+                return View(entity);
             }
             catch (Exception ex)
             {
-                Dictionary<string, string> errosValidacao = new Dictionary<string, string>();
-                return ErroCatchPadraoRedirecionando(errosValidacao, ex);
+                Dictionary<string, string> erros = new Dictionary<string, string>();
+                return DefaultErrosTreatment(erros, ex);
             }
         }
 
-        public virtual void PosEditarGet(ref T dominio)
+        public virtual void PosEditGet(ref T entity)
         {
-            CarregaOcultos(dominio);
+            LoadHidden(entity);
         }
 
-        public virtual void PreEditarPost(ref T id)
+        public virtual void PreEditPost(ref T id)
         {
 
         }
 
         [HttpPost]
         [Authorize]
-        public virtual ActionResult Editar(T dominio)
+        public virtual ActionResult Edit(T entity)
         {
-            Dictionary<string, string> errosValidacao = new Dictionary<string, string>();
+            Dictionary<string, string> erros = new Dictionary<string, string>();
 
             try
             {
                 if (!CheckEditPermission())
                     return RedirectToAction("Autorizacao", "Erro");
 
-                PreEditarPost(ref dominio);
+                PreEditPost(ref entity);
 
-                if (ValidaModelStateEditar(dominio))
+                if (GetValidModelState(entity))
                 {
-                    bool retorno = AcaoEditar(dominio, out errosValidacao);
-                    PosEditarPost(dominio, retorno);
+                    bool result = ActionEdit(entity, out erros);
+                    PosEditarPost(entity, result);
                 }
                 else
                 {
-                    errosValidacao = new Dictionary<string, string>();
-                    errosValidacao.Add("modelStatusInvalido", Mensagens.ModelStateInvalido);
+                    erros = new Dictionary<string, string>();
+                    erros.Add("modelStatusInvalido", Messages.ModelStateInvalido);
                 }
 
-                ExibeMensagemAposEditar(errosValidacao);
+                ShowMessageAfterEdit(erros);
 
-                return ReturnEditar(dominio, errosValidacao);
+                return ReturnEditar(entity, erros);
             }
             catch (Exception ex)
             {
-                return ErroCatchPadraoRedirecionando(errosValidacao, ex);
+                return DefaultErrosTreatment(erros, ex);
             }
         }
 
-        private bool ValidaModelStateEditar(T dominio)
+        private bool GetValidModelState(T entity)
         {
             return ModelState.IsValid;
         }
 
-        private bool AcaoEditar(T dominio, out Dictionary<string, string> errosValidacao)
+        private bool ActionEdit(T entity, out Dictionary<string, string> erros)
         {
-            bool retorno = GerenciadorBase.Editar(dominio, out errosValidacao);
+            bool retorno = BaseManager.Edit(entity, out erros);
             return retorno;
         }
 
-        public virtual void ExibeMensagemAposEditar(Dictionary<string, string> errosValidacao)
+        public virtual void ShowMessageAfterEdit(Dictionary<string, string> erros)
         {
-            ModelState.ShowErros(errosValidacao);
-            ExibeMensagem.Show((Controller)this, errosValidacao);
+            ModelState.ShowErros(erros);
+            ShowMessage.Show((Controller)this, erros);
         }
 
         public virtual ActionResult ReturnEditar(T dominio, Dictionary<string, string> erros)
@@ -391,103 +390,103 @@ namespace Client.Zeus.App.Controllers
 
         #endregion
 
-        #region Deletar
+        #region Delete
 
-        public virtual void PreDeletar(int id)
+        public virtual void PreDelete(int id)
         {
 
         }
 
         [Authorize]
-        public virtual ActionResult Deletar(int id)
+        public virtual ActionResult Delete(int id)
         {
-            Dictionary<string, string> errosValidacao = new Dictionary<string, string>();
+            Dictionary<string, string> erros = new Dictionary<string, string>();
 
             try
             {
                 if (!CheckDeletePermission())
                     return RedirectToAction("Autorizacao", "Erro");
 
-                PreDeletar(id);
-                bool retorno = AcaoDeletar(id, out errosValidacao);
-                PosDeletar(id, retorno);
-                ExibeMensagemAposDeletar(errosValidacao);
+                PreDelete(id);
+                bool result = ActionDelete(id, out erros);
+                PostDelete(id, result);
+                ShowMessageAfterDelete(erros);
 
                 if (FlagPreservaValoresAcaoVoltar)
                     TempData["AcaoVoltar"] = true;
 
-                return ReturnDeletar(id);
+                return ReturnDelete(id);
             }
             catch (Exception ex)
             {
-                return ErroCatchPadraoRedirecionando(errosValidacao, ex);
+                return DefaultErrosTreatment(erros, ex);
             }
         }
 
-        public virtual bool AcaoDeletar(int id, out Dictionary<string, string> errosValidacao)
+        public virtual bool ActionDelete(int id, out Dictionary<string, string> erros)
         {
-            return GerenciadorBase.Excluir(id, out errosValidacao);
+            return BaseManager.Delete(id, out erros);
         }
 
-        public virtual void ExibeMensagemAposDeletar(Dictionary<string, string> errosValidacao)
+        public virtual void ShowMessageAfterDelete(Dictionary<string, string> erros)
         {
-            ModelState.ShowErros(errosValidacao);
-            ExibeMensagem.Show((Controller)this, errosValidacao);
+            ModelState.ShowErros(erros);
+            ShowMessage.Show((Controller)this, erros);
         }
 
-        public virtual ActionResult ReturnDeletar(int id)
+        public virtual ActionResult ReturnDelete(int id)
         {
             return RedirectToAction("Index");
         }
 
-        public virtual void PosDeletar(int idDominio, bool retorno)
+        public virtual void PostDelete(int id, bool result)
         {
 
         }
 
         #endregion
 
-        public virtual void CarregaOcultos(T dominio)
+        public virtual void LoadHidden(T entity)
         {
-            AdicionaControles(dominio);
+            AddControl(entity);
         }
 
-        public virtual void AdicionaControles(T dominio)
+        public virtual void AddControl(T entity)
         {
 
         }
 
         public SelectList SelectList<TModel>(
-            Func<TModel, object> CampoDescricao,
-            Func<TModel, object> CampoID,
-            string selecionado = null,
-            Func<TModel, bool> Condicoes = null)
+            Func<TModel, object> fieldDescription,
+            Func<TModel, object> fieldId,
+            string selected = null,
+            Func<TModel, bool> condiction = null)
             where TModel : BaseDomain, new()
         {
-            BaseManager<TModel> gerenciadorLista = null;
-            var propriedades = typeof(BaseController).GetProperties();
-            foreach (PropertyInfo i in propriedades)
+            BaseManager<TModel> listManager = null;
+            var properties = typeof(BaseController).GetProperties();
+            foreach (PropertyInfo i in properties)
             {
                 var propriedade = i.GetValue(this);
                 if (propriedade is BaseManager<TModel>)
                 {
-                    gerenciadorLista = propriedade as BaseManager<TModel>;
+                    listManager = propriedade as BaseManager<TModel>;
                     break;
                 }
             }
 
-            if (gerenciadorLista != null)
+            if (listManager != null)
             {
-                var itens = (Condicoes == null) ? gerenciadorLista.List() : gerenciadorLista.List(Condicoes).ToList();
+                var items = (condiction == null) ? listManager.List() : listManager.List(condiction).ToList();
 
-                var aux = itens.Select(a => new SelectListItem
+                var aux = items.Select(a => new SelectListItem
                 {
-                    Value = CampoID(a).ToString(),
-                    Text = CampoDescricao(a).ToString(),
-                    Selected = CampoID(a).ToString() == selecionado
+                    Value = fieldId(a).ToString(),
+                    Text = fieldDescription(a).ToString(),
+                    Selected = fieldId(a).ToString() == selected
                 }).ToList();
 
-                return new SelectList(aux, "Value", "Text", selecionado);
+                return new SelectList(aux, "Value", "Text", selected);
             }
             else
             {
@@ -498,22 +497,22 @@ namespace Client.Zeus.App.Controllers
 
 
         public SelectList SelectList<TModel>(
-            Func<TModel, object> CampoDescricao,
-            Func<TModel, object> CampoID,
-            string selecionado = null,
-            IList<TModel> listaPronta = null)
-            where TModel : DominioBase, new()
+            Func<TModel, object> fieldDescription,
+            Func<TModel, object> fieldId,
+            string selected = null,
+            IList<TModel> list = null)
+            where TModel : BaseDomain, new()
         {
-            if (listaPronta != null)
+            if (list != null)
             {
-                var aux = listaPronta.Select(a => new SelectListItem
+                var aux = list.Select(a => new SelectListItem
                 {
-                    Value = CampoID(a).ToString(),
-                    Text = CampoDescricao(a).ToString(),
-                    Selected = CampoID(a).ToString() == selecionado
+                    Value = fieldId(a).ToString(),
+                    Text = fieldDescription(a).ToString(),
+                    Selected = fieldId(a).ToString() == selected
                 }).ToList();
 
-                return new SelectList(aux, "Value", "Text", selecionado);
+                return new SelectList(aux, "Value", "Text", selected);
             }
             else
             {
@@ -522,7 +521,7 @@ namespace Client.Zeus.App.Controllers
             }
         }
 
-        private ActionResult ErroCatchPadraoRedirecionando(Dictionary<string, string> errosValidacao, Exception ex)
+        private ActionResult DefaultErrosTreatment(Dictionary<string, string> errosValidacao, Exception ex)
         {
             base.ErroCatchPadrao(errosValidacao, ex);
             return View("Erro");

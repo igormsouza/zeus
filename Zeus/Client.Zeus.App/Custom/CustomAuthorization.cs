@@ -1,5 +1,4 @@
-﻿using Client.Zeus.Negocio.Gerenciador;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -44,11 +43,11 @@ namespace Client.Zeus.App.Custom
             }
             else
             {
-                var temPermissao = (from a in LoginManager.LoggedUser.TB_PERFIL
-                                   from b in a.TB_FUNCIONALIDADE
+                var allowed = (from a in LoginManager.LoggedUser.TB_PERFIL
+                                   from b in a.TB_FUNCTIONALITY
                                    where b.ACTION == action && b.CONTROLLER == controller
                                    select b).Count();
-                return temPermissao > 0;
+                return allowed > 0;
             }
         }
     }
