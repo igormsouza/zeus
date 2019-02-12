@@ -11,7 +11,7 @@ namespace Client.Zeus.Util.Menu
     {
         public int ID { get; set; }
 
-        [Map("TITULO")]
+        [Map("TITLE")]
         public string Title { get; set; }
 
         [Map("CONTROLLER")]
@@ -20,16 +20,16 @@ namespace Client.Zeus.Util.Menu
         [Map("ACTION")]
         public string Action { get; set; }
 
-        [Map("IMAGEM")]
+        [Map("IMAGE")]
         public string Image { get; set; }
 
-        [Map("ID_PAI")]
+        [Map("ID_PARENT")]
         public Nullable<int> IdFather { get; set; }
 
         [Map("URL")]
         public string Url { get; set; }
 
-        [Map("IND_ABRIR_NOVA_PAGINA")]
+        [Map("FLAG_NEW_PAGE")]
         public Nullable<bool> NewPage { get; set; }
 
         public List<MenuModel> Childreen { get; set; }
