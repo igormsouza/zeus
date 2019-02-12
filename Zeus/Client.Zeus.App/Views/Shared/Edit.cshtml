@@ -1,8 +1,8 @@
-﻿@using Client.Zeus.Dominio.Base;
+﻿@using Client.Zeus.Domain.Base;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    ModelAutomaticoTela modelo = new ModelAutomaticoTela(true);
+    var modelo = new ModelAutomaticoTela(true);
     if (ViewBag.Modelo is ModelAutomaticoTela)
     {
         modelo = ViewBag.Modelo as ModelAutomaticoTela;

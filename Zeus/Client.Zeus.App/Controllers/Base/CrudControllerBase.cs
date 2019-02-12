@@ -59,7 +59,7 @@ namespace Client.Zeus.App.Controllers
                     foreach (BaseManager<T> Tprop in Tproperties)
                     {
                         var propName = Tprop.GetType().Name;
-                        if (propName.Substring(0, propName.IndexOf("Gerenciador")).Equals(controllerName))
+                        if (propName.Substring(0, propName.IndexOf("Manager")).Equals(controllerName))
                         {
                             baseManager = Tprop;
                             break;

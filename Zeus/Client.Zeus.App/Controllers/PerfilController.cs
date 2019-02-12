@@ -14,11 +14,12 @@ namespace Client.Zeus.App.Controllers
     {
         public PerfilController()
         {
-            ViewBag.Titulo = "Perfil";
-            ViewBag.CamposPesquisa = new[] { "NAME" };
-            ViewBag.CamposGrid = new[] { "ID", "NAME" };
-            ViewBag.Acoes = new[] { "Edit", "Delete" };
-            ViewBag.ExibirNovo = true;
+            var fields = new[] { new Field("NAME") }.ToList<Field>();
+
+            AutomaticModel.Title = "Perfil";
+            AutomaticModel.SearchFields = fields;
+            AutomaticModel.GridField = fields.Select(o => o.Name).ToList();
+            AutomaticModel.Fields = fields;
         }
     }
 }

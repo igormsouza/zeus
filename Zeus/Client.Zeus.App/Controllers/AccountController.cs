@@ -82,15 +82,15 @@ namespace Client.Zeus.App.Controllers
             switch (statusLogin)
             {
                 case LoginManager.StatusLogin.WrongPassword:
-                    ModelState.AddModelError("", "Senha incorreta.");
+                    ModelState.AddModelError("", "Wrong password.");
                     break;
                 case LoginManager.StatusLogin.Success:
                     return RedirectToLocal(returnUrl);
                 case LoginManager.StatusLogin.Error:
-                    ModelState.AddModelError("", "Ocorreu um erro ao realizar o login.");
+                    ModelState.AddModelError("", "Error.");
                     break;
                 case LoginManager.StatusLogin.UserNotFound:
-                    ModelState.AddModelError("", "Usuário não existe.");
+                    ModelState.AddModelError("", "User doesn't exist.");
                     break;
                 default:
                     break;
