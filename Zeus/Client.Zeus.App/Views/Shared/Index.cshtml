@@ -37,7 +37,7 @@ else
 
                         <div class="pull-right">
                             <div class="btn-group">
-                                <a href="@Url.Action("Inserir", dic)" class="btn btn-default btn-xs"><i class="fa fa-plus-circle"></i>&nbsp;Novo</a>
+                                <a href="@Url.Action("Insert", dic)" class="btn btn-default btn-xs"><i class="fa fa-plus-circle"></i>&nbsp;New</a>
                             </div>
                         </div>
                     }
@@ -225,14 +225,14 @@ else
                                         <div class="pull-right">
                                             @if (modelo.ShowClean)
                                             {
-                                                <a href="@Url.Action("LimparPesquisa")" class="btn btn-default"><i class="fa fa-eraser fa-fw"></i> Limpar</a>
+                                                <a href="@Url.Action("CleanSearch")" class="btn btn-default"><i class="fa fa-eraser fa-fw"></i> Reset</a>
                                             }
 
                                             @if (modelo.ShowNew)
                                             {
-                                                <a href="@Url.Action("Inserir")" class="btn btn-default"><i class="fa fa-plus-circle fa-fw"></i> Novo</a>
+                                                <a href="@Url.Action("Insert")" class="btn btn-default"><i class="fa fa-plus-circle fa-fw"></i> New</a>
                                             }
-                                            <button type="submit" class="btn btn-default btn-principal"><i class="fa fa-search fa-fw"></i> Pesquisar</button>
+                                            <button type="submit" class="btn btn-default btn-principal"><i class="fa fa-search fa-fw"></i> Search</button>
                                         </div>
                                     </div>
                                 </div>

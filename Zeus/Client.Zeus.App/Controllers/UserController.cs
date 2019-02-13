@@ -18,10 +18,9 @@ namespace Client.Zeus.App.Controllers
         public UserController()
         {
             var fields = new[] {
-                new Field("NOME"),
+                new Field("NAME"),
                 new Field("LOGIN"),
-                new Field("EMAIL"),
-                new Field("CPF")
+                new Field("EMAIL")
             }.ToList<Field>();
 
             var fieldsSearch = new[] {

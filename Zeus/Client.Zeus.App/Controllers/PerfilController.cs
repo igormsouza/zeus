@@ -14,7 +14,7 @@ namespace Client.Zeus.App.Controllers
     {
         public PerfilController()
         {
-            var fields = new[] { new Field("NAME") }.ToList<Field>();
+            var fields = new[] { new Field("NAME", width: "10") }.ToList<Field>();
 
             AutomaticModel.Title = "Perfil";
             AutomaticModel.SearchFields = fields;

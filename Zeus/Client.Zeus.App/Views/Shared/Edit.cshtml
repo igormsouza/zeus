@@ -2,16 +2,16 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    var modelo = new ModelAutomaticoTela(true);
-    if (ViewBag.Modelo is ModelAutomaticoTela)
+    var modelo = new AutomaticModel(true);
+    if (ViewBag.Modelo is AutomaticModel)
     {
-        modelo = ViewBag.Modelo as ModelAutomaticoTela;
+        modelo = ViewBag.Modelo as AutomaticModel;
     }
 
     var idDiv = 0;
 }
 
-@if (modelo.NaoCarregado)
+@if (modelo.NotLoad)
 {
     <div class="row"> View não carregada! </div>
 }
@@ -20,7 +20,7 @@ else
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
-                @(modelo.Titulo ?? @ViewContext.RouteData.Values["controller"] as string) - Editar
+                @(modelo.Title ?? @ViewContext.RouteData.Values["controller"] as string) - Modify
             </h1>
 
             <div class="panel panel-default">
@@ -29,22 +29,22 @@ else
                 </div>
 
                 <div class="panel-body">
-                    @using (Html.BeginForm("Editar", @ViewContext.RouteData.Values["controller"] as string, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    @using (Html.BeginForm("Edit", @ViewContext.RouteData.Values["controller"] as string, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                        foreach (var campo in modelo.CamposOcultos)
+                        foreach (var campo in modelo.HiddenField)
                         {
-                            if (!string.IsNullOrWhiteSpace(campo.ValorFixo))
+                            if (!string.IsNullOrWhiteSpace(campo.FixedValue))
                             {
-                                @Html.Hidden(campo.Nome, campo.ValorFixo)
+                                @Html.Hidden(campo.Name, campo.FixedValue)
                             }
                             else
                             {
-                                var valor = ViewData[campo.Nome];
+                                var valor = ViewData[campo.Name];
                                 valor = valor ?? "";
-                                @Html.Hidden(campo.Nome, valor)
+                                @Html.Hidden(campo.Name, valor)
                             }
                         }
 
@@ -58,33 +58,33 @@ else
                                         </div>
                                     }
                                     
-                                    @foreach (var campo in modelo.Campos)
+                                    @foreach (var campo in modelo.Fields)
                                     {
-                                        var Metadata = ModelMetadata.FromStringExpression(campo.Nome as string, ViewData);
+                                        var Metadata = ModelMetadata.FromStringExpression(campo.Name as string, ViewData);
                                         if (Metadata.PropertyName == null) { continue; }
                                         var NomeCampo = (Metadata.DisplayName ?? Metadata.PropertyName);
                                         var Valor = Metadata.Model;// ViewData[Metadata.PropertyName];
 
-                                        <div class="col-xs-12 col-sm-2 col-md-4 col-lg-@campo.Largura margintop10">
+                                        <div class="col-xs-12 col-sm-2 col-md-4 col-lg-@campo.Width margintop10">
                                             <div class="">
                                                 @Html.Label(Metadata.PropertyName, NomeCampo + (NomeCampo.EndsWith("?") ? "" : ":"), new { @class = "labelCustom" })
 
                                                 @if (Metadata.ModelType == typeof(bool) || Metadata.ModelType == typeof(bool?))
                                                 {
-                                                    if (campo.Tipo == enumTipoCampo.Padrao)
+                                                    if (campo.Type == enumFieldType.Default)
                                                     {
                                                         @Html.DropDownList(Metadata.PropertyName, new List<System.Web.Mvc.SelectListItem> {
                                                     new System.Web.Mvc.SelectListItem { Text = "Sim", Value = "True", Selected = Valor == "True" },
                                                     new System.Web.Mvc.SelectListItem { Text = "Não", Value = "False", Selected = Valor == "False" }
                                                 }, new { @class = "form-control" })
                                                     }
-                                                    else if (campo.Tipo == enumTipoCampo.CustomizadoParcial)
+                                                    else if (campo.Type == enumFieldType.CustomizedParcial)
                                                     {
-                                                        @Html.Partial(campo.CarregarControle)
+                                                        @Html.Partial(campo.LoadControl)
                                                     }
-                                                    else if (campo.Tipo == enumTipoCampo.CustomizadoHtml)
+                                                    else if (campo.Type == enumFieldType.CustomizedHtml)
                                                     {
-                                                        @Html.Raw(campo.CarregarControle)
+                                                        @Html.Raw(campo.LoadControl)
                                                     }
                                                 }
                                                 else if (Metadata.PropertyName.ToUpper().StartsWith("ID") && Metadata.PropertyName.ToUpper() != "ID")
@@ -92,9 +92,9 @@ else
                                                     var lista = (SelectList)ViewData[Metadata.PropertyName.Replace("ID_", "").ToUpper()];
                                                     if (lista != null)
                                                     {
-                                                        if (campo.Tipo == enumTipoCampo.Padrao)
+                                                        if (campo.Type == enumFieldType.Default)
                                                         {
-                                                            if (campo.Ativo)
+                                                            if (campo.Active)
                                                             {
                                                                 @Html.DropDownList(Metadata.PropertyName, lista, Valor as string, new { @class = "form-control" })
                                                             }
@@ -104,31 +104,31 @@ else
                                                                 @Html.Hidden(Metadata.PropertyName, lista.SelectedValue.ToString())
                                                             }
                                                         }
-                                                        else if (campo.Tipo == enumTipoCampo.CustomizadoParcial)
+                                                        else if (campo.Type == enumFieldType.CustomizedParcial)
                                                         {
-                                                            @Html.Partial(campo.CarregarControle)
+                                                            @Html.Partial(campo.LoadControl)
                                                         }
-                                                        else if (campo.Tipo == enumTipoCampo.CustomizadoHtml)
+                                                        else if (campo.Type == enumFieldType.CustomizedHtml)
                                                         {
-                                                            @Html.Raw(campo.CarregarControle)
+                                                            @Html.Raw(campo.LoadControl)
                                                         }
                                                     }
                                                     else
                                                     {
-                                                        if (campo.Tipo == enumTipoCampo.TextArea)
+                                                        if (campo.Type == enumFieldType.TextArea)
                                                         {
                                                             Valor = Valor ?? "";
                                                             @Html.TextArea(Metadata.PropertyName, Valor.ToString(), new { @class = "form-control", maxlength = "50", @readonly = "readonly" })
                                                         }
-                                                        else if (campo.Tipo == enumTipoCampo.CustomizadoParcial)
+                                                        else if (campo.Type == enumFieldType.CustomizedParcial)
                                                         {
-                                                            @Html.Partial(campo.CarregarControle)
+                                                            @Html.Partial(campo.LoadControl)
                                                         }
-                                                        else if (campo.Tipo == enumTipoCampo.CustomizadoHtml)
+                                                        else if (campo.Type == enumFieldType.CustomizedHtml)
                                                         {
-                                                            @Html.Raw(campo.CarregarControle)
+                                                            @Html.Raw(campo.LoadControl)
                                                         }
-                                                        else if (campo.Tipo == enumTipoCampo.Padrao)
+                                                        else if (campo.Type == enumFieldType.Default)
                                                         {
                                                             @Html.TextBox(Metadata.PropertyName, Valor, new { @class = "form-control", maxlength = "50", @readonly = "readonly" })
                                                         }
@@ -136,24 +136,24 @@ else
                                                 }
                                                 else if (Metadata.PropertyName.ToUpper() == "SENHA" || Metadata.PropertyName.ToUpper() == "PASSWORD")
                                                 {
-                                                    if (campo.Tipo == enumTipoCampo.Padrao)
+                                                    if (campo.Type == enumFieldType.Default)
                                                     {
                                                         @Html.Password(Metadata.PropertyName, "SENHA_PADRAO", new { @class = "form-control", maxlength = "50" })
                                                     }
-                                                    else if (campo.Tipo == enumTipoCampo.CustomizadoParcial)
+                                                    else if (campo.Type == enumFieldType.CustomizedParcial)
                                                     {
-                                                        @Html.Partial(campo.CarregarControle)
+                                                        @Html.Partial(campo.LoadControl)
                                                     }
-                                                    else if (campo.Tipo == enumTipoCampo.CustomizadoHtml)
+                                                    else if (campo.Type == enumFieldType.CustomizedHtml)
                                                     {
-                                                        @Html.Raw(campo.CarregarControle)
+                                                        @Html.Raw(campo.LoadControl)
                                                     }
                                                 }
                                                 else if (Metadata.ModelType == typeof(DateTime) || Metadata.ModelType == typeof(DateTime?))
                                                 {
-                                                    if (campo.Tipo == enumTipoCampo.Padrao)
+                                                    if (campo.Type == enumFieldType.Default)
                                                     {
-                                                        if (campo.Ativo)
+                                                        if (campo.Active)
                                                         {
                                                             @Html.TextBox(Metadata.PropertyName, Valor, "{0:dd/MM/yyyy}", new { @class = "form-control data datepicker", maxlength = "10" })
                                                         }
@@ -163,13 +163,13 @@ else
                                                             @Html.Hidden(Metadata.PropertyName, Valor)
                                                         }
                                                     }
-                                                    else if (campo.Tipo == enumTipoCampo.CustomizadoParcial)
+                                                    else if (campo.Type == enumFieldType.CustomizedParcial)
                                                     {
-                                                        @Html.Partial(campo.CarregarControle)
+                                                        @Html.Partial(campo.LoadControl)
                                                     }
-                                                    else if (campo.Tipo == enumTipoCampo.CustomizadoHtml)
+                                                    else if (campo.Type == enumFieldType.CustomizedHtml)
                                                     {
-                                                        @Html.Raw(campo.CarregarControle)
+                                                        @Html.Raw(campo.LoadControl)
                                                     }
                                                 }
                                                 else
@@ -184,10 +184,10 @@ else
                                                     if (Metadata.ModelType == typeof(decimal) || Metadata.ModelType == typeof(decimal?)) { classes.Add("numero"); }
                                                     if (Metadata.ModelType == typeof(long) || Metadata.ModelType == typeof(long?)) { classes.Add("numero"); }
 
-                                                    if (campo.Tipo == enumTipoCampo.TextArea)
+                                                    if (campo.Type == enumFieldType.TextArea)
                                                     {
                                                         Valor = Valor ?? "";
-                                                        if (campo.Ativo)
+                                                        if (campo.Active)
                                                         {
                                                             @Html.TextArea(Metadata.PropertyName, Valor.ToString(), new { @class = string.Join(" ", classes), maxlength = "1000" })
                                                         }
@@ -197,17 +197,17 @@ else
                                                             @Html.Hidden(Metadata.PropertyName, Valor)
                                                         }
                                                     }
-                                                    else if (campo.Tipo == enumTipoCampo.CustomizadoParcial)
+                                                    else if (campo.Type == enumFieldType.CustomizedParcial)
                                                     {
-                                                        @Html.Partial(campo.CarregarControle)
+                                                        @Html.Partial(campo.LoadControl)
                                                     }
-                                                    else if (campo.Tipo == enumTipoCampo.CustomizadoHtml)
+                                                    else if (campo.Type == enumFieldType.CustomizedHtml)
                                                     {
-                                                        @Html.Raw(campo.CarregarControle)
+                                                        @Html.Raw(campo.LoadControl)
                                                     }
-                                                    else if (campo.Tipo == enumTipoCampo.Padrao)
+                                                    else if (campo.Type == enumFieldType.Default)
                                                     {
-                                                        if (campo.Ativo)
+                                                        if (campo.Active)
                                                         {
                                                             @Html.TextBox(Metadata.PropertyName, Valor, new { @class = string.Join(" ", classes), maxlength = "50" })
                                                         }
@@ -237,7 +237,7 @@ else
                             <div class="row">
                                 <div class="pull-right">
                                     <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-arrow-circle-o-left fa-fw"></i> Cancelar</a>
-                                    @if (modelo.Campos.Count > 0)
+                                    @if (modelo.Fields.Count > 0)
                                     {
                                         <button type="submit" value="Create" class="btn btn-default btn-principal"><i class="fa fa-plus-circle fa-fw"></i> Salvar</button>
                                     }
@@ -255,31 +255,31 @@ else
 {
     var nomeDiv = string.Format("divDinamica_{0}", idDiv);
 
-    <div id="@nomeDiv" data-pai="@campo.IdReferencia" data-modo-conteudo="@Convert.ToInt32(campo.InclusaoReferencia).ToString()">
+    <div id="@nomeDiv" data-pai="@campo.ReferenceId" data-modo-conteudo="@Convert.ToInt32(campo.IncludedReference).ToString()">
 
-        @if (campo.TipoConteudo == enumTipoConteudoDinamico.CustomizadoParcial)
+        @if (campo.ContentType == enumDynamicContentType.CustomizedParcial)
         {
-            if (!string.IsNullOrWhiteSpace(campo.Propriedade))
+            if (!string.IsNullOrWhiteSpace(campo.Property))
             {
-                var metadata = ModelMetadata.FromStringExpression(campo.Propriedade as string, ViewData);
+                var metadata = ModelMetadata.FromStringExpression(campo.Property as string, ViewData);
                 var valor = metadata.Model;
                 if (valor != null)
                 {
-                    @Html.Partial(campo.Conteudo, valor)
+                    @Html.Partial(campo.Content, valor)
                 }
                 else
                 {
-                    @Html.Partial(campo.Conteudo)
+                    @Html.Partial(campo.Content)
                 }
             }
             else
             {
-                @Html.Partial(campo.Conteudo)
+                @Html.Partial(campo.Content)
             }
         }
-        else if (campo.TipoConteudo == enumTipoConteudoDinamico.CustomizadoHtml)
+        else if (campo.ContentType == enumDynamicContentType.CustomizedHtml)
         {
-            @Html.Raw(campo.Conteudo)
+            @Html.Raw(campo.Content)
         }
 
     </div>
